@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-</head>
-<body>
-<?php
-?>
+<footer class="modal-footer"><small>Some yadda yadda creaative legal jargon or whatever</small></footer>
 </body>
 </html>
