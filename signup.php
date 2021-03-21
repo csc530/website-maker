@@ -9,8 +9,10 @@
             <input type="text" name="username" id="username" required>
             <label for="password">Password: </label>
             <input type="password" name="password" id="password" required>
+            <label for="confirm-password">Confirm password: </label>
+            <input type="password" name="confirm-password" id="confirm-password" required>
         </fieldset>
-        <button type="submit" class="btn btn-primary">login</button>
-        <a href="signup.php" class="btn btn-secondary" ><button type="button">Sign Up</button></a>
+        <button type="submit" class="btn btn-primary">Register</button>
+        <a href="login.php" class="btn btn-secondary" ><button type="button">Login</button></a>
     </form>
 <?php require_once 'footer.php'?>

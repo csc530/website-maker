@@ -7,3 +7,4 @@
 <form action="hosted-sites.php" method="get">
 <button type="button">View Sites</button>
 </form>
+<?php require_once 'footer.php'?>
