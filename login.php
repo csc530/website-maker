@@ -3,7 +3,7 @@
 	require_once 'header.php';
 ?>
     <h1>Login</h1>
-    <form action="validate.php" method="post">
+    <form action="register.php" method="post">
         <fieldset>
             <label for="username">Username: </label>
             <input type="text" name="username" id="username" required>

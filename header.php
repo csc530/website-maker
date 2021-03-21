@@ -18,7 +18,7 @@
                     <a class="nav-link" aria-current="page" href="items.php">Grocery List</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="register.php">Register</a>
+                    <a class="nav-link" href="signup.php">Register</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="login.php" role="button" >Login</a>
