@@ -6,10 +6,13 @@
     <form action="register.php" method="post">
         <fieldset>
             <label for="email">Email: </label>
-            <input type="email" name="email" id="email" required>
+            <input type="email" name="email" id="email" required />
             <label for="password">Password: </label>
-            <input type="password" name="password" id="password" required>
+            <input type="password" name="password" id="password" required />
         </fieldset>
+        <label hidden>
+            <input hidden name="login" value="true" type="checkbox" checked required disabled />
+        </label>
         <button type="submit" class="btn btn-primary">login</button>
         <a href="signup.php" class="btn btn-secondary" ><button type="button">Sign Up</button></a>
     </form>
