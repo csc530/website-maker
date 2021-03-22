@@ -7,18 +7,24 @@
 	if($login)
 	{
 		$error = "No user with email, $email, was found please <a href='register.php?email=$email'>register</a> now.";
-		require_once 'connect.php';
-		$sql = 'SELECT password FROM users WHERE email = :email';
-		$cmd = $db->prepare($sql);
-		$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
-		$cmd->execute();
-		$success = $cmd->fetch();
-		//check if entered password matches hashed password in the db
-		if(password_verify($password, $success['password']))
-			header("location:menu.php");
-		else
-			$error = 'Incorrect password';
-		header("location:login.php?error=$error");
+		try
+		{
+			require_once 'connect.php';
+			$sql = 'SELECT password FROM users WHERE email = :email';
+			$cmd = $db->prepare($sql);
+			$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
+			$cmd->execute();
+			$success = $cmd->fetch();
+			//check if entered password matches hashed password in the db
+			if(password_verify($password, $success['password']))
+				header("location:menu.php");
+			else
+				$error = 'Incorrect password';
+			header("location:login.php?error=$error");
+		}
+		catch(Exception $exception)
+		{		header("location:login.php?error=$error");
+		}
 	}
 	else
 	{

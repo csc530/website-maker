@@ -10,7 +10,7 @@
 			<label for="password">Password: </label>
 			<input type="password" name="password" id="password" required />
 			<?php
-				if($_GET['error'])
+				if(!empty($_GET['error']))
 					echo '<p class="p-0 alert-danger">' . $_GET['error'] . '</p>'
 			?>
 		</fieldset>
