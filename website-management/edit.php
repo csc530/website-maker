@@ -1,5 +1,6 @@
 <?php
 	//TODO: validate session or redirect
+	//todo validate: validate user has acces to edit this page if they somehow got onto the wrong website's edit page somehow?
 	$title = 'Create a website';
 	require_once '../header.php';
 	$websiteID = $_GET['websiteID'];
@@ -14,6 +15,7 @@
 ?>
 	<h1><?php echo $websiteInfo['name'];?></h1>
 	<form action="edit-validation.php" method="post">
+		<input type="number" name="websiteID" disabled required readonly value="<?echo "$websiteID";?>" hidden />
 		<fieldset>
 			<legend>Access</legend>
 			<label for="user">Add user</label>
@@ -35,6 +37,8 @@
 			</ul>
 			<button type="submit" name="add" value="true" class="btn-primary">Add</button>
 		</fieldset>
+	</form>
+	<form action="edit-validation.php" method="post">
 		<fieldset>
 			<legend>Basics</legend>
 			<label for="title">Website title</label>
@@ -46,6 +50,8 @@
 			          placeholder="Give a brief welcome and overview to your clients/users/visitors about your website."><?php echo $websiteInfo['description']; ?></textarea>
 		</fieldset>
 		<button type="submit" name="update" value="true" class="btn-primary">Update</button>
-		<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit content</button>
+	</form>
+	<form action="edit-validation.php" method="post">
+	<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit content</button>
 	</form>
 <?php require_once 'footer.php' ?>
