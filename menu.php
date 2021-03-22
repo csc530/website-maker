@@ -21,6 +21,6 @@
 			foreach($websites as $site)
 				echo '<li><a href="'.$site['addr'].'">'.$site['preview'].'</a></li>';
 		?>
-		<li><a href="website-mangement/create.php">+</a></li>
+		<li><a href="website-management/create.php">+</a></li>
 	</ul>
 <?php require_once 'footer.php' ?>

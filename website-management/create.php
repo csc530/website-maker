@@ -1,7 +1,7 @@
 <?php
 	//TODO: validate session or redirect
 	$title = 'Create a website';
-	require_once 'header.php';
+	require_once '../header.php';
 ?>
 	<form action="website-validation.php" method="post">
 		<fieldset>

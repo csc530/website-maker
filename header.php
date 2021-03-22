@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><?php echo "$error"; ?></title>
+    <title><?php echo "$title"; ?></title>
+	<!--todo paths: make absolute paths for below links-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
     <script src="js/bootstrap.min.js" type="text/javascript"></script>
