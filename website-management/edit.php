@@ -1,12 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>$Title$</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-</head>
-<body>
 <?php
+	//TODO: validate session or redirect
+	$title = 'Create a website';
+	require_once '../header.php';
+	$websiteID = $_GET['websiteID'];
+	require_once '../connect.php';
+	//get name and description of website from db using websiteID
+	$sql = 'SELECT name, description FROM websites WHERE ID=:id;';
+	$cmd = $db->prepare($sql);
+	$cmd->bindParam(':id', $websiteID, PDO::PARAM_INT);
+	$cmd->execute();
+	$db = null;
+	$websiteInfo = $cmd->fetch();
 ?>
-</body>
-</html>
+	<h1><?php echo $websiteInfo['name'];?></h1>
+	<form action="edit-validation.php" method="post">
+		<fieldset>
+			<legend>Access</legend>
+			<label for="user">Add user</label>
+			<input type="text" name="user" maxlength="128" id="user" required />
+			<ul>
+				<?php
+					require_once '../connect.php';
+					$websiteID = $_GET['websiteID'];
+					//query all current website editors for selected website
+					$sql = 'SELECT email FROM users INNER JOIN websites_admin wa on :email = wa.admin WHERE websiteID = :websiteID';
+					$cmd = $db->prepare($sql);
+					$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
+					$cmd->bindParam(':websiteID', $websiteID, PDO::PARAM_INT);
+					$cmd->execute();
+					$users = $cmd->fetchAll();
+					foreach($users as $user)
+						echo '<li>' . $user['email'] . '</li>';
+				?>
+			</ul>
+			<button type="submit" name="add" value="true" class="btn-primary">Add</button>
+		</fieldset>
+		<fieldset>
+			<legend>Basics</legend>
+			<label for="title">Website title</label>
+			<!-- insert current name and description of website to form-->
+			<input type="text" name="title" maxlength="35" id="title" required
+			       value="<?php echo $websiteInfo['name']; ?>">
+			<label for="description">Description</label>
+			<textarea name="description" id="description" required
+			          placeholder="Give a brief welcome and overview to your clients/users/visitors about your website."><?php echo $websiteInfo['description']; ?></textarea>
+		</fieldset>
+		<button type="submit" name="update" value="true" class="btn-primary">Update</button>
+		<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit content</button>
+	</form>
+<?php require_once 'footer.php' ?>
