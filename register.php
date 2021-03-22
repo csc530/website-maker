@@ -17,7 +17,11 @@
 			$success = $cmd->fetch();
 			//check if entered password matches hashed password in the db
 			if(password_verify($password, $success['password']))
+			{
+				session_start();
+				
 				header("location:menu.php");
+			}
 			else
 				$error = 'Incorrect password';
 			header("location:login.php?error=$error");
