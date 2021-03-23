@@ -18,8 +18,8 @@
 					echo '<p class="p-0 alert-danger">' . $_GET['error'] . '</p>'
 			?>
 		</fieldset>
-		<button type="submit" class="btn btn-primary">Register</button>
-		<a href="login.php" class="">
+		<button type="submit" class="btn btn-primary" >Register</button>
+		<a href="login.php" >
 			<button type="button" class="btn btn-secondary">Login</button>
 		</a>
 	</form>

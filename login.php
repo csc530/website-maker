@@ -14,12 +14,9 @@
 					echo '<p class="p-0 alert-danger">' . $_GET['error'] . '</p>'
 			?>
 		</fieldset>
-		<label hidden>
-			<input hidden name="login" value="true" type="checkbox" checked required disabled />
-		</label>
-		<button type="submit" class="btn btn-primary">login</button>
-		<a href="signup.php" class="btn btn-secondary">
-			<button type="button">Sign Up</button>
+		<button type="submit" class="btn btn-primary" name="login" value="true">login</button>
+		<a href="signup.php">
+			<button  class="btn btn-secondary"type="button">Sign Up</button>
 		</a>
 	</form>
 <?php require_once 'footer.php' ?>

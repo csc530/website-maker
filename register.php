@@ -1,10 +1,10 @@
 <?php
 	$error = "Please try again.";
-	$email = $_POST['username'];
+	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$cPassword = $_POST['confirm-password'];
 	$login = $_POST['login'];
-	if($login)
+	if(!empty($login))
 	{
 		$error = "No user with email, $email, was found please <a href='register.php?email=$email'>register</a> now.";
 		try
@@ -33,7 +33,7 @@
 	else
 	{
 		if(empty($email))
-			$error = 'username cannot be empty.';
+			$error = 'email cannot be empty.';
 		else if(empty($password))
 			$error = 'password cannot be empty.';
 		else if(empty($cPassword) || $cPassword != $password)
