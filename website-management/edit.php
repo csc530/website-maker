@@ -32,7 +32,8 @@
 					$cmd->execute();
 					$users = $cmd->fetchAll();
 					foreach($users as $user)
-						echo '<li>' . $user['email'] . '</li>';
+						///use get method to assign which delete button is clicked
+						echo '<li><a href="edit-validation.php?delete='.$user['email'].'" ><button class="btn btn-dark" id="'.$user['email'].'"  type="button"> - </button></a>' . $user['email'] . '</li>';
 				?>
 			</ul>
 			<button type="submit" name="add" value="true" class="btn-primary">Add</button>

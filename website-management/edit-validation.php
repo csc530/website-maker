@@ -8,8 +8,26 @@
 	$add = $_POST['add'];
 	//website's ID
 	$websiteID = $_POST['websiteID'];
+	//user to delete
+	$delete = $_GET['delete'];
 	if(!empty($editDetails))
 		header("location:edit-page.php?pageID=$websiteID");
+	else if(!empty($delete)){
+		try
+		{
+			$error = 'Network error please try again.';
+			require_once '../connect.php';
+			//no need for extensive checks as if the user is not there no delete is executed
+			$sql = 'DELETE FROM websites_admin WHERE admin = :user';
+			$cmd = $db->prepare($sql);
+			$cmd->bindParam(':user', $delete, PDO::PARAM_STR, 128);
+			$cmd->execute();
+		}
+		catch(Exception $exception)
+		{
+			header("location:edit.php?error=$error");
+		}
+	}
 	else if(!empty($add))
 	{
 		//new user email account
