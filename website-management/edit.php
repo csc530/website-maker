@@ -1,6 +1,6 @@
 <?php
 	//TODO: validate session or redirect
-	//todo validate: validate user has access to edit this page if they somehow got onto the wrong website's edit page somehow?
+	//toDo validate: validate user has access to edit this page if they somehow got onto the wrong website's edit page somehow?
 	$title = 'Create a website';
 	require_once '../header.php';
 	$websiteID = $_GET['websiteID'];
@@ -14,8 +14,7 @@
 	$websiteInfo = $cmd->fetch();
 ?>
 	<h1><?php echo $websiteInfo['name'];?></h1>
-	<form action="edit-validation.php" method="post">
-		<input type="number" name="websiteID" disabled required readonly value="<?echo "$websiteID";?>" hidden />
+	<form action="edit-validation.php?websiteID=<?echo "$websiteID";?>" method="post">
 		<fieldset>
 			<legend>Access</legend>
 			<label for="user">Add user</label>
@@ -40,7 +39,7 @@
 			<button type="submit" name="add" value="true" class="btn-primary">Add</button>
 		</fieldset>
 	</form>
-	<form action="edit-validation.php" method="post">
+	<form action="edit-validation.php?websiteID=<?echo "$websiteID";?>" method="post">
 		<fieldset>
 			<legend>Basics</legend>
 			<label for="title">Website title</label>
@@ -53,7 +52,7 @@
 		</fieldset>
 		<button type="submit" name="update" value="true" class="btn-primary">Update</button>
 	</form>
-	<form action="edit-validation.php" method="post">
+	<form action="edit-validation.php?websiteID=<?echo "$websiteID";?>" method="post">
 	<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit content</button>
 	</form>
 <?php require_once 'footer.php' ?>

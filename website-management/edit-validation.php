@@ -7,7 +7,7 @@
 	//add button to add a new admin user
 	$add = $_POST['add'];
 	//website's ID
-	$websiteID = $_POST['websiteID'];
+	$websiteID = $_GET['websiteID'];
 	//user to delete
 	$delete = $_GET['delete'];
 	if(!empty($editDetails))
