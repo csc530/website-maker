@@ -60,7 +60,7 @@
 			}
 			catch(Exception $exception)
 			{
-				$error = "$email is already bound to an account please <a href='login.php'>login</a>.";
+				$error = "$email is already bound to an account please <a href='pages/login.php'>login</a>.";
 			}
 		}
 		header("location:signup.php?error=$error");

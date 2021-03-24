@@ -3,7 +3,7 @@
 	require_once 'header.php';
 ?>
 	<h1>Login</h1>
-	<form action="register.php" method="post">
+	<form action="../register.php" method="post">
 		<fieldset>
 			<label for="email">Email: </label>
 			<input type="email" name="email" id="email" required />
