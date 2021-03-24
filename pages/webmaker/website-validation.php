@@ -18,7 +18,7 @@
 			try
 			{
 				$error = 'Network error, please try again.';
-				require_once 'connect.php';
+				require_once '../page-includes/connect.php';
 				$sql = 'INSERT INTO websites (creator,name, description) VALUES (:email,:title,:desc);';
 				$cmd = $db->prepare($sql);
 				//todo:get email from session

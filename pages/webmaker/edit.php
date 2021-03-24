@@ -1,5 +1,5 @@
 <?php
-	require_once 'authenticate.php';
+	require_once '../page-includes/authenticate.php';
 	//toDo validate: validate user has access to edit this page if they somehow got onto the wrong website's edit page somehow?
 	$title = 'Create a website';
 	require_once '../header.php';
@@ -56,4 +56,4 @@
 	<form action="edit-validation.php?websiteID=<?echo "$websiteID";?>" method="post">
 	<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit content</button>
 	</form>
-<?php require_once 'footer.php' ?>
+<?php require_once '../page-layouts/footer.php' ?>

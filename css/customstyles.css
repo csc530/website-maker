@@ -1,5 +1,9 @@
+@charset "UTF-8";
 /*Custom styles with bootstrap overrides*/
-
+input, form{
+    display: block;
+    margin-bottom: 8px;
+}
 fieldset{
     padding: 25px;
 }
