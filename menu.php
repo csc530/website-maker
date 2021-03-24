@@ -1,10 +1,5 @@
 <?php
-	//TODO: validate session or redirect
-	if(session_status()==PHP_SESSION_NONE)
-	{
-		header('location:login.php?error="Please login or register an account"');
-		exit('Not logged in.');
-	}
+	require_once 'authenticate.php';
 	$title = 'Main menu';
 	require_once 'header.php';
 	require_once 'menu-header.php';
@@ -18,8 +13,9 @@
     				INNER JOIN websites_admin ON websites.ID = websites_admin.websiteID
 					WHERE admin=:email;';
 			$cmd = $db->prepare($sql);
-			//TODO: somehow get email from session
-			$cmd->bindParam(':email',$email, PDO::PARAM_STR, 128);
+session_start();
+			$email = $_SESSION['email'];
+$cmd->bindParam(':email',$email, PDO::PARAM_STR, 128);
 			$cmd->execute();
 			$db=null;
 			$websites = $cmd->fetchAll();

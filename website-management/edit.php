@@ -1,5 +1,5 @@
 <?php
-	//TODO: validate session or redirect
+	require_once 'authenticate.php';
 	//toDo validate: validate user has access to edit this page if they somehow got onto the wrong website's edit page somehow?
 	$title = 'Create a website';
 	require_once '../header.php';
@@ -26,7 +26,8 @@
 					//query all current website editors for selected website
 					$sql = 'SELECT email FROM creators INNER JOIN websites_admin wa on :email = wa.admin WHERE websiteID = :websiteID';
 					$cmd = $db->prepare($sql);
-					//todo email: get email from session
+					session_start();
+					$email = $_SESSION['email'];
 					$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
 					$cmd->bindParam(':websiteID', $websiteID, PDO::PARAM_INT);
 					$cmd->execute();
