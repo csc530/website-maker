@@ -12,7 +12,7 @@
 			<label for="password">Password: </label>
 			<input type="password" name="password" id="password" required>
 			<label for="confirm-password">Confirm password: </label>
-			<input type="password" name="confirm-password" id="confirm-password" required>
+			<input type="password" name="confirm-password" id="confirm-password" required />
 			<?php
 				if(!empty($_GET['error']))
 					echo '<p class="p-0 alert-danger">' . $_GET['error'] . '</p>'
