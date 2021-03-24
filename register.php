@@ -10,7 +10,7 @@
 		try
 		{
 			require_once 'connect.php';
-			$sql = 'SELECT password FROM users WHERE email = :email';
+			$sql = 'SELECT password FROM creators WHERE email = :email';
 			$cmd = $db->prepare($sql);
 			$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
 			$cmd->execute();
@@ -19,15 +19,17 @@
 			if(password_verify($password, $success['password']))
 			{
 				session_start();
-				
 				header("location:menu.php");
+				exit();
 			}
 			else
 				$error = 'Incorrect password';
 			header("location:login.php?error=$error");
+			exit();
 		}
 		catch(Exception $exception)
 		{		header("location:login.php?error=$error");
+		exit();
 		}
 	}
 	else
@@ -43,14 +45,18 @@
 			try
 			{
 				require_once 'connect.php';
-				$sql = 'INSERT INTO users (:username, :password);';
+				$sql = 'INSERT INTO creators VALUES (:username, :password);';
 				$cmd = $db->prepare($sql);
 				$cmd->bindParam(':username', $email, PDO::PARAM_STR, 128);
 				$password = password_hash($password, PASSWORD_DEFAULT);
 				$cmd->bindParam(':password', $password, PDO::PARAM_STR, 128);
-				$success = $cmd->execute();
+				//Registered email as PK so if the query fails it will 99% of the time be because they are
+				//registering an already bound email address
+				 	$success = $cmd->execute();
 				$db = null;
 				header("location:menu.php");
+				//insurance/verification that no other code is executed
+				exit();
 			}
 			catch(Exception $exception)
 			{
@@ -58,5 +64,5 @@
 			}
 		}
 		header("location:signup.php?error=$error");
-	}
+	exit();}
 ?>

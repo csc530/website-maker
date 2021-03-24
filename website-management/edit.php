@@ -24,7 +24,7 @@
 					require_once '../connect.php';
 					$websiteID = $_GET['websiteID'];
 					//query all current website editors for selected website
-					$sql = 'SELECT email FROM users INNER JOIN websites_admin wa on :email = wa.admin WHERE websiteID = :websiteID';
+					$sql = 'SELECT email FROM creators INNER JOIN websites_admin wa on :email = wa.admin WHERE websiteID = :websiteID';
 					$cmd = $db->prepare($sql);
 					//todo email: get email from session
 					$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);

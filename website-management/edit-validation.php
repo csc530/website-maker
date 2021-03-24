@@ -40,7 +40,7 @@
 			{
 				$error = 'Network error please try again.';
 				require_once '../connect.php';
-				$sql = 'SELECT email FROM users WHERE email = :user';
+				$sql = 'SELECT email FROM creators WHERE email = :user';
 				$cmd = $db->prepare($sql);
 				$cmd->execute();
 				$user = $cmd->fetch();

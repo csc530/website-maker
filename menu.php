@@ -1,5 +1,10 @@
 <?php
 	//TODO: validate session or redirect
+	if(session_status()==PHP_SESSION_NONE)
+	{
+		header('location:login.php?error="Please login or register an account"');
+		exit('Not logged in.');
+	}
 	$title = 'Main menu';
 	require_once 'header.php';
 	require_once 'menu-header.php';
