@@ -1,4 +1,5 @@
 </div>
-<footer class="modal-footer"><small>Some yadda yadda creaative legal jargon or whatever</small></footer>
+</main>
+<footer class="modal-footer navbar-expand-lg"><small>Some yadda yadda creative legal jargon or whatever</small></footer>
 </body>
 </html>

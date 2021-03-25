@@ -1,8 +1,11 @@
 @charset "UTF-8";
 /*Custom styles with bootstrap overrides*/
-input, form{
+input, form,textarea{
     display: block;
     margin-bottom: 8px;
+}
+main>div.container{
+    min-height: 780px;
 }
 fieldset{
     padding: 25px;
