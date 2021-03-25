@@ -18,6 +18,7 @@
 			{
 				$error = 'Network error, please try again.';
 				require_once 'connect.php';
+				//todo: validate that they can't have two website of the same name
 				$sql = 'INSERT INTO websites (creator,name, description) VALUES (:email,:title,:desc);';
 				$cmd = $db->prepare($sql);
 				$email = $_SESSION['email'];
@@ -64,11 +65,20 @@
 			}
 			catch(Exception $exception)
 			{
-				header("location:create.php?error=$error");
+				//i'm going to say 99% of the time it will throw an error is because they already have a page with that name and since it's PK the db will throw an exception
+				//todo: check if they already have a page with that name
+				$error = 'You already have a webpage with that name';
+				header("location:edit-webpages.php?title=$title&pageNumber=$pageNumber&pageTitle=$pageTitle&content=$content&error=$error&step=$step");
 				exit();
 			}
 		}
 		header("location:edit-webpages.php?title=$title&pageNumber=$pageNumber&pageTitle=$pageTitle&content=$content&error=$error&step=$step");
+		exit();
+	}
+	else
+	{
+		$webID = $_GET['webID'];
+		header("location:publish.php?webID=$webID");
 		exit();
 	}
 	?>
