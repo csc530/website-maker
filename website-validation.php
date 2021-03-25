@@ -6,13 +6,10 @@
 	{
 		$title = $_POST['title'];
 		$description = $_POST['description'];
-		$pages = $_POST['pages'];
 		if(empty($title))
 			$error = 'Website title cannot be empty';
 		else if(empty($description))
 			$error = 'Website description cannot be empty';
-		else if(empty($pages) || !is_numeric($pages) || $pages < 1)
-			$error = 'The number of pages must be greater than 1.';
 		else
 		{
 			try
@@ -26,7 +23,7 @@
 				$cmd->bindParam(':title', $title, PDO::PARAM_STR, 35);
 				$cmd->bindParam(':desc', $description, PDO::PARAM_STR, 600);
 				$cmd->execute();
-				header("location:edit-webpages.php?title=$title&pages=$pages");
+				header("location:edit-webpages.php?title=$title");
 			}
 			catch(Exception $exception)
 			{
