@@ -1,11 +1,15 @@
 <?php
 	require_once 'authenticate.php';
 	$title = 'Create a website';
+	$error = $_GET['error'];
 	require_once 'meta.php';
 ?>
 	<form action="website-validation.php" method="post">
 		<fieldset>
 			<legend>Basics</legend>
+			<?php if(!empty($_GET['error']))
+				echo "<p class='alert-danger alert'>$error</p>";
+			?>
 			<label for="title">Website title</label>
 			<input type="text" name="title" maxlength="35" id="title" required>
 			<label for="description">Description</label>

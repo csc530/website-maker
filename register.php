@@ -19,6 +19,7 @@
 			if(password_verify($password, $success['password']))
 			{
 				session_start();
+				$_SESSION['email'] = $email;
 				header("location:menu.php");
 				exit();
 			}
