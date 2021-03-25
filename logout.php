@@ -1,11 +1,10 @@
-
 <?php
 	// access current session
-	session_start();
+	echo session_start();
 	// remove all session variables
-	session_unset();
+	echo session_unset();
 	// terminate the session
-	session_destroy();
+	echo session_destroy();
 	// redirect to main page
 	header('location:index.php');
 	exit();

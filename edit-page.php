@@ -1,5 +1,5 @@
 <?php
-	require_once 'authenticate.php';
+	$redirect=true;
 	$title = 'Create a website';
 	require_once 'meta.php';
 ?>

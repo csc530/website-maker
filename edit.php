@@ -1,5 +1,5 @@
 <?php
-	require_once 'authenticate.php';
+	$redirect=true;
 	//toDo validate: validate user has access to edit this page if they somehow got onto the wrong website's edit page somehow?
 	$title = 'Create a website';
 	require_once 'meta.php';

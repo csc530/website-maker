@@ -1,5 +1,5 @@
 <?php
-	require_once 'authenticate.php';
+	$redirect = true;
 	$title = 'Main menu';
 	require_once 'meta.php';
 	require_once 'menu-header.php';
@@ -13,7 +13,6 @@
     				INNER JOIN websites_admin ON websites.ID = websites_admin.websiteID
 					WHERE admin=:email;';
 			$cmd = $db->prepare($sql);
-session_start();
 			$email = $_SESSION['email'];
 $cmd->bindParam(':email',$email, PDO::PARAM_STR, 128);
 			$cmd->execute();
