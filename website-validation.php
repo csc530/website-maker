@@ -26,7 +26,7 @@
 				$cmd->bindParam(':title', $title, PDO::PARAM_STR, 35);
 				$cmd->bindParam(':desc', $description, PDO::PARAM_STR, 600);
 				$cmd->execute();
-				header("location:edit-page.php?title=$error;pages=$pages");
+				header("location:edit-webpages.php?title=$title&pages=$pages");
 			}
 			catch(Exception $exception)
 			{
