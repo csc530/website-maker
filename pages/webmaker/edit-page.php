@@ -1,7 +1,7 @@
 <?php
 	require_once '../page-includes/authenticate.php';
 	$title = 'Create a website';
-	require_once '../header.php';
+	require_once '../meta.php';
 ?>
 	<form action="website-validation.php" method="post">
 		<fieldset>

@@ -1,6 +1,6 @@
 <?php
 	$title = 'Login';
-	require_once '../page-layouts/header.php';
+	require_once '../page-layouts/meta.php';
 	$email = "";
 	$email = $_GET['email'];
 ?>

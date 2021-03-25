@@ -2,7 +2,7 @@
 	require_once '../page-includes/authenticate.php';
 	//toDo validate: validate user has access to edit this page if they somehow got onto the wrong website's edit page somehow?
 	$title = 'Create a website';
-	require_once '../header.php';
+	require_once '../meta.php';
 	$websiteID = $_GET['websiteID'];
 	require_once '../connect.php';
 	//get name and description of website from db using websiteID

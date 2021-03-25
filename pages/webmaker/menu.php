@@ -1,14 +1,14 @@
 <?php
-	require_once '../page-includes/authenticate.php';
+	require_once '../../page-includes/authenticate.php';
 	$title = 'Main menu';
-	require_once '../page-layouts/header.php';
-	require_once 'menu-header.php';
+	require_once '../../page-layouts/meta.php';
+	require_once '../../page-layouts/menu-header.php';
 ?>
 	<h2>Your websites</h2>
 	<ul>
 		<?php
 		//populate ul with website hrefs from database
-			require_once '../page-includes/connect.php';
+			require_once '../../page-includes/connect.php';
 			$sql = 'SELECT name, preview, addr FROM websites
     				INNER JOIN websites_admin ON websites.ID = websites_admin.websiteID
 					WHERE admin=:email;';
@@ -22,6 +22,6 @@ $cmd->bindParam(':email',$email, PDO::PARAM_STR, 128);
 			foreach($websites as $site)
 				echo '<li><a href="'.$site['addr'].'">'.$site['preview'].'</a></li>';
 		?>
-		<li><a href="website-management/create.php">+</a></li>
+		<li><a href="create.php">+</a></li>
 	</ul>
-<?php require_once '../page-layouts/footer.php' ?>
+<?php require_once '../../page-layouts/footer.php' ?>
