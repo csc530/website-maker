@@ -12,7 +12,8 @@
 <body>
 <!--Bootstrap navbar https://getbootstrap.com/docs/5.0/components/navbar/-->
 <?php
-	if(require_once 'authenticate.php')
+	require_once 'authenticate.php';
+	if($loggedIn)
 		require_once 'user-header.php';
 	else
 		require_once 'main-header.php'
