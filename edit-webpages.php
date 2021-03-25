@@ -14,12 +14,16 @@
 	//Or get pages from database if they are editing an existing one
 	if(empty($webID))
 	{
-		$sql = 'SELECT title, content FROM pages WHERE websiteID = :webID AND pageNumber = :pageNum;';
-		$cmd = $db->prepare($sql);
-		$cmd->bindParam(':webID', $webID, PDO::PARAM_INT, 11);
-		$cmd->bindParam(':pageNum', $pageNumber, PDO::PARAM_INT, 11);
-		$cmd->execute();
-		$pageDetails = $cmd->fetch();
+		try
+		{
+			$sql = 'SELECT title, content FROM pages WHERE websiteID = :webID AND pageNumber = :pageNum;';
+			$cmd = $db->prepare($sql);
+			$cmd->bindParam(':webID', $webID, PDO::PARAM_INT, 11);
+			$cmd->bindParam(':pageNum', $pageNumber, PDO::PARAM_INT, 11);
+			$cmd->execute();
+			$pageDetails = $cmd->fetch();
+		}
+		catch(Exception $exception){}
 	}
 ?>
 	<form action="website-validation.php?pageNumber="<?php echo "$pageNumber"; ?> method="post">
