@@ -27,6 +27,7 @@
 	}
 ?>
 	<form action="website-validation.php?pageNumber="<?php echo "$pageNumber"; ?> method="post">
+		<h1><?php echo "$title: page $pageNumber" ?></h1>
 		<label for="pageTitle">Page title</label>
 		<input id="pageTitle" name="pageTitle" type="text" required max="50" min="1"
 		       value="<?php if(!empty($pageDetails)) echo $pageDetails['title']; ?>" />

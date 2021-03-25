@@ -1,6 +1,6 @@
 <?php
 	$redirect = true;
-	if($loggedIn)
+	require_once 'authenticate.php';
 	$step = $_POST['step'];
 	$error = 'Please try again';
 	//check what step of the website building process user is on

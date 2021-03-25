@@ -7,7 +7,7 @@
 	<form action="website-validation.php" method="post">
 		<fieldset>
 			<legend>Basics</legend>
-			<?php if(!empty($_GET['error']))
+			<?php if(!empty($error))
 				echo "<p class='alert-danger alert'>$error</p>";
 			?>
 			<label for="title">Website title</label>
