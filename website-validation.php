@@ -40,12 +40,12 @@
 		$title = trim($_GET['title']);
 		$content = trim($_POST['pageContent']);
 		$webID = $_GET['webID'];
-		if(empty($title))
+		if(empty($pageTitle))
 			$error = 'Page title cannot be empty';
-		else if(empty($description))
+		else if(empty($content))
 			$error = 'Page content cannot be empty';
 		else
-		{		echo "bepp";
+		{			echo "bepp";
 			
 			try
 			{
@@ -53,7 +53,7 @@
 				require_once 'connect.php';
 				$sql = 'INSERT INTO pages VALUES (:title,:content,:webID,:pgNum);';
 				$cmd = $db->prepare($sql);
-				$cmd->bindParam(':title' , $title, PDO::PARAM_STR, 50);
+				$cmd->bindParam(':title' , $pageTitle, PDO::PARAM_STR, 50);
 				$cmd->bindParam(':content', $content, PDO::PARAM_STR, 10000);
 				$cmd->bindParam(':webID', $webID, PDO::PARAM_INT, 11);
 				$cmd->bindParam(':pgNum',$pageNumber, PDO::PARAM_INT, 11);
@@ -67,5 +67,6 @@
 				header("location:create.php?error=$error");
 			}
 		}
+		header("location:edit-webpages.php?title=$title&pageTitle=$pageTitle&content=$content&error=$error");
 	}
 	?>
