@@ -45,8 +45,7 @@
 		else if(empty($content))
 			$error = 'Page content cannot be empty';
 		else
-		{			echo "bepp";
-			
+		{
 			try
 			{
 				$error = 'Network error, please try again.';
@@ -59,14 +58,17 @@
 				$cmd->bindParam(':pgNum',$pageNumber, PDO::PARAM_INT, 11);
 				$cmd->execute();
 				//increment the page number as to 'add' a new page
-				$pageNumber++;
+				$pageNumber= $pageNumber+1;
 				header("location:edit-webpages.php?title=$title&pageNumber=$pageNumber&webID=$webID");
+				exit();
 			}
 			catch(Exception $exception)
 			{
 				header("location:create.php?error=$error");
+				exit();
 			}
 		}
-		header("location:edit-webpages.php?title=$title&pageTitle=$pageTitle&content=$content&error=$error");
+		header("location:edit-webpages.php?title=$title&pageNumber=$pageNumber&pageTitle=$pageTitle&content=$content&error=$error&step=$step");
+		exit();
 	}
 	?>
