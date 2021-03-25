@@ -1,7 +1,7 @@
 <?php
-	require_once '../page-includes/authenticate.php';
+	require_once 'authenticate.php';
 	$title = 'Create a website';
-	require_once '../meta.php';
+	require_once 'meta.php';
 ?>
 	<form action="website-validation.php" method="post">
 		<fieldset>
@@ -14,4 +14,4 @@
 		</fieldset>
 		<button type="submit" name="step" id="step" value="1" class="btn btn-primary">Next</button>
 	</form>
-<?php require_once '../page-layouts/footer.php' ?>
+<?php require_once 'footer.php' ?>

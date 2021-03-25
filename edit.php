@@ -1,10 +1,10 @@
 <?php
-	require_once '../page-includes/authenticate.php';
+	require_once 'authenticate.php';
 	//toDo validate: validate user has access to edit this page if they somehow got onto the wrong website's edit page somehow?
 	$title = 'Create a website';
-	require_once '../meta.php';
+	require_once 'meta.php';
 	$websiteID = $_GET['websiteID'];
-	require_once '../connect.php';
+	require_once 'connect.php';
 	//get name and description of website from db using websiteID
 	$sql = 'SELECT name, description FROM websites WHERE ID=:id;';
 	$cmd = $db->prepare($sql);
@@ -21,7 +21,7 @@
 			<input type="text" name="user" maxlength="128" id="user" required />
 			<ul>
 				<?php
-					require_once '../connect.php';
+					require_once 'connect.php';
 					$websiteID = $_GET['websiteID'];
 					//query all current website editors for selected website
 					$sql = 'SELECT email FROM creators INNER JOIN websites_admin wa on :email = wa.admin WHERE websiteID = :websiteID';
@@ -56,4 +56,4 @@
 	<form action="edit-validation.php?websiteID=<?echo "$websiteID";?>" method="post">
 	<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit content</button>
 	</form>
-<?php require_once '../page-layouts/footer.php' ?>
+<?php require_once 'footer.php' ?>

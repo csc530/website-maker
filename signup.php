@@ -1,6 +1,6 @@
 <?php
 	$title = 'Login';
-	require_once '../page-layouts/meta.php';
+	require_once 'meta.php';
 	$email = "";
 	$email = $_GET['email'];
 ?>
@@ -21,4 +21,4 @@
 			<button type="button" class="btn btn-secondary">Login</button>
 		</a>
 	</form>
-<?php require_once '../page-layouts/footer.php' ?>
+<?php require_once 'footer.php' ?>

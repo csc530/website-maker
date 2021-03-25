@@ -1,6 +1,6 @@
 <?php
 	$title = 'Login';
-	require_once '../page-layouts/meta.php';
+	require_once 'meta.php';
 ?>
 	<form action="register.php" method="post">
 		<h1>Login</h1>
@@ -17,4 +17,4 @@
 			<button  class="btn btn-secondary"type="button">Sign Up</button>
 		</a>
 	</form>
-<?php require_once '../page-layouts/footer.php' ?>
+<?php require_once 'footer.php' ?>

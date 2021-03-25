@@ -16,7 +16,7 @@
 		try
 		{
 			$error = 'Network error please try again.';
-			require_once '../connect.php';
+			require_once 'connect.php';
 			//no need for extensive checks as if the user is not there no delete is executed
 			$sql = 'DELETE FROM websites_admin WHERE admin = :user';
 			$cmd = $db->prepare($sql);
@@ -39,7 +39,7 @@
 			try
 			{
 				$error = 'Network error please try again.';
-				require_once '../connect.php';
+				require_once 'connect.php';
 				$sql = 'SELECT email FROM creators WHERE email = :user';
 				$cmd = $db->prepare($sql);
 				$cmd->execute();
@@ -84,7 +84,7 @@
 			try
 			{
 				$error = 'Network error please try again.';
-				require_once '../connect.php';
+				require_once 'connect.php';
 					$sql = 'UPDATE websites SET name = :name AND description = :description WHERE ID = :ID';
 					$cmd = $db->prepare($sql);
 					$cmd->bindParam(':websiteID', $websiteID, PDO::PARAM_INT, 11);
