@@ -51,18 +51,18 @@
 	try
 	{
 		require 'connect.php';
-		$sql = 'SELECT pageNumber, websiteID FROM pages WHERE websiteID = :webID AND pageNumber != :pageNum;';
+		$sql = 'SELECT pageNumber, websiteID, title FROM pages WHERE websiteID = :webID AND pageNumber != :pageNum ORDER BY pageNumber;';
 		$cmd = $db->prepare($sql);
 		$cmd->bindParam(':webID', $webID, PDO::PARAM_INT, 11);
 		$cmd->bindParam(':pageNum', $pageNumber, PDO::PARAM_INT, 11);
 		$cmd->execute();
 		$pages = $cmd->fetchAll();
 		if(!empty($pages))
-			echo "<h2>pages</h2>\n<ul>";
+			echo "<h2>pages</h2>\n<ol>";
 		foreach($pages as $page)
-			echo '<li><a href="edit-webpages.php?pageNumber=' . $page['pageNumber'] . '&webID=' . $page['websiteID'] . '">' . $page['title'] . '</a></li>';
+			echo '<li><a href="edit-webpages.php?title='.$title.'&pageNumber=' . $page['pageNumber'] . '&webID=' . $page['websiteID'] . '">' . $page['title'] . '</a></li>';
 		if(empty($pages))
-			echo "</ul>";
+			echo "</ol>";
 	}
 	catch(Exception $exception)
 	{

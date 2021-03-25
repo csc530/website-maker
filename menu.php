@@ -7,7 +7,7 @@
 	<h2>Your websites</h2>
 	<ul>
 		<?php
-		//populate ul with website hrefs from database
+		//todo populate ul with website hrefs from database
 			require_once 'connect.php';
 			$sql = 'SELECT name, preview, addr FROM websites
     				INNER JOIN websites_admin ON websites.ID = websites_admin.websiteID
