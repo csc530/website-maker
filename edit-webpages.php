@@ -2,41 +2,29 @@
 	$title = 'Page Content';
 	$redirect = true;
 	require_once 'meta.php';
+	//get errorMsg if any
 	$error = $_GET['error'];
-	$siteTitle = $_GET['siteTitle'];
+	//get website's title
+	$siteName = $_GET['siteTitle'];
+	//get webpage's number
 	$pageNumber = $_GET['pageNumber'];
-	$webID = $_GET['webID'];
 	//to hold details of current page from db if any
 	$pageDetails = "";
-	//if there is no error get check for pre-existing page content from db
+	//if there is no error check for pre-existing page content from db
 	if(empty($error))
 	{
-		//check if passed in page number is present, numeric, and greater than 1
-		if(empty($pageNumber) || !is_numeric($pageNumber) || $pageNumber < 1)
-			$pageNumber = 1;
 		require 'connect.php';
-		//if the webpage's website ID is not given in the url get it from the db
-		if(empty($webID))
-		{
-			//get the websites ID from db
-			//this will work (with fetch) as each user must have a unique website name for each of their sites
-			$sql = 'SELECT ID FROM websites WHERE name = :title AND creator = :email;';
-			$cmd = $db->prepare($sql);
-			$cmd->bindParam(':title', $siteTitle, PDO::PARAM_STR, 35);
-			$cmd->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR, 128);
-			$cmd->execute();
-			$webID = $cmd->fetch();
-			$webID = $webID['ID'];
-		}
 		try
 		{
 			//get the details of current page if it already exits in db else this will do nothing
-			$sql = 'SELECT title, content FROM pages WHERE websiteID = :webID AND pageNumber = :pageNum;';
+			$sql = 'SELECT name, content FROM pages WHERE creator = :email AND pageNumber = :pageNum AND siteName = :siteName;';
 			$cmd = $db->prepare($sql);
-			$cmd->bindParam(':webID', $webID, PDO::PARAM_INT, 11);
+			$cmd->bindParam(':creator', $_SESSION['email'], PDO::PARAM_STR, 128);
 			$cmd->bindParam(':pageNum', $pageNumber, PDO::PARAM_INT, 11);
+			$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 			$cmd->execute();
-			$db=null;
+			$db = null;
+			//can use fetch as their should (as per db constraints) one page that matches the pageNumber
 			$pageDetails = $cmd->fetch();
 		}
 		catch(Exception $exception)
@@ -47,46 +35,50 @@
 	else
 	{
 		//declare an array pageDetails as an array with string indices (title and content) with the pertinent values from the GET url
-		$pageDetails = array('title' => $_GET['pageTitle'], 'content' => $_GET['content']);
+		$pageDetails = array('name' => $_GET['pageTitle'], 'content' => $_GET['content']);
 	}
 	try
 	{
 		//display other pages on site on top in a list (not including currently built site)
 		require 'connect.php';
-		$sql = 'SELECT pageNumber, websiteID, title FROM pages WHERE websiteID = :webID AND pageNumber != :pageNum ORDER BY pageNumber;';
+		$sql = 'SELECT pageNumber, name FROM pages WHERE creator = :creator AND pageNumber != :pageNum AND siteName=:siteName ORDER BY pageNumber;';
 		$cmd = $db->prepare($sql);
-		$cmd->bindParam(':webID', $webID, PDO::PARAM_INT, 11);
+		$cmd->bindParam(':creator', $_SESSION['email'], PDO::PARAM_STR, 128);
 		$cmd->bindParam(':pageNum', $pageNumber, PDO::PARAM_INT, 11);
+		$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 		$cmd->execute();
 		$pages = $cmd->fetchAll();
+		//print each page as a list item if any
 		if(!empty($pages))
+		{
 			echo "<h2>pages</h2>\n<ol>";
-		foreach($pages as $page)
-			echo '<li><a href="edit-webpages.php?siteTitle='.$siteTitle.'&pageNumber=' . $page['pageNumber'] . '&webID=' . $page['websiteID'] . '">' . $page['title'] . '</a></li>';
-		if(empty($pages))
+			foreach($pages as $page)
+				echo '<li><a href="edit-webpages.php?siteTitle=' . $siteName . '&pageNumber=' . $page['pageNumber'] . '">' . $page['name'] . '</a></li>';
 			echo "</ol>";
+		}
 	}
 	catch(Exception $exception)
 	{
 	}
 ?>
-	<form action="website-validation.php?pageNumber=<?php echo "$pageNumber&webID=$webID&siteTitle=$siteTitle"; ?>" method="post">
-	<h1><?php echo "$siteTitle: page $pageNumber" ?></h1>
+	<form action="website-validation.php?pageNumber=<?php echo "$pageNumber&siteTitle=$siteName"; ?>"
+	      method="post">
+		<h1><?php echo "$siteName: page $pageNumber" ?></h1>
 		<?php
 			if(!empty($error))
 				echo "<p class='alert alert-danger'>$error</p>";
 		?>
-	<label for="pageTitle">Page title</label>
-	<input id="pageTitle" name="pageTitle" type="text" required max="50" min="1"
-	       value="<?php if(!empty($pageDetails)) echo $pageDetails['title']; ?>" />
-	<label for="pageContent">Page content</label>
-	<textarea name="pageContent" id="pageContent" required
-	          placeholder="HTML content is allowed i.e. <h1>Hello</h1><p>Welcome to my page, I hope you enjoy</p>..."><?php
-			if(!empty($pageDetails))
-				echo $pageDetails['content'];
-		?></textarea>
+		<label for="pageTitle">Page title</label>
+		<input id="pageTitle" name="pageTitle" type="text" required max="50" min="1"
+		       value="<?php if(!empty($pageDetails)) echo $pageDetails['name']; ?>" />
+		<label for="pageContent">Page content</label>
+		<textarea name="pageContent" id="pageContent" required
+		          placeholder="HTML content is allowed i.e. <h1>Hello</h1><p>Welcome to my page, I hope you enjoy</p>..."><?php
+				if(!empty($pageDetails))
+					echo $pageDetails['content'];
+			?></textarea>
 		<button type="submit" name="step" value="2">Add page</button>
-	<button type="submit" name="step" value="3">Submit</button>
+		<button type="submit" name="step" value="3">Submit</button>
 	</form>
 <?php
 	require_once 'footer.php';
