@@ -93,10 +93,16 @@
 		header("location:edit-webpages.php?siteTitle=$siteName&pageNumber=$pageNumber&pageTitle=$pageTitle&content=$content&error=$error&step=$step");
 		exit();
 	}
-	else
+	else if($step==3)
 	{
 		$siteName = $_GET['siteTitle'];
 		header("location:publish.php?siteTitle=$siteName");
+		exit();
+	}
+	else
+	{
+		//todo: add appropriate redirect when a site page is clicked to edit it
+		//todo: update and add publish column to site allow viewing it in when opened
 		exit();
 	}
 	?>

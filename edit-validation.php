@@ -85,6 +85,7 @@
 			{
 				$error = 'Network error please try again.';
 				require_once 'connect.php';
+				//todo: pass in old website title to update and check if they are renaming to an already taken website
 					$sql = 'UPDATE websites SET name = :name AND description = :description WHERE ID = :ID';
 					$cmd = $db->prepare($sql);
 					$cmd->bindParam(':websiteID', $websiteID, PDO::PARAM_INT, 11);

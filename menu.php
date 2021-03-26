@@ -2,7 +2,7 @@
 	$redirect = true;
 	$title = 'Main menu';
 	require_once 'meta.php';
-	require_once 'menu-header.php';
+	require_once 'menu-options.php';
 ?>
 	<h2>Your websites</h2>
 	<ul>
