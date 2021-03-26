@@ -1,14 +1,31 @@
 <?php
 	$redirect=true;
-	//toDo validate: validate user has access to edit this page if they somehow got onto the wrong website's edit page somehow?
+	require_once 'authenticate.php';
 	$title = 'Create a website';
 	require_once 'meta.php';
-	$websiteID = $_GET['websiteID'];
+	$siteName = $_GET['siteTitle'];
+	$creator = $_GET['creator'];
+	//if no creator GET argument has been passed it means they are the creator of the website
+	if(empty($creator))
+		$creator = $_SESSION['email'];
 	require_once 'connect.php';
-	//get name and description of website from db using websiteID
-	$sql = 'SELECT name, description FROM websites WHERE ID=:id;';
+	//validate user has access to edit this page if they somehow got onto the wrong website's edit page somehow?
+	$sql = 'SELECT admin FROM (SELECT * FROM websites_admin WHERE siteName = :siteName) AS selectedSite WHERE admin = :email OR creator = :email';
 	$cmd = $db->prepare($sql);
-	$cmd->bindParam(':id', $websiteID, PDO::PARAM_INT);
+	$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
+	$cmd->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR, 128);
+	$cmd->execute();
+	$permitted = $cmd->fetch();
+	if(empty($permitted))
+	{
+		$db=null;
+		header('location:menu.php?error=You are not permitted to view that site.');
+		exit();
+	}
+	//get name and description of website from db using websiteID
+	$sql = 'SELECT name, description FROM websites WHERE creator = :creator;';
+	$cmd = $db->prepare($sql);
+	$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
 	$cmd->execute();
 	$db = null;
 	$websiteInfo = $cmd->fetch();
