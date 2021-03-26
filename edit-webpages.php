@@ -3,7 +3,7 @@
 	$redirect = true;
 	require_once 'meta.php';
 	$error = $_GET['error'];
-	$title = $_GET['title'];
+	$siteTitle = $_GET['siteTitle'];
 	$pageNumber = $_GET['pageNumber'];
 	$webID = $_GET['webID'];
 	//to hold details of current page from db if any
@@ -22,7 +22,7 @@
 			//this will work (with fetch) as each user must have a unique website name for each of their sites
 			$sql = 'SELECT ID FROM websites WHERE name = :title AND creator = :email;';
 			$cmd = $db->prepare($sql);
-			$cmd->bindParam(':title', $title, PDO::PARAM_STR, 35);
+			$cmd->bindParam(':title', $siteTitle, PDO::PARAM_STR, 35);
 			$cmd->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR, 128);
 			$cmd->execute();
 			$webID = $cmd->fetch();
@@ -30,6 +30,7 @@
 		}
 		try
 		{
+			//get the details of current page if it already exits in db else this will do nothing
 			$sql = 'SELECT title, content FROM pages WHERE websiteID = :webID AND pageNumber = :pageNum;';
 			$cmd = $db->prepare($sql);
 			$cmd->bindParam(':webID', $webID, PDO::PARAM_INT, 11);
@@ -45,11 +46,12 @@
 	//if there is an error display it and reload previously entered data into the form
 	else
 	{
-		//declare an array pageDetails as an array with string indicies (title and content) with the pertinent values from the GET url
+		//declare an array pageDetails as an array with string indices (title and content) with the pertinent values from the GET url
 		$pageDetails = array('title' => $_GET['pageTitle'], 'content' => $_GET['content']);
 	}
 	try
 	{
+		//display other pages on site on top in a list (not including currently built site)
 		require 'connect.php';
 		$sql = 'SELECT pageNumber, websiteID, title FROM pages WHERE websiteID = :webID AND pageNumber != :pageNum ORDER BY pageNumber;';
 		$cmd = $db->prepare($sql);
@@ -60,7 +62,7 @@
 		if(!empty($pages))
 			echo "<h2>pages</h2>\n<ol>";
 		foreach($pages as $page)
-			echo '<li><a href="edit-webpages.php?title='.$title.'&pageNumber=' . $page['pageNumber'] . '&webID=' . $page['websiteID'] . '">' . $page['title'] . '</a></li>';
+			echo '<li><a href="edit-webpages.php?siteTitle='.$siteTitle.'&pageNumber=' . $page['pageNumber'] . '&webID=' . $page['websiteID'] . '">' . $page['title'] . '</a></li>';
 		if(empty($pages))
 			echo "</ol>";
 	}
@@ -68,8 +70,8 @@
 	{
 	}
 ?>
-	<form action="website-validation.php?pageNumber=<?php echo "$pageNumber&webID=$webID&pageTitle=$title"; ?>" method="post">
-	<h1><?php echo "$title: page $pageNumber" ?></h1>
+	<form action="website-validation.php?pageNumber=<?php echo "$pageNumber&webID=$webID&siteTitle=$siteTitle"; ?>" method="post">
+	<h1><?php echo "$siteTitle: page $pageNumber" ?></h1>
 		<?php
 			if(!empty($error))
 				echo "<p class='alert alert-danger'>$error</p>";
