@@ -27,10 +27,21 @@
 				$cmd->bindParam(':desc', $description, PDO::PARAM_STR, 600);
 				$cmd->execute();
 				header("location:edit-webpages.php?siteTitle=$siteName&pageNumber=1");
+				exit();
 			}
 			catch(Exception $exception)
 			{
+				//check if the error was thrown because they already have a website with that name
+				$sql='SELECT name FROM websites WHERE creator=:email AND name = :siteName';
+				$cmd=$db->prepare($sql);
+				$cmd->bindParam(':email', $_SESSION['email'],PDO::PARAM_STR,128);
+				$cmd->bindParam(':siteName',$siteName, PDO::PARAM_STR, 35);
+				$cmd->execute();
+				$duplicate = $cmd->fetch();
+				if(!empty($duplicate))
+					$error = 'You already have a webpage with that name';
 				header("location:create.php?error=$error");
+				exit();
 			}
 		}
 	}
@@ -65,8 +76,15 @@
 			}
 			catch(Exception $exception)
 			{
-				//i'm going to say 99% of the time it will throw an error is because they already have a page with that name and since it's PK the db will throw an exception
-				//todo: check if they already have a page with that name
+				//check if the error was thrown because they already have a webpage with that name
+				$sql='SELECT name FROM pages WHERE creator=:email AND siteName = :siteName';
+				$cmd=$db->prepare($sql);
+				$cmd->bindParam(':email', $_SESSION['email'],PDO::PARAM_STR,128);
+				$cmd->bindParam(':siteName',$siteName, PDO::PARAM_STR, 35);
+				$cmd->execute();
+				$duplicate = $cmd->fetch();
+				if($duplicate['name']==$pageTitle)
+					$error = 'You already have a webpage with that name';
 				$error = 'You already have a webpage with that name';
 				header("location:edit-webpages.php?siteTitle=$siteName&pageNumber=$pageNumber&pageTitle=$pageTitle&content=$content&error=$error&step=$step");
 				exit();
