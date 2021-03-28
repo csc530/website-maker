@@ -29,8 +29,9 @@
 			exit();
 		}
 		catch(Exception $exception)
-		{		header("location:login.php?error=$error");
-		exit();
+		{
+			header("location:login.php?error=$error");
+			exit();
 		}
 	}
 	else
@@ -53,10 +54,12 @@
 				$cmd->bindParam(':password', $password, PDO::PARAM_STR, 128);
 				//Registered email as PK so if the query fails it will 99% of the time be because they are
 				//registering an already bound email address
-				 	$success = $cmd->execute();
+				$success = $cmd->execute();
 				$db = null;
+				//start a session of newly created user
+				session_start();
+				$_SESSION['email'] = $email;
 				header("location:menu.php");
-				//insurance/verification that no other code is executed
 				exit();
 			}
 			catch(Exception $exception)
@@ -65,5 +68,6 @@
 			}
 		}
 		header("location:signup.php?error=$error");
-	exit();}
+		exit();
+	}
 ?>
