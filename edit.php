@@ -74,7 +74,7 @@
 			<button type="submit" name="add" value="true" class="btn-primary">Add</button>
 		</fieldset>
 	</form>
-	<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creator";?>" method="post">
+	<form action="edit-webpages.php?pageNumber=1&siteTitle=<?php echo "$siteName&creator=$creator";?>" method="post">
 	<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit content</button>
 	</form>
 <?php require_once 'footer.php' ?>

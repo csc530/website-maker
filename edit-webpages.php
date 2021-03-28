@@ -10,6 +10,10 @@
 	$pageNumber = $_GET['pageNumber'];
 	//to hold details of current page from db if any
 	$pageDetails = "";
+	//check if a creator has been if not then the logged in user is the creator of the site
+	$creator = $_GET['creator'];
+	if(empty($creator))
+		$creator = $_SESSION['email'];
 	//if there is no error check for pre-existing page content from db
 	if(empty($error))
 	{
@@ -17,9 +21,9 @@
 		try
 		{
 			//get the details of current page if it already exits in db else this will do nothing
-			$sql = 'SELECT name, content FROM pages WHERE creator = :email AND pageNumber = :pageNum AND siteName = :siteName;';
+			$sql = 'SELECT name, content FROM pages WHERE creator = :creator AND pageNumber = :pageNum AND siteName = :siteName;';
 			$cmd = $db->prepare($sql);
-			$cmd->bindParam(':creator', $_SESSION['email'], PDO::PARAM_STR, 128);
+			$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
 			$cmd->bindParam(':pageNum', $pageNumber, PDO::PARAM_INT, 11);
 			$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 			$cmd->execute();

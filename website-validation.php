@@ -113,6 +113,7 @@
 	{
 		//todo: add appropriate redirect when a site page is clicked to edit it
 		//todo: update and add publish column to site allow viewing it in when opened
+		header('location:menu.php');
 		exit();
 	}
 	?>
