@@ -18,7 +18,7 @@
 			{
 				$error = 'Network error, please try again.';
 				require_once 'connect.php';
-				//todo: validate that they can't have two website of the same name
+				//will throw an error as the website's name and creator are PK meaning there cannot be any duplicates
 				$sql = 'INSERT INTO websites (creator,name, description) VALUES (:email,:title,:desc);';
 				$cmd = $db->prepare($sql);
 				$email = $_SESSION['email'];
@@ -26,6 +26,16 @@
 				$cmd->bindParam(':title', $siteName, PDO::PARAM_STR, 35);
 				$cmd->bindParam(':desc', $description, PDO::PARAM_STR, 600);
 				$cmd->execute();
+				/*there is a trigger in db that will add this website and creator to website_admin table to indicate that the creator is also an
+				admin allowed to edit the site and content as such
+				**I made a trigger instead of the below code as I think it'll be more efficient and that you're marking PHP not MySQL
+				$sql = 'INSERT INTO websites_admin (name,creator, creator) VALUES (:title,:email,:email);';
+				$cmd = $db->prepare($sql);
+				$email = $_SESSION['email'];
+				$cmd->bindParam(':email' , $email, PDO::PARAM_STR, 128);
+				$cmd->bindParam(':title', $siteName, PDO::PARAM_STR, 35);
+				$cmd->execute();
+				*/
 				header("location:edit-webpages.php?siteTitle=$siteName&pageNumber=1");
 				exit();
 			}
