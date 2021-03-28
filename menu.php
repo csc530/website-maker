@@ -26,21 +26,17 @@
 	<h2>Collaborating sites</h2>
 	<ul>
 		<?php
-			//todo populate ul with website hrefs from database
-			require_once 'connect.php';
-			$sql = 'SELECT name FROM websites
-    				INNER JOIN websites_admin ON websites.name = websites_admin.siteName
-					WHERE admin=:email;';
+			require 'connect.php';
+			$sql = 'SELECT siteName, w.creator FROM websites_admin AS wa INNER JOIN websites AS w on wa.siteName = w.name	WHERE admin=:email AND wa.creator != :email AND w.creator = wa.creator;';
 			$cmd = $db->prepare($sql);
-			$email = $_SESSION['email'];
-			$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
+			$cmd->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR, 128);
 			$cmd->execute();
 			$db = null;
 			$websites = $cmd->fetchAll();
 			foreach($websites as $site)
-				echo '<li><a href="' . $site['addr'] . '">' . $site['name'] . '</a></li>';
+				echo '<li><a href="#">' . $site['name'] . '</a>' . $site['siteName'] . ' <a href="edit.php?siteTitle=' . $site['siteName'] . '&creator='
+						. $site['creator'] . '"><button class="btn btn-dark" type="button">Edit</button></a></li>';
 		?>
-		<li><a href="create.php">+</a></li>
 	</ul>
 <?php
 	require_once 'footer.php' ?>
