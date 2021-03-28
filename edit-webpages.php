@@ -47,7 +47,7 @@
 		require 'connect.php';
 		$sql = 'SELECT pageNumber, name FROM pages WHERE creator = :creator AND pageNumber != :pageNum AND siteName=:siteName ORDER BY pageNumber;';
 		$cmd = $db->prepare($sql);
-		$cmd->bindParam(':creator', $_SESSION['email'], PDO::PARAM_STR, 128);
+		$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
 		$cmd->bindParam(':pageNum', $pageNumber, PDO::PARAM_INT, 11);
 		$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 		$cmd->execute();
@@ -57,7 +57,9 @@
 		{
 			echo "<h2>pages</h2>\n<ol>";
 			foreach($pages as $page)
-				echo '<li><a href="edit-webpages.php?siteTitle=' . $siteName . '&pageNumber=' . $page['pageNumber'] . '">' . $page['name'] . '</a></li>';
+				echo '<li>'.$page['pageNumber'].'. <a href="edit-webpages.php?siteTitle=' . $siteName . '&pageNumber=' . $page['pageNumber'] . '">' .
+						$page['name'] .
+				'</a></li>';
 			echo "</ol>";
 		}
 	}
@@ -65,7 +67,7 @@
 	{
 	}
 ?>
-	<form action="website-validation.php?pageNumber=<?php echo "$pageNumber&siteTitle=$siteName"; ?>"
+	<form action="website-validation.php?pageNumber=<?php echo "$pageNumber&siteTitle=$siteName&creator=$creator"; ?>"
 	      method="post">
 		<h1><?php echo "$siteName: page $pageNumber" ?></h1>
 		<?php
