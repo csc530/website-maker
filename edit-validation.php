@@ -27,9 +27,11 @@
 			$error = 'Network error please try again.';
 			require 'connect.php';
 			//no need for extensive checks as if the user is not there no delete is executed
-			$sql = 'DELETE FROM websites_admin WHERE admin = :user';
+			$sql = 'DELETE FROM websites_admin WHERE admin = :user AND creator = :creator AND siteName = :siteName';
 			$cmd = $db->prepare($sql);
 			$cmd->bindParam(':user', $delete, PDO::PARAM_STR, 128);
+			$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+			$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 			$cmd->execute();
 			$db = null;
 			header("location:edit.php?siteTitle=$siteName&creator=$creator");

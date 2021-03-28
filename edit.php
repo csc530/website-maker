@@ -58,7 +58,7 @@
 					$websiteID = $_GET['websiteID'];
 					//query all current website editors for selected website excluding the creator, because you can't remove the creator of the
 					// site as an admin
-					$sql = 'SELECT email FROM creators INNER JOIN websites_admin wa on creator = :creator WHERE siteName = :siteName AND admin != :creator';
+					$sql = 'SELECT admin FROM websites_admin WHERE siteName = :siteName AND admin != :creator AND creator = :creator';
 					$cmd = $db->prepare($sql);
 					$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
 					$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
@@ -66,7 +66,9 @@
 					$users = $cmd->fetchAll();
 					foreach($users as $user)
 						///use get method to assign which delete button is clicked
-						echo '<li><a href="edit-validation.php?delete='.$user['email'].'" ><button class="btn btn-dark" id="'.$user['email'].'"  type="button"> - </button></a>' . $user['email'] . '</li>';
+						echo '<li><a href="edit-validation.php?delete='.$user['admin']."&creator=$creator&siteTitle=$siteName".'" ><button
+						class="btn btn-dark" id="'.$user['admin'].'"
+						type="button"> - </button></a>' . $user['admin'] . '</li>';
 				?>
 			</ul>
 			<button type="submit" name="add" value="true" class="btn-primary">Add</button>
