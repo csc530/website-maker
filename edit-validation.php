@@ -1,4 +1,6 @@
 <?php
+	$redirect = true;
+	require_once 'authenticate.php';
 	$error = 'Please try again.';
 	//edit button to edit additional page content
 	$editDetails = $_POST['edit'];
@@ -6,64 +8,82 @@
 	$update = $_POST['update'];
 	//add button to add a new admin user
 	$add = $_POST['add'];
-	//website's ID
-	$websiteID = $_GET['websiteID'];
+	//website's name
+	$siteName = $_GET['siteTitle'];
 	//user to delete
 	$delete = $_GET['delete'];
+	//creator of website
+	$creator = $_GET['creator'];
+	//redirect to edit individual pages content
 	if(!empty($editDetails))
-		header("location:edit-page.php?pageID=$websiteID");
-	else if(!empty($delete)){
+	{
+		header("location:edit-page.php?siteTitle=$siteName&creator=$creator");
+		exit();
+	}
+	else if(!empty($delete))
+	{
 		try
 		{
 			$error = 'Network error please try again.';
-			require_once 'connect.php';
+			require 'connect.php';
 			//no need for extensive checks as if the user is not there no delete is executed
 			$sql = 'DELETE FROM websites_admin WHERE admin = :user';
 			$cmd = $db->prepare($sql);
 			$cmd->bindParam(':user', $delete, PDO::PARAM_STR, 128);
 			$cmd->execute();
+			$db = null;
+			header("location:edit.php?siteTitle=$siteName&creator=$creator");
+			exit();
 		}
 		catch(Exception $exception)
 		{
-			header("location:edit.php?error=$error");
+			header("location:edit.php?error=$error&siteTitle=$siteName&creator=$creator");
+			exit();
 		}
 	}
 	else if(!empty($add))
 	{
 		//new user email account
 		$newUser = $_POST['user'];
-		if(empty($user))
-			$error = 'New admin user cannot be left blank.';
+		if(empty($newUser))
+			$error = 'New admin user cannot be left blank.'.$newUser;
 		else
 		{
 			try
 			{
 				$error = 'Network error please try again.';
-				require_once 'connect.php';
+				require 'connect.php';
 				$sql = 'SELECT email FROM creators WHERE email = :user';
 				$cmd = $db->prepare($sql);
 				$cmd->execute();
 				$user = $cmd->fetch();
+				$db=null;
 				if($user['email'] == $newUser)
 				{
-					$sql = 'INSERT INTO websites_admin VALUES (:websiteID, :user);';
+					require 'connect.php';
+					$sql = 'INSERT INTO websites_admin VALUES (:siteName, :creator, :admin);';
 					$cmd = $db->prepare($sql);
-					$cmd->bindParam(':websiteID', $websiteID, PDO::PARAM_INT, 11);
+					$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 					//Also db-side checking as user is a foreign key so that user must exist
 					$cmd->bindParam(':user', $newUser, PDO::PARAM_STR, 128);
+					$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
 					$cmd->execute();
+					$db = null;
 					//todo ui: pass get variable to allow the new user to be highlighted for a time or something
-					header("location:edit.php");
+					header("location:edit.php?creator=$creator&siteTitle=$siteName");
+					exit();
 				}
 				else
 				{
 					$error = "There is no registered user with $newUser email address. <a href='../signup.php?email=$newUser'>register</a> with it now.";
-					header("location:edit.php?error=$error");
+					header("location:edit.php?error=$error&creator=$creator&siteTitle=$siteName");
+					exit();
 				}
 			}
 			catch(Exception $exception)
 			{
-				header("location:edit.php?error=$error");
+				header("location:edit.php?error=$error&creator=$creator&siteTitle=$siteName");
+				exit();
 			}
 		}
 	}
@@ -75,31 +95,35 @@
 			$error = 'Website title cannot be left blank.';
 		else if(empty($description))
 			$error = 'Website description cannot be left blank.';
-		else if(strlen($description)>600)
+		else if(strlen($description) > 600)
 			$error = 'Description must be less than 600 characters.';
-		else if(strlen($title))
+		else if(strlen($title) > 35)
 			$error = 'Website title must be less than 35 characters';
 		else
 		{
 			try
 			{
 				$error = 'Network error please try again.';
-				require_once 'connect.php';
-				//todo: pass in old website title to update and check if they are renaming to an already taken website
-					$sql = 'UPDATE websites SET name = :name AND description = :description WHERE ID = :ID';
-					$cmd = $db->prepare($sql);
-					$cmd->bindParam(':websiteID', $websiteID, PDO::PARAM_INT, 11);
-					$cmd->bindParam(':name', $title,PDO::PARAM_STR, 35);
-					$cmd->bindParam(':description', $description, PDO::PARAM_STR, 600);
-					//db-side checking as well that description and title is not nul
-					$cmd->execute();
-					//todo ui: pass get variable to allow the new user to be highlighted for a time or something
-					header("location:edit.php");
-							}
+				require 'connect.php';
+				//DB check because name is PK can't have duplicate named site
+				$sql = 'UPDATE websites SET name = :name, description = :description WHERE name = :newName;';
+				$cmd = $db->prepare($sql);
+				$cmd->bindParam(':newName', $siteName, PDO::PARAM_STR, 35);
+				$cmd->bindParam(':name', $title, PDO::PARAM_STR, 35);
+				$cmd->bindParam(':description', $description, PDO::PARAM_STR, 600);
+				//db-side checking as well that description and title is not nul
+				$cmd->execute();
+				$db = null;
+				header("location:edit.php?creator=$creator&siteTitle=$title");
+				exit();
+			}
 			catch(Exception $exception)
 			{
-				header("location:edit.php?error=$error");
+				header("location:edit.php?error=$error&creator=$creator&siteTitle=$siteName");
+				exit();
 			}
 		}
 	}
-		?>
+	header("location:edit.php?error=$error&creator=$creator&siteTitle=$siteName");
+	exit();
+?>

@@ -31,12 +31,27 @@
 	$db = null;
 	$websiteInfo = $cmd->fetch();
 ?>
+	<!--Sectioned off the edits in separates for ease of submission (allowed to have requires for appropriate inputs then no requires and having
+	additional check on the server side?) and handling in validation page-->
 	<h1><?php echo $websiteInfo['name'];?></h1>
+	<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creator";?>" method="post">
+		<fieldset>
+			<legend>Basics</legend>
+			<label for="title">Website title</label>
+			<!-- insert current name and description of website to form-->
+			<input type="text" name="title" maxlength="35" id="title" required
+			       value="<?php echo $websiteInfo['name']; ?>" />
+			<label for="description">Description</label>
+			<textarea name="description" id="description" required
+			          placeholder="Give a brief welcome and overview to your clients/users/visitors about your website."><?php echo $websiteInfo['description']; ?></textarea>
+		</fieldset>
+		<button type="submit" name="update" value="true" class="btn-primary">Update</button>
+	</form>
 	<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creator";?>" method="post">
 		<fieldset>
 			<legend>Access</legend>
 			<label for="user">Add user</label>
-			<input type="text" name="user" maxlength="128" id="user" required />
+			<input type="text" name="user" maxlength="128" id="user" required >
 			<ul>
 				<?php
 					require 'connect.php';
@@ -56,19 +71,6 @@
 			</ul>
 			<button type="submit" name="add" value="true" class="btn-primary">Add</button>
 		</fieldset>
-	</form>
-	<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creator";?>" method="post">
-		<fieldset>
-			<legend>Basics</legend>
-			<label for="title">Website title</label>
-			<!-- insert current name and description of website to form-->
-			<input type="text" name="title" maxlength="35" id="title" required
-			       value="<?php echo $websiteInfo['name']; ?>">
-			<label for="description">Description</label>
-			<textarea name="description" id="description" required
-			          placeholder="Give a brief welcome and overview to your clients/users/visitors about your website."><?php echo $websiteInfo['description']; ?></textarea>
-		</fieldset>
-		<button type="submit" name="update" value="true" class="btn-primary">Update</button>
 	</form>
 	<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creator";?>" method="post">
 	<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit content</button>
