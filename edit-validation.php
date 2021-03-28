@@ -55,9 +55,11 @@
 				require 'connect.php';
 				$sql = 'SELECT email FROM creators WHERE email = :user';
 				$cmd = $db->prepare($sql);
+				$cmd->bindParam(':user', $newUser, PDO::PARAM_STR, 128);
 				$cmd->execute();
 				$user = $cmd->fetch();
 				$db=null;
+				//check if there is a registered user with given email
 				if($user['email'] == $newUser)
 				{
 					require 'connect.php';
@@ -65,7 +67,7 @@
 					$cmd = $db->prepare($sql);
 					$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 					//Also db-side checking as user is a foreign key so that user must exist
-					$cmd->bindParam(':user', $newUser, PDO::PARAM_STR, 128);
+					$cmd->bindParam(':admin', $newUser, PDO::PARAM_STR, 128);
 					$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
 					$cmd->execute();
 					$db = null;
