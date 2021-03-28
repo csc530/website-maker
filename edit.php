@@ -23,30 +23,30 @@
 		exit();
 	}
 	//get name and description of website from db using websiteID
-	$sql = 'SELECT name, description FROM websites WHERE creator = :creator;';
+	$sql = 'SELECT name, description FROM websites WHERE creator = :creator AND name = :siteName;';
 	$cmd = $db->prepare($sql);
 	$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+	$cmd->bindParam(':siteName',$siteName, PDO::PARAM_STR, 35);
 	$cmd->execute();
 	$db = null;
 	$websiteInfo = $cmd->fetch();
 ?>
 	<h1><?php echo $websiteInfo['name'];?></h1>
-	<form action="edit-validation.php?websiteID=<?echo "$websiteID";?>" method="post">
+	<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creator";?>" method="post">
 		<fieldset>
 			<legend>Access</legend>
 			<label for="user">Add user</label>
 			<input type="text" name="user" maxlength="128" id="user" required />
 			<ul>
 				<?php
-					require_once 'connect.php';
+					require 'connect.php';
 					$websiteID = $_GET['websiteID'];
-					//query all current website editors for selected website
-					$sql = 'SELECT email FROM creators INNER JOIN websites_admin wa on :email = wa.admin WHERE websiteID = :websiteID';
+					//query all current website editors for selected website excluding the creator, because you can't remove the creator of the
+					// site as an admin
+					$sql = 'SELECT email FROM creators INNER JOIN websites_admin wa on creator = :creator WHERE siteName = :siteName AND admin != :creator';
 					$cmd = $db->prepare($sql);
-					session_start();
-					$email = $_SESSION['email'];
-					$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
-					$cmd->bindParam(':websiteID', $websiteID, PDO::PARAM_INT);
+					$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+					$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 					$cmd->execute();
 					$users = $cmd->fetchAll();
 					foreach($users as $user)
@@ -57,7 +57,7 @@
 			<button type="submit" name="add" value="true" class="btn-primary">Add</button>
 		</fieldset>
 	</form>
-	<form action="edit-validation.php?websiteID=<?echo "$websiteID";?>" method="post">
+	<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creator";?>" method="post">
 		<fieldset>
 			<legend>Basics</legend>
 			<label for="title">Website title</label>
@@ -70,7 +70,7 @@
 		</fieldset>
 		<button type="submit" name="update" value="true" class="btn-primary">Update</button>
 	</form>
-	<form action="edit-validation.php?websiteID=<?echo "$websiteID";?>" method="post">
+	<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creator";?>" method="post">
 	<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit content</button>
 	</form>
 <?php require_once 'footer.php' ?>
