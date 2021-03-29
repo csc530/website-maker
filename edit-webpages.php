@@ -55,12 +55,12 @@
 		//print each page as a list item if any
 		if(!empty($pages))
 		{
-			echo "<h2>pages</h2>\n<ol>";
+			echo "<h2>pages</h2>\n<ul>";
 			foreach($pages as $page)
 				echo '<li>'.$page['pageNumber'].'. <a href="edit-webpages.php?siteTitle=' . $siteName . '&pageNumber=' . $page['pageNumber'] . '">' .
 						$page['name'] .
-				'</a></li>';
-			echo "</ol>";
+				'</a><a href="delete.php?pageNumber='."$pageNumber&siteTitle=$siteName&creator=$creator".'" onclick="return confirmDelete()"><button class="btn btn-danger">Delete</button></a></li>';
+			echo "</ul>";
 		}
 	}
 	catch(Exception $exception)

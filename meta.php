@@ -6,8 +6,9 @@
 	<!--todo paths: make absolute paths for below links-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-	<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript" defer></script>
 	<link href="css/myStyles.css" type="text/css" rel="stylesheet" />
+	<script src="js/scripts.js" type="text/javascript" defer></script>
 </head>
 <body>
 <!--Bootstrap navbar https://getbootstrap.com/docs/5.0/components/navbar/-->
