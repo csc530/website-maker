@@ -59,7 +59,7 @@
 			foreach($pages as $page)
 				echo '<li>'.$page['pageNumber'].'. <a href="edit-webpages.php?siteTitle=' . $siteName . '&pageNumber=' . $page['pageNumber'] . '">' .
 						$page['name'] .
-				'</a><a href="delete.php?pageNumber='."$pageNumber&siteTitle=$siteName&creator=$creator".'" onclick="return confirmDelete()"><button class="btn btn-danger">Delete</button></a></li>';
+				'</a><a href="delete.php?pageNumber='.$page['pageNumber']."&siteTitle=$siteName&creator=$creator".'" onclick="return confirmDelete()"><button class="btn btn-danger">Delete</button></a></li>';
 			echo "</ul>";
 		}
 	}
