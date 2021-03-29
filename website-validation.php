@@ -1,5 +1,4 @@
 <?php
-	
 	require_once 'authenticate.php';
 	$step = $_POST['step'];
 	$error = 'Please try again';
@@ -8,8 +7,10 @@
 	if(empty($creator))
 		$creator =$_SESSION['email'];
 	//check what step of the website building process user is on
+	//if user is coming from create.php (creating website title and description)
 	if($step==1)
 	{
+		//
 		$siteName = trim($_POST['title']);
 		$description = trim($_POST['description']);
 		if(empty($siteName))

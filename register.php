@@ -1,30 +1,39 @@
 <?php
 	$error = "Please try again.";
-	$email = $_POST['email'];
-	$password = $_POST['password'];
-	$cPassword = $_POST['confirm-password'];
+	$email = trim($_POST['email']);
+	$password = trim($_POST['password']);
+	$cPassword = trim($_POST['confirm-password']);
 	$login = $_POST['login'];
+	//if they are logging in
 	if(!empty($login))
 	{
-		$error = "No user with email, $email, was found please <a href='register.php?email=$email'>register</a> now.";
 		try
 		{
+			$error = 'Network error, please try again.';
 			require_once 'connect.php';
+			//query db for password belonging to given email addr
 			$sql = 'SELECT password FROM creators WHERE email = :email';
 			$cmd = $db->prepare($sql);
 			$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
 			$cmd->execute();
 			$success = $cmd->fetch();
-			//check if entered password matches hashed password in the db
-			if(password_verify($password, $success['password']))
-			{
-				session_start();
-				$_SESSION['email'] = $email;
-				header("location:menu.php");
-				exit();
-			}
+			//maybe not the safest to indicate whether password or email is wrong but personally I like it as a user to know what to adjust
+			//if no results are returned in $success variable email address is wrong
+			if(empty($success))
+				$error = "No user with email, $email, was found please <a href='register.php?email=$email'>register</a> now.";
 			else
-				$error = 'Incorrect password';
+			{
+				//check if entered password matches hashed password in the db
+				if(password_verify($password, $success['password']))
+				{
+					session_start();
+					$_SESSION['email'] = $email;
+					header("location:menu.php");
+					exit();
+				}
+				else
+					$error = 'Incorrect password';
+			}
 			header("location:login.php?error=$error");
 			exit();
 		}
@@ -36,6 +45,7 @@
 	}
 	else
 	{
+		//basic validation of email and password
 		if(empty($email))
 			$error = 'email cannot be empty.';
 		else if(empty($password))
@@ -47,14 +57,15 @@
 			try
 			{
 				require_once 'connect.php';
+				//insert new user to db
 				$sql = 'INSERT INTO creators VALUES (:username, :password);';
 				$cmd = $db->prepare($sql);
 				$cmd->bindParam(':username', $email, PDO::PARAM_STR, 128);
 				$password = password_hash($password, PASSWORD_DEFAULT);
 				$cmd->bindParam(':password', $password, PDO::PARAM_STR, 128);
-				//Registered email as PK so if the query fails it will 99% of the time be because they are
+				//Registered email is PK so if the query fails it will 99% of the time be because they are
 				//registering an already bound email address
-				$success = $cmd->execute();
+				$cmd->execute();
 				$db = null;
 				//start a session of newly created user
 				session_start();
@@ -64,7 +75,16 @@
 			}
 			catch(Exception $exception)
 			{
-				$error = "$email is already bound to an account please <a href='pages/login.php'>login</a>.";
+				//check if email is already bound and update errorMsg accordingly
+				require 'connect.php';
+				$sql = 'SELECT email FROM creators WHERE email = :email';
+				$cmd = $db->prepare($sql);
+				$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
+				$cmd->execute();
+				$success = $cmd->fetch();
+				$db = null;
+				if(!empty($success))
+					$error = "$email is already bound to an account please <a href='pages/login.php'>login</a>.";
 			}
 		}
 		header("location:signup.php?error=$error");
