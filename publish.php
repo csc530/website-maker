@@ -3,7 +3,7 @@
 	require_once 'authenticate.php';
 	$title = "Finalize";
 	$siteName = $_GET['siteTitle'];
-	$creator = $_GET['creator']
+	$creator = $_GET['creator'];
 	require_once 'meta.php';
 	?>
 <form action="website-validation.php?siteTitle=<?php

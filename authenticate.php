@@ -3,9 +3,9 @@
 	//The reason it doesn't always redirect is for choosing the header so it won't infinitely loop when they are not logged in
 	session_start();
 	$loggedIn = !empty($_SESSION['email']);
-	if($redirect===false && !$loggedIn)
+	if(!$stay && !$loggedIn)
 	{
-		header('location:login.php?error="Please login or register an account"');
+		header('location:login.php?error="Please login or register an account"'.$redirect);
 		exit();
 	}
 	?>

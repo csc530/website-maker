@@ -15,7 +15,7 @@
 <!--Bootstrap navbar https://getbootstrap.com/docs/5.0/components/navbar/-->
 <?php
 	//display appropriate header for if the user is logged in or not
-	$redirect = false;
+	$stay = true;
 	require_once 'authenticate.php';
 	if($loggedIn)
 		require_once 'user-header.php';
