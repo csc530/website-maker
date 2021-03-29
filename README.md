@@ -3,6 +3,7 @@
 <h2>Purpose</h2>
 <p>This web app is made to allow registered users 'host' their websites. Allowing them to edit the website's name and individual page content. Also, allowing collaboration with other registered users.</p>
 <h2>Clarification</h2>
+<p>I left all files in the same level for ease of linking between them with <code>require</code>, etc.</p>
 <p>Throughout the project/pages I (try) to make distinction between <em>webpage</em> and website. The difference being</p>
 <dl>
 <dt>Webpage</dt>

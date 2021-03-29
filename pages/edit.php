@@ -18,7 +18,7 @@
 	//if the query is empty it means they are not permitted to edit, then redirect to home
 	if(empty($permitted))
 	{
-		$db=null;
+		$db = null;
 		header('location:menu.php?error=You are not permitted to view that site.');
 		exit();
 	}
@@ -26,32 +26,37 @@
 	$sql = 'SELECT name, description FROM websites WHERE creator = :creator AND name = :siteName;';
 	$cmd = $db->prepare($sql);
 	$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
-	$cmd->bindParam(':siteName',$siteName, PDO::PARAM_STR, 35);
+	$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 	$cmd->execute();
 	$db = null;
 	$websiteInfo = $cmd->fetch();
 ?>
 	<!--Sectioned off the edits in separate forms for ease of submission (allowed to have required (attr) for appropriate inputs rather than no
 	required attributes on any input and needing additional checks server-side) and handling in validation page-->
-	<h1><?php echo $websiteInfo['name'];?></h1>
-	<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creator";?>" method="post">
+	<h1><?php
+			echo $websiteInfo['name']; ?></h1>
+	<form action="edit-validation.php?siteTitle=<?php
+		echo "$siteName&creator=$creator"; ?>" method="post">
 		<fieldset>
 			<legend>Basics</legend>
 			<label for="title">Website title</label>
 			<!-- insert current name and description of website to form-->
 			<input type="text" name="title" maxlength="35" id="title" required
-			       value="<?php echo $websiteInfo['name']; ?>" />
+			       value="<?php
+				       echo $websiteInfo['name']; ?>" />
 			<label for="description">Description</label>
 			<textarea name="description" id="description" required
-			          placeholder="Give a brief welcome and overview to your clients/users/visitors about your website."><?php echo $websiteInfo['description']; ?></textarea>
+			          placeholder="Give a brief welcome and overview to your clients/users/visitors about your website."><?php
+					echo $websiteInfo['description']; ?></textarea>
 		</fieldset>
 		<button type="submit" name="update" value="true" class="btn-primary">Update</button>
 	</form>
-	<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creator";?>" method="post">
+	<form action="edit-validation.php?siteTitle=<?php
+		echo "$siteName&creator=$creator"; ?>" method="post">
 		<fieldset>
 			<legend>Access</legend>
 			<label for="user">Add user</label>
-			<input type="text" name="user" maxlength="128" id="user" required >
+			<input type="text" name="user" maxlength="128" id="user" required>
 			<ul>
 				<?php
 					require 'connect.php';
@@ -65,15 +70,17 @@
 					$users = $cmd->fetchAll();
 					//loop through query displaying each user with a corresponding delete button
 					foreach($users as $user)
-						echo '<li><a href="edit-validation.php?delete='.$user['admin']."&creator=$creator&siteTitle=$siteName".'" ><button
-						class="btn btn-dark" id="'.$user['admin'].'"
+						echo '<li><a href="edit-validation.php?delete=' . $user['admin'] . "&creator=$creator&siteTitle=$siteName" . '" ><button
+						class="btn btn-dark" id="' . $user['admin'] . '"
 						type="button"> - </button></a>' . $user['admin'] . '</li>';
 				?>
 			</ul>
 			<button type="submit" name="add" value="true" class="btn-primary">Add</button>
 		</fieldset>
 	</form>
-	<form action="edit-webpages.php?pageNumber=1&siteTitle=<?php echo "$siteName&creator=$creator";?>" method="post">
-	<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit content</button>
+	<form action="edit-webpages.php?pageNumber=1&siteTitle=<?php
+		echo "$siteName&creator=$creator"; ?>" method="post">
+		<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit content</button>
 	</form>
-<?php require_once 'footer.php' ?>
+<?php
+	require_once 'footer.php' ?>

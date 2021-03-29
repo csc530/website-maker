@@ -8,4 +8,4 @@
 		header('location:signup.php?error=Please login or register an account');
 		exit();
 	}
-	?>
+?>

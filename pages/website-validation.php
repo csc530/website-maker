@@ -5,10 +5,10 @@
 	//check for a creator in GET if not signed in user is the creator
 	$creator = $_GET['creator'];
 	if(empty($creator))
-		$creator =$_SESSION['email'];
+		$creator = $_SESSION['email'];
 	//check what step of the website building process user is on
 	//if user is coming from create.php (creating website title and description)
-	if($step==1)
+	if($step == 1)
 	{
 		//trim whitespace from website title and description
 		$siteName = trim($_POST['title']);
@@ -19,7 +19,7 @@
 		else if(empty($description))
 			$error = 'Website overview cannot be empty';
 		//I choose for 'Hi' as a basic and simplest overview
-		else if(strlen($description)<2)
+		else if(strlen($description) < 2)
 			$error = 'Website overview must at least be 2 characters';
 		else
 		{
@@ -30,7 +30,7 @@
 				//will throw an error as the website's name and creator are PK meaning there cannot be any duplicates
 				$sql = 'INSERT INTO websites (creator,name, description) VALUES (:creator,:title,:desc);';
 				$cmd = $db->prepare($sql);
-				$cmd->bindParam(':creator' , $creator, PDO::PARAM_STR, 128);
+				$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
 				$cmd->bindParam(':title', $siteName, PDO::PARAM_STR, 35);
 				$cmd->bindParam(':desc', $description, PDO::PARAM_STR, 600);
 				$cmd->execute();
@@ -50,10 +50,10 @@
 			catch(Exception $exception)
 			{
 				//check if the error was thrown because they already have a website with that name
-				$sql='SELECT name FROM websites WHERE creator=:creator AND name = :siteName';
-				$cmd=$db->prepare($sql);
-				$cmd->bindParam(':creator', $creator,PDO::PARAM_STR,128);
-				$cmd->bindParam(':siteName',$siteName, PDO::PARAM_STR, 35);
+				$sql = 'SELECT name FROM websites WHERE creator=:creator AND name = :siteName';
+				$cmd = $db->prepare($sql);
+				$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+				$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 				$cmd->execute();
 				$duplicate = $cmd->fetch();
 				if(!empty($duplicate))
@@ -64,7 +64,7 @@
 		}
 	}
 	//check for individual website's pages
-	else if($step==2)
+	else if($step == 2)
 	{
 		$pageNumber = $_GET['pageNumber'];
 		$pageTitle = trim($_POST['pageTitle']);
@@ -87,8 +87,8 @@
 				$sql = 'SELECT * FROM pages WHERE siteName=:siteName AND pageNumber=:pageNumber AND creator=:creator;';
 				$cmd = $db->prepare($sql);
 				$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
-				$cmd->bindParam(':pageNumber',$pageNumber, PDO::PARAM_INT, 11);
-				$cmd->bindParam(':siteName',$siteName,PDO::PARAM_STR, 35);
+				$cmd->bindParam(':pageNumber', $pageNumber, PDO::PARAM_INT, 11);
+				$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 				$cmd->execute();
 				$isUpdate = $cmd->fetch();
 				//if the fetch is empty then there is no existing page at that number so insert into db if not update (page of that pageNumber)
@@ -105,20 +105,20 @@
 				$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 				$cmd->execute();
 				//increment the page number as to 'add' a new page (or progress to new page if they updated)
-				$pageNumber= $pageNumber+1;
+				$pageNumber = $pageNumber + 1;
 				header("location:edit-webpages.php?siteTitle=$siteName&pageNumber=$pageNumber&creator=$creator");
 				exit();
 			}
 			catch(Exception $exception)
 			{
 				//check if the error was thrown because they already have a webpage with that name
-				$sql='SELECT name FROM pages WHERE creator=:email AND siteName = :siteName';
-				$cmd=$db->prepare($sql);
-				$cmd->bindParam(':email', $creator,PDO::PARAM_STR,128);
-				$cmd->bindParam(':siteName',$siteName, PDO::PARAM_STR, 35);
+				$sql = 'SELECT name FROM pages WHERE creator=:email AND siteName = :siteName';
+				$cmd = $db->prepare($sql);
+				$cmd->bindParam(':email', $creator, PDO::PARAM_STR, 128);
+				$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 				$cmd->execute();
 				$duplicate = $cmd->fetch();
-				if($duplicate['name']==$pageTitle)
+				if($duplicate['name'] == $pageTitle)
 					$error = 'You already have a webpage with that name';
 				header("location:edit-webpages.php?siteTitle=$siteName&creator=$creator&pageNumber=$pageNumber&pageTitle=$pageTitle&content=$content&error=$error&step=$step");
 				exit();
@@ -129,7 +129,7 @@
 		exit();
 	}
 	//submission of website (review)
-	else if($step==3)
+	else if($step == 3)
 	{
 		$siteName = $_GET['siteTitle'];
 		//verify user can edit this page
@@ -143,4 +143,4 @@
 		header('location:menu.php');
 		exit();
 	}
-	?>
+?>

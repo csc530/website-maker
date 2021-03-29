@@ -5,7 +5,7 @@
 	$siteName = $_GET['siteTitle'];
 	$creator = $_GET['creator'];
 	require_once 'meta.php';
-	?>
+?>
 <form action="website-validation.php?siteTitle=<?php
 	echo "$siteName"; ?>" method="post">
 	<h1>Review</h1>

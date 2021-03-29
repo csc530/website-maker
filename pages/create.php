@@ -10,7 +10,7 @@
 			<?php
 				//display error
 				if(!empty($error))
-				echo "<p class='alert-danger alert'>$error</p>";
+					echo "<p class='alert-danger alert'>$error</p>";
 			?>
 			<label for="title">Website title</label>
 			<input type="text" name="title" maxlength="35" id="title" required>
@@ -20,4 +20,5 @@
 		</fieldset>
 		<button type="submit" name="step" id="step" value="1" class="btn btn-primary">Next</button>
 	</form>
-<?php require_once 'footer.php' ?>
+<?php
+	require_once 'footer.php' ?>
