@@ -25,6 +25,7 @@
 		{
 			try
 			{
+				
 				$error = 'Network error, please try again.';
 				require_once 'connect.php';
 				//will throw an error as the website's name and creator are PK meaning there cannot be any duplicates
@@ -62,6 +63,9 @@
 				exit();
 			}
 		}
+		//redirect for invalid title or description
+		header("location:create.php?error=$error");
+		exit();
 	}
 	//check for individual website's pages
 	else if($step == 2)
