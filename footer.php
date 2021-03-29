@@ -1,5 +1,6 @@
 </div>
 </main>
-<footer class="modal-footer navbar-expand-lg"><small>Some yadda yadda creative legal jargon or whatever</small></footer>
+<footer class="modal-footer navbar-expand-lg"><p><small>Copyright &copy; 2021 | COMP1086 </small>Brought to you in whole by Christofer Cousins with
+                                                                                                 contributing css and js additions by bootstrap 5.0.</p></footer>
 </body>
 </html>
