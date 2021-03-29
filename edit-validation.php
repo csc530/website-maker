@@ -1,5 +1,5 @@
 <?php
-	$redirect = true;
+	
 	require_once 'authenticate.php';
 	$error = 'Please try again.';
 	//edit button to edit additional page content

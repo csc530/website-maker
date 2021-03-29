@@ -1,5 +1,5 @@
 <?php
-	$redirect = true;
+	
 	$title = 'Create a website';
 	$error = $_GET['error'];
 	require_once 'meta.php';

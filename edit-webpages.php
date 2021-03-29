@@ -1,6 +1,6 @@
 <?php
 	$title = 'Page Content';
-	$redirect = true;
+	
 	require_once 'meta.php';
 	//get errorMsg if any
 	$error = $_GET['error'];

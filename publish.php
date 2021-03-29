@@ -1,5 +1,5 @@
 <?php
-	$redirect = true;
+	
 	require_once 'authenticate.php';
 	$title = "Finalize";
 	$sitename = $_GET['siteTitle'];

@@ -1,5 +1,5 @@
 <?php
-	$redirect = true;
+	
 	$title = 'Main menu';
 	require_once 'meta.php';
 	require_once 'menu-options.php';
