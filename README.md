@@ -24,3 +24,5 @@
 <li>Some pages include meta.php and authenticate.php this will not cause an error as authenticate in both cases use <code>require_once</code> which it means it will run only once in the page = <code>session_start()</code> is run only once per page</li>
 <li>the <code>$title</code> variable on top of pages is the tab's title</li>
 </ul>
+<h2>Bonus</h2>
+<p>I added functionality to have multiple users build multiple websites. Which I believe is additional to the base project of multiple users editing one website. This can be seen most (I believe) in <a href="pages/edit-webpages.php">edit-webpages.php</a>. <small>I think this is bonus but a lot was MySQL so idk, </small></p>
