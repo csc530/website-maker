@@ -5,15 +5,21 @@
 	$pageNumber = $_GET['pageNumber'];
 	if(empty($pageNumber))
 	{
-		require 'connect.php';
-		$sql = 'DELETE FROM websites WHERE name = :siteName AND creator = :creator;';
-		$cmd = $db->prepare($sql);
-		$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
-		$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
-		$cmd->execute();
-		$db=null;
-		header("location:menu.php?msg=Successfully deleted $siteName website.");
-		exit();
+		try
+		{
+			require 'connect.php';
+			$sql = 'DELETE FROM websites WHERE name = :siteName AND creator = :creator;';
+			$cmd = $db->prepare($sql);
+			$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+			$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
+			$cmd->execute();
+			$db = null;
+			header("location:menu.php?msg=Successfully deleted $siteName website.");
+			exit();
+		}
+		catch(Exception $exception){
+		
+		}
 	}
 	else
 	{

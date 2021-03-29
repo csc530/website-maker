@@ -19,7 +19,7 @@
 			foreach($websites as $site)
 				echo '<li><a href="#">' . $site['name'] . '</a>
 					  <a href="edit.php?siteTitle=' . $site['name'] . '"><button class="btn btn-dark" type="button">Edit</button></a>
-					  <a href="delete.php?siteTitle=' . $site['name'] . '" onclick="confirmDelete()"><button class="btn btn-danger" type="button">Delete</button></a></li>';
+					  <a href="delete.php?siteTitle=' . $site['name'] . "&creator=$email\"".' onclick="confirmDelete()"><button class="btn btn-danger" type="button">Delete</button></a></li>';
 		?>
 		<li><a href="create.php">+</a></li>
 	</ul>
