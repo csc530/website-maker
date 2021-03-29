@@ -30,6 +30,11 @@
 			$db = null;
 			//can use fetch as their should (as per db constraints) one page that matches the pageNumber
 			$pageDetails = $cmd->fetch();
+			//if there is a pre-exiting page then display to user that they are updating rather than adding
+			if(!empty($pageDetails))
+			$buttonMsg = 'Update';
+			else
+				$buttonMsg='Add page';
 		}
 		catch(Exception $exception)
 		{
@@ -40,6 +45,7 @@
 	{
 		//declare an array pageDetails as an array with string indices (title and content) with the pertinent values from the GET url
 		$pageDetails = array('name' => $_GET['pageTitle'], 'content' => $_GET['content']);
+		$buttonMsg = 'Add page';
 	}
 	try
 	{
@@ -83,7 +89,7 @@
 				if(!empty($pageDetails))
 					echo $pageDetails['content'];
 			?></textarea>
-		<button type="submit" name="step" value="2">Add page</button>
+		<button type="submit" name="step" value="2"><?php echo $buttonMsg; ?></button>
 		<button type="submit" name="step" value="3">Submit</button>
 	</form>
 <?php

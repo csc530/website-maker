@@ -74,13 +74,25 @@
 			{
 				$error = 'Network error, please try again.';
 				require_once 'connect.php';
-				$sql = 'INSERT INTO pages VALUES (:name,:siteName,:creator,:content,:pageNumber);';
+				//check if there if they are updating an existing page
+				$sql = 'SELECT * FROM pages WHERE siteName=:siteName AND pageNumber=:pageNumber AND creator=:creator;';
 				$cmd = $db->prepare($sql);
-				$cmd->bindParam(':name' , $pageTitle, PDO::PARAM_STR, 50);
-				$cmd->bindParam(':content', $content, PDO::PARAM_STR, 10000);
 				$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
 				$cmd->bindParam(':pageNumber',$pageNumber, PDO::PARAM_INT, 11);
 				$cmd->bindParam(':siteName',$siteName,PDO::PARAM_STR, 35);
+				$cmd->execute();
+				$isUpdate = $cmd->fetch();
+				//if the fetch is empty then there is no existing page at that number so insert into db if not update that pageNumber
+				if(empty($isUpdate))
+					$sql = 'INSERT INTO pages VALUES (:name,:siteName,:creator,:content,:pageNumber);';
+				else
+					$sql = 'UPDATE pages SET content = :content, name = :name WHERE creator = :creator AND pageNumber = :pageNumber AND siteName = :siteName;';
+				$cmd = $db->prepare($sql);
+				$cmd->bindParam(':name', $pageTitle, PDO::PARAM_STR, 50);
+				$cmd->bindParam(':content', $content, PDO::PARAM_STR, 10000);
+				$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+				$cmd->bindParam(':pageNumber', $pageNumber, PDO::PARAM_INT, 11);
+				$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 				$cmd->execute();
 				//increment the page number as to 'add' a new page
 				$pageNumber= $pageNumber+1;
@@ -92,13 +104,12 @@
 				//check if the error was thrown because they already have a webpage with that name
 				$sql='SELECT name FROM pages WHERE creator=:email AND siteName = :siteName';
 				$cmd=$db->prepare($sql);
-				$cmd->bindParam(':email', $_SESSION['email'],PDO::PARAM_STR,128);
+				$cmd->bindParam(':email', $creator,PDO::PARAM_STR,128);
 				$cmd->bindParam(':siteName',$siteName, PDO::PARAM_STR, 35);
 				$cmd->execute();
 				$duplicate = $cmd->fetch();
 				if($duplicate['name']==$pageTitle)
 					$error = 'You already have a webpage with that name';
-				$error = 'You already have a webpage with that name';
 				header("location:edit-webpages.php?siteTitle=$siteName&creator=$creator&pageNumber=$pageNumber&pageTitle=$pageTitle&content=$content&error=$error&step=$step");
 				exit();
 			}
