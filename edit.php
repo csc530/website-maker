@@ -1,5 +1,4 @@
 <?php
-	
 	require_once 'authenticate.php';
 	$title = 'Create a website';
 	require_once 'meta.php';
@@ -9,20 +8,21 @@
 	if(empty($creator))
 		$creator = $_SESSION['email'];
 	require_once 'connect.php';
-	//validate user has access to edit this page if they somehow got onto the wrong website's edit page somehow?
+	//validate user has access to edit this page, if they are an admin/creator (if they somehow got onto the wrong website's edit page somehow?)
 	$sql = 'SELECT admin FROM (SELECT * FROM websites_admin WHERE siteName = :siteName) AS selectedSite WHERE admin = :email OR creator = :email';
 	$cmd = $db->prepare($sql);
 	$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 	$cmd->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR, 128);
 	$cmd->execute();
 	$permitted = $cmd->fetch();
+	//if the query is empty it means they are not permitted to edit, then redirect to home
 	if(empty($permitted))
 	{
 		$db=null;
 		header('location:menu.php?error=You are not permitted to view that site.');
 		exit();
 	}
-	//get name and description of website from db using websiteID
+	//get name and description of website from db (with creator and siteName PK)
 	$sql = 'SELECT name, description FROM websites WHERE creator = :creator AND name = :siteName;';
 	$cmd = $db->prepare($sql);
 	$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
@@ -31,8 +31,8 @@
 	$db = null;
 	$websiteInfo = $cmd->fetch();
 ?>
-	<!--Sectioned off the edits in separates for ease of submission (allowed to have requires for appropriate inputs then no requires and having
-	additional check on the server side?) and handling in validation page-->
+	<!--Sectioned off the edits in separate forms for ease of submission (allowed to have required (attr) for appropriate inputs rather than no
+	required attributes on any input and needing additional checks server-side) and handling in validation page-->
 	<h1><?php echo $websiteInfo['name'];?></h1>
 	<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creator";?>" method="post">
 		<fieldset>
@@ -55,17 +55,16 @@
 			<ul>
 				<?php
 					require 'connect.php';
-					$websiteID = $_GET['websiteID'];
 					//query all current website editors for selected website excluding the creator, because you can't remove the creator of the
-					// site as an admin
+					// website as an admin
 					$sql = 'SELECT admin FROM websites_admin WHERE siteName = :siteName AND admin != :creator AND creator = :creator';
 					$cmd = $db->prepare($sql);
 					$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
 					$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 					$cmd->execute();
 					$users = $cmd->fetchAll();
+					//loop through query displaying each user with a corresponding delete button
 					foreach($users as $user)
-						///use get method to assign which delete button is clicked
 						echo '<li><a href="edit-validation.php?delete='.$user['admin']."&creator=$creator&siteTitle=$siteName".'" ><button
 						class="btn btn-dark" id="'.$user['admin'].'"
 						type="button"> - </button></a>' . $user['admin'] . '</li>';

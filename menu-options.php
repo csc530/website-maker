@@ -3,7 +3,7 @@
 	<ul class="navbar nav-justified">
 		<li><a href="create.php">New website</a></li>
 		<!--todo add JS alert box (onclick) to choosing available websites to edit on below li-->
-		<li>Edit Websites</li>
-		<li><a href="profile.php">profile</a></li>
+		<li><a href="#">Edit Websites</a></li>
+		<!--todo add profile page-->
 	</ul>
 </nav>

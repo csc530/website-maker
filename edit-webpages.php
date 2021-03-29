@@ -1,8 +1,7 @@
 <?php
+	require_once 'authenticate.php';
 	$title = 'Page Content';
-	
 	require_once 'meta.php';
-	//get errorMsg if any
 	$error = $_GET['error'];
 	//get website's title
 	$siteName = $_GET['siteTitle'];
@@ -14,10 +13,8 @@
 	$creator = $_GET['creator'];
 	if(empty($creator))
 		$creator = $_SESSION['email'];
-	//if there is no error check for pre-existing page content from db
-	if(empty($error))
-	{
-		require 'connect.php';
+	//check for pre-existing page content from db
+	require 'connect.php';
 		try
 		{
 			//get the details of current page if it already exits in db else this will do nothing
@@ -38,10 +35,13 @@
 		}
 		catch(Exception $exception)
 		{
-		}
+			//declare an array pageDetails as an array with string indices (title and content) with the pertinent values from the GET url(if any)
+			//since the db query failed
+			$pageDetails = array('name' => $_GET['pageTitle'], 'content' => $_GET['content']);
+			$buttonMsg = 'Add page';
 	}
 	//if there is an error display it and reload previously entered data into the form
-	else
+	if(!empty($error))
 	{
 		//declare an array pageDetails as an array with string indices (title and content) with the pertinent values from the GET url
 		$pageDetails = array('name' => $_GET['pageTitle'], 'content' => $_GET['content']);
@@ -49,7 +49,7 @@
 	}
 	try
 	{
-		//display other pages on site on top in a list (not including currently built site)
+		//display other pages on site on top in a list (not including current page)
 		require 'connect.php';
 		$sql = 'SELECT pageNumber, name FROM pages WHERE creator = :creator AND pageNumber != :pageNum AND siteName=:siteName ORDER BY pageNumber;';
 		$cmd = $db->prepare($sql);
@@ -57,8 +57,9 @@
 		$cmd->bindParam(':pageNum', $pageNumber, PDO::PARAM_INT, 11);
 		$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 		$cmd->execute();
+		$db=null;
 		$pages = $cmd->fetchAll();
-		//print each page as a list item if any
+		//print each page as a list item if any with a link to go and edit that page
 		if(!empty($pages))
 		{
 			echo "<h2>pages</h2>\n<ul>";

@@ -1,5 +1,4 @@
 <?php
-	
 	require_once 'authenticate.php';
 	$error = 'Please try again.';
 	//edit button to edit additional page content
@@ -14,12 +13,14 @@
 	$delete = $_GET['delete'];
 	//creator of website
 	$creator = $_GET['creator'];
-	//redirect to edit individual pages content
+	
+	//If they clicked the edit button redirect to edit-webpages to edit site's pages content
 	if(!empty($editDetails))
 	{
-		header("location:edit-page.php?siteTitle=$siteName&creator=$creator");
+		header("location:edit-webpages.php?siteTitle=$siteName&creator=$creator&pageNumber=1");
 		exit();
 	}
+	//if they clicked delete for one of the admin, delete that admin
 	else if(!empty($delete))
 	{
 		try
@@ -43,25 +44,28 @@
 			exit();
 		}
 	}
+	//If they entered a new admin to the site
 	else if(!empty($add))
 	{
 		//new user email account
 		$newUser = $_POST['user'];
+		//basic email validation of admin email
 		if(empty($newUser))
-			$error = 'New admin user cannot be left blank.'.$newUser;
+			$error = 'New admin user cannot be left blank.' . $newUser;
 		else
 		{
 			try
 			{
 				$error = 'Network error please try again.';
 				require 'connect.php';
+				//query db for existing user with given email addr
 				$sql = 'SELECT email FROM creators WHERE email = :user';
 				$cmd = $db->prepare($sql);
 				$cmd->bindParam(':user', $newUser, PDO::PARAM_STR, 128);
 				$cmd->execute();
 				$user = $cmd->fetch();
-				$db=null;
-				//check if there is a registered user with given email
+				$db = null;
+				//if there is a registered user with given email add them as admin to website
 				if($user['email'] == $newUser)
 				{
 					require 'connect.php';
@@ -93,6 +97,7 @@
 	}
 	else if(!empty($update))
 	{
+		//validation of new site's name and description
 		$title = $_POST['title'];
 		$description = $_POST['description'];
 		if(empty($title))
@@ -110,11 +115,12 @@
 				$error = 'Network error please try again.';
 				require 'connect.php';
 				//DB check because name is PK can't have duplicate named site
-				$sql = 'UPDATE websites SET name = :name, description = :description WHERE name = :newName;';
+				$sql = 'UPDATE websites SET name = :name, description = :description WHERE name = :newName AND creator = :creator;';
 				$cmd = $db->prepare($sql);
 				$cmd->bindParam(':newName', $siteName, PDO::PARAM_STR, 35);
 				$cmd->bindParam(':name', $title, PDO::PARAM_STR, 35);
 				$cmd->bindParam(':description', $description, PDO::PARAM_STR, 600);
+				$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
 				//db-side checking as well that description and title is not nul
 				$cmd->execute();
 				$db = null;
@@ -123,6 +129,16 @@
 			}
 			catch(Exception $exception)
 			{
+				//check if the error is because they are using an already taken name
+				require 'connect.php';
+				$sql = 'SELECT * FROM websites WHERE name = :newName AND creator = :creator;';
+				$cmd = $db->prepare($sql);
+				$cmd->bindParam(':newName', $siteName, PDO::PARAM_STR, 35);
+				$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 35);
+				$cmd->execute();
+				$exits = $cmd->fetch();
+				if(!empty($exits))
+					$error = "You already have a website with the name $siteName";
 				header("location:edit.php?error=$error&creator=$creator&siteTitle=$siteName");
 				exit();
 			}
