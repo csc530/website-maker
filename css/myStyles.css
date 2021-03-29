@@ -1,12 +1,25 @@
 @charset "UTF-8";
 /*Custom styles with bootstrap overrides*/
+/*add spacing between form inputs and groups*/
 input, form,textarea{
     display: block;
     margin-bottom: 8px;
 }
-main>div.container{
-    min-height: 780px;
-}
+
 fieldset{
     padding: 25px;
+}
+
+/*Places footer to the bottom of page */
+header{
+    height: 5%;
+}
+main{
+    height: 80%;
+    min-height: 780px;
+}
+footer{
+    height: 5%;
+    display: block;
+    justify-content: center;
 }

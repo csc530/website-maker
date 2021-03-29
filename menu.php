@@ -23,7 +23,7 @@
 					  <a href="edit.php?siteTitle=' . $site['name'] . '"><button class="btn btn-dark" type="button">Edit</button></a>
 					  <a href="delete.php?siteTitle=' . $site['name'] . "&creator=$email\"".' onclick="return confirmDelete()"><button class="btn btn-danger" type="button">Delete</button></a></li>';
 		?>
-		<li><a href="create.php">+</a></li>
+		<li><a href="create.php"><button class="btn btn-success">+</button></a></li>
 	</ul>
 	<h2>Collaborating sites</h2>
 	<ul>
