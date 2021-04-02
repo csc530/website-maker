@@ -13,6 +13,9 @@
 				<li class="nav-item">
 					<a class="nav-link" href="logout.php" role="button">Logout</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link alert-danger" href="super-user.php" role="button" title="Edit and delete all accounts on web">Super user</a>
+				</li>
 			</ul>
 			<form class="d-flex">
 				<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

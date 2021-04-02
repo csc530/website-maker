@@ -87,7 +87,10 @@
 					$error = "$email is already bound to an account please <a href='pages/login.php'>login</a>.";
 			}
 		}
-		header("location:signup.php?error=$error");
+		if(empty($_POST['superuser']))
+			header("location:signup.php?error=$error");
+		else
+			header("location:super-user.php?error=$error");
 		exit();
 	}
 ?>
