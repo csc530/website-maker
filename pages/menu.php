@@ -32,7 +32,7 @@
 		<?php
 			require 'connect.php';
 			//Query db for website in which they are a collaborator (not the creator) an admin
-			$sql = 'SELECT siteName, w.creator FROM websites_admin AS wa INNER JOIN websites AS w on wa.siteName = w.name	WHERE admin=:email AND wa.creator != :email AND w.creator = wa.creator;';
+			$sql = 'SELECT name, w.creator FROM websites_admin AS wa INNER JOIN websites AS w on wa.siteName = w.name	WHERE admin=:email AND wa.creator != :email AND w.creator = wa.creator;';
 			$cmd = $db->prepare($sql);
 			$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
 			$cmd->execute();
