@@ -10,16 +10,15 @@
 			$email = $_SESSION['email'];
 			require_once 'connect.php';
 			//query db for existing website created by this (logged in) user
-			$sql = 'SELECT name FROM websites WHERE creator=:email;';
+			$sql = 'SELECT name, creatorID FROM websites WHERE creator=:email;';
 			$cmd = $db->prepare($sql);
 			$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
 			$cmd->execute();
 			$db = null;
 			$websites = $cmd->fetchAll();
-			//todo add view url to params/make view urls in db
 			//display each of user's website with appropriate delete and edit buttons
 			foreach($websites as $site)
-				echo '<li><a href="#">' . $site['name'] . '</a>
+				echo '<li><a target="_blank" href="mySite.php?pg=0&site' . $site['name'] . '&ID=' . $site['creatorID'] . '">' . $site['name'] . '</a>
 					  <a href="edit.php?siteTitle=' . $site['name'] . '"><button class="btn btn-dark" type="button">Edit</button></a>
 					  <a href="delete.php?siteTitle=' . $site['name'] . "&creator=$email\"" . ' onclick="return confirmDelete()"><button class="btn btn-danger" type="button">Delete</button></a></li>';
 		?>
@@ -32,7 +31,9 @@
 		<?php
 			require 'connect.php';
 			//Query db for website in which they are a collaborator (not the creator) an admin
-			$sql = 'SELECT name, w.creator FROM websites_admin AS wa INNER JOIN websites AS w on wa.siteName = w.name	WHERE admin=:email AND wa.creator != :email AND w.creator = wa.creator;';
+			$sql = 'SELECT name, w.creator, creatorID FROM websites_admin AS wa
+    				INNER JOIN websites AS w on wa.siteName = w.name
+					WHERE admin=:email AND wa.creator != :email AND w.creator = wa.creator;';
 			$cmd = $db->prepare($sql);
 			$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
 			$cmd->execute();
@@ -41,7 +42,7 @@
 			//display all website in which they are an admin with appropriate edit buttons
 			//they do not display a delete button as only the creator should delete the website
 			foreach($websites as $site)
-				echo '<li><a href="#">' . $site['name'] . '</a>' . $site['siteName'] . ' <a href="edit.php?siteTitle=' . $site['siteName'] . '&creator='
+				echo '<li><a target="" href="mySite.php?pg=0&site' . $site['name'] . '&ID=' . $site['creatorID'] . '">' . $site['name'] . '</a>' . $site['siteName'] . ' <a href="edit.php?siteTitle=' . $site['siteName'] . '&creator='
 						. $site['creator'] . '"><button class="btn btn-dark" type="button">Edit</button></a></li>';
 		?>
 	</ul>
