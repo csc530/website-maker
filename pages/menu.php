@@ -42,7 +42,8 @@
 			//display all website in which they are an admin with appropriate edit buttons
 			//they do not display a delete button as only the creator should delete the website
 			foreach($websites as $site)
-				echo '<li><a target="" href="mySite.php?pg=0&site' . $site['name'] . '&ID=' . $site['creatorID'] . '">' . $site['name'] . '</a>' . $site['siteName'] . ' <a href="edit.php?siteTitle=' . $site['siteName'] . '&creator='
+				echo '<li><a target="_blank" href="mySite.php?pg=0&site' . $site['name'] . '&ID=' . $site['creatorID'] . '">' . $site['name'] . '</a>' .
+						$site['siteName'] . ' <a href="edit.php?siteTitle=' . $site['siteName'] . '&creator='
 						. $site['creator'] . '"><button class="btn btn-dark" type="button">Edit</button></a></li>';
 		?>
 	</ul>
