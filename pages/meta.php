@@ -14,6 +14,12 @@
 <body>
 <header>
 	<!--Bootstrap navbar https://getbootstrap.com/docs/5.0/components/navbar/-->
+	<!--Main navbar header displaying login and register links-->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="index.php">Web Dreamscapes <!--add img of logo or just logo--></a>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	<?php
 		//display appropriate header for if the user is logged in or not
 		$stay = true;
@@ -23,6 +29,9 @@
 		else
 			require_once 'main-header.php'
 	?>
+			</div>
+		</div>
+	</nav>
 </header>
 <main>
 	<div class="container">
