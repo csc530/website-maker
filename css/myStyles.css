@@ -13,10 +13,11 @@ fieldset{
 /*Places footer to the bottom of page */
 header{
     height: 5%;
+    background-color: deepskyblue;
 }
 main{
     height: 80%;
-    min-height: 780px;
+    background-color: linear-gradient(top,deepskyblue,floralwhite);
 }
 footer{
     height: 5%;
