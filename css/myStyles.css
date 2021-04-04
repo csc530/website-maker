@@ -1,5 +1,25 @@
 @charset "UTF-8";
-/*Custom styles with bootstrap overrides*/
+/*Custom styles for bootstrap overrides*/
+/*Allows for container to take up whole page displaying all content*/
+.container{
+    max-height: 100%;
+}
+
+/*Image sizing for websites logo*/
+img.logo{
+    max-height: 50px;
+    height: 20px;
+    min-height: 15px;
+    max-width: 50px;
+    width: 20px;
+    min-width: 15px;
+
+}
+img.logo-lg{
+    height: 150px;
+    width: 150px;
+}
+
 /*add spacing between form inputs and groups*/
 input, form,textarea{
     display: block;
@@ -11,14 +31,14 @@ fieldset{
 
 /*places footer on bottom of page, and centers content (make~80%of screen space)*/
 header{
-    height: 10vh;
+    min-height: 10vh;
     background-color: skyblue;
 }
 main{
-    height: 80vh;
+    min-height: 80vh;
 }
 footer{
-    height: 10vh;
+    min-height: 10vh;
     display: block;
     justify-content: center;background-image: linear-gradient(floralwhite, whitesmoke);
 }
@@ -29,6 +49,9 @@ html{
 }
 
 /*Light Mode aesthetics*/
+.navbar-dark .navbar-nav .nav-link {
+    color: black;
+}
 header.bg-light{
     background-image: linear-gradient(deepskyblue, skyblue);
 }
@@ -40,6 +63,9 @@ footer.bg-light{
 }
 
 /*Dark Mode aesthetics*/
+.navbar-dark .navbar-nav .nav-link {
+    color: white;
+}
 header.bg-dark{
     background-color: black!important;
 }

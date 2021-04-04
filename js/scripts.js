@@ -32,7 +32,7 @@ theme.addEventListener("click", function() {
 	const footer = document.querySelector("footer");
 	const header = document.querySelector("header");
 	//add elements to array for easy change of theme
-	let elements = [body, main, footer, header];
+	let elements = [header,body,main,footer];
 	for(let i = 0; i < elements.length; i++) {
 		//swap class attribute light with dark
 		//if statement checks what class attribute they contain and swap accordingly
