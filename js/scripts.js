@@ -32,13 +32,13 @@ theme.addEventListener("click", function() {
 	const footer = document.querySelector("footer");
 	const header = document.querySelector("header");
 	//add elements to array for easy change of theme
-	let elems = [body, main, footer, header];
-	for(let i = 0; i < elems.length; i++) {
+	let elements = [body, main, footer, header];
+	for(let i = 0; i < elements.length; i++) {
 		//swap class attribute light with dark
 		//if statement checks what class attribute they contain and swap accordingly
-		if(elems[i].classList.contains("bg-light"))
-			elems[i].classList.replace("bg-light", "bg-dark");
+		if(elements[i].classList.contains("bg-light"))
+			elements[i].classList.replace("bg-light", "bg-dark");
 		else
-			elems[i].classList.replace("bg-dark", "bg-light");
+			elements[i].classList.replace("bg-dark", "bg-light");
 	}
 });

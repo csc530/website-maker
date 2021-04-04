@@ -9,11 +9,11 @@
 <form action="website-validation.php?siteTitle=<?php
 	echo "$siteName"; ?>" method="post">
 	<h1>Review</h1>
-	<h2>Website Overview</h2>
+	<h2>Overview</h2>
 	<!--todo add mini view of pages with link to edit them and special link for splash back to website edit not page-->
 	<h3>Website name: <?php
 			echo $siteName; ?></h3>
-	<h3>Website overview:</h3>
+	<h3>Description:</h3>
 	<?php
 		require_once 'connect.php';
 		//get description opf website and total number of pages
