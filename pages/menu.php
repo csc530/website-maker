@@ -19,7 +19,7 @@
 			$websites = $cmd->fetchAll();
 			//display each of user's website with appropriate delete and edit buttons
 			foreach($websites as $site)
-				echo '<li><a target="_blank" href="mySite.php?pg=0&site' . $site['name'] . '&ID=' . $id . '">' . $site['name'] . '</a>
+				echo '<li><a target="_blank" href="mySite.php?pg=0&site=' . $site['name'] . '&ID=' . $id . '">' . $site['name'] . '</a>
 					  <a href="edit.php?siteTitle=' . $site['name'] . '&creator='.$id.'"><button class="btn btn-dark" type="button">Edit</button></a>
 					  <a href="delete.php?siteTitle=' . $site['name'] . '&creator='.$email.'"' . ' onclick="return confirmDelete()"><button
 					  class="btn btn-danger" type="button">Delete</button></a></li>';

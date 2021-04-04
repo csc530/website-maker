@@ -26,3 +26,7 @@
 </ul>
 <h2>Bonus</h2>
 <p>I added functionality to have multiple users build multiple websites. Which I believe is additional to the base project of multiple users editing one website. This can be seen most (I believe) in <a href="pages/edit-webpages.php">edit-webpages.php</a>. <small>I think this is bonus but a lot was MySQL so idk, </small></p>
+<h3>Databse stuff</h3>
+<ul>
+<li>I changed how urls are made for accessing certain user sites and pages it uses a newly created creatorID which directly links to their email thus making urls not contain users email but integers relating to their emails. Making it more secure and private for them, that's also the reason why I did it.</li>
+</ul>
