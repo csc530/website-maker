@@ -10,11 +10,11 @@
 	<link href="../css/myStyles.css" type="text/css" rel="stylesheet" />
 	<script src="../js/scripts.js" type="text/javascript" defer></script>
 </head>
-<body>
-<header>
+<body class="bg-dark">
+<header class="bg-dark">
 	<!--Bootstrap navbar https://getbootstrap.com/docs/5.0/components/navbar/-->
 	<!--Main navbar header displaying login and register links-->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-dark">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="index.php">Web Dreamscapes <!--add img of logo or just logo--></a>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -28,9 +28,9 @@
 		else
 			require_once 'main-header.php'
 	?>
-			</div>
+			
 		</div>
 	</nav>
 </header>
-<main>
+<main class="bg-dark">
 	<div class="container">
