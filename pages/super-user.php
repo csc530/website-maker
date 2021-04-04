@@ -2,6 +2,17 @@
 	require_once 'authenticate.php';
 	$title = 'Super user';
 	require_once 'meta.php';
+	//code to update user's email
+	if(!empty($_POST['newEmail']))
+	{
+		require 'connect.php';
+		$sql='UPDATE creators SET email = :newEmail WHERE email = :email;';
+		$cmd=$db->prepare($sql);
+		$cmd->bindParam(':email', $_POST['editUser'], PDO::PARAM_STR, 128);
+		$cmd->bindParam(':newEmail', $_POST['newEmail'], PDO::PARAM_STR, 128);
+		$cmd->execute();
+		$db=null;
+	}
 ?>
 	<h1>Registered users of Web Dreamscapes: </h1>
 	<form action="register.php" method="post">
@@ -19,8 +30,7 @@
 		<label for="editUser">Change user email: </label>
 		<select name="editUser" id="editUser" required>
 			<?php
-				
-				require_once 'connect.php';
+				require 'connect.php';
 				$alph = 'ABCDEFGHILKMNOPQRSTUVWXYZ';
 				for($i = 0; $i < 26; $i++)
 				{
