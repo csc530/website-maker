@@ -12,7 +12,7 @@
 	//check if a creator has been if not then the logged in user is the creator of the site
 	$creator = $_GET['creator'];
 	if(empty($creator))
-		$creator = $_SESSION['email'];
+		$creator = $_SESSION['id'];
 	//check for pre-existing page content from db
 	require 'connect.php';
 	try
