@@ -10,8 +10,8 @@
 	<link href="../css/myStyles.css" type="text/css" rel="stylesheet" />
 	<script src="../js/scripts.js" type="text/javascript" defer></script>
 </head>
-<body class="bg-dark">
-<header class="bg-dark">
+<body class="bg-light">
+<header class="bg-light">
 	<!--Bootstrap navbar https://getbootstrap.com/docs/5.0/components/navbar/-->
 	<!--Main navbar header displaying login and register links-->
 	<nav class="navbar navbar-expand-lg navbar-dark">
@@ -26,11 +26,11 @@
 		if($loggedIn)
 			require_once 'user-header.php';
 		else
-			require_once 'main-header.php'
+			require_once 'main-header.php';
 	?>
-			
+			<img src="" alt="Line drawing picture of the sun" height="25" id="theme"/>
 		</div>
 	</nav>
 </header>
-<main class="bg-dark">
+<main class="bg-light">
 	<div class="container">
