@@ -26,7 +26,13 @@
 				//check if entered password matches hashed password in the db
 				if(password_verify($password, $success['password']))
 				{
+					$sql = 'SELECT ID FROM creators WHERE email = :email';
+					$cmd = $db->prepare($sql);
+					$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
+					$db = null;
+					$cmd->execute();
 					session_start();
+					$_SESSION['id']=$cmd->fetch()['ID'];
 					$_SESSION['email'] = $email;
 					header("location:menu.php");
 					exit();
@@ -39,6 +45,7 @@
 		}
 		catch(Exception $exception)
 		{
+			$db=null;
 			header("location:login.php?error=$error");
 			exit();
 		}
@@ -58,7 +65,7 @@
 			{
 				require_once 'connect.php';
 				//insert new user to db
-				$sql = 'INSERT INTO creators VALUES (:username, :password);';
+				$sql = 'INSERT INTO creators(email, password) VALUES (:username, :password);';
 				$cmd = $db->prepare($sql);
 				$cmd->bindParam(':username', $email, PDO::PARAM_STR, 128);
 				$password = password_hash($password, PASSWORD_DEFAULT);
@@ -66,10 +73,17 @@
 				//Registered email is PK so if the query fails it will 99% of the time be because they are
 				//registering an already bound email address
 				$cmd->execute();
+				//get newly created creatorId to store in session
+				$sql = 'SELECT ID FROM creators WHERE email = :email';
+				$cmd = $db->prepare($sql);
+				$cmd->bindParam(':email', $email, PDO::PARAM_STR, 128);
 				$db = null;
+				$cmd->execute();
 				//start a session of newly created user
 				session_start();
 				$_SESSION['email'] = $email;
+				//add creator id to session
+				$_SESSION['id']=$cmd->fetch()['ID'];
 				header("location:menu.php");
 				exit();
 			}

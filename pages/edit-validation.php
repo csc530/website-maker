@@ -31,7 +31,7 @@
 			$sql = 'DELETE FROM websites_admin WHERE admin = :user AND creator = :creator AND siteName = :siteName';
 			$cmd = $db->prepare($sql);
 			$cmd->bindParam(':user', $delete, PDO::PARAM_STR, 128);
-			$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+			$cmd->bindParam(':creator', $creator, PDO::PARAM_INT, 11);
 			$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 			$cmd->execute();
 			$db = null;
@@ -74,7 +74,7 @@
 					$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 					//Also db-side checking as user is a foreign key so that user must exist
 					$cmd->bindParam(':admin', $newUser, PDO::PARAM_STR, 128);
-					$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+					$cmd->bindParam(':creator', $creator, PDO::PARAM_INT, 11);
 					$cmd->execute();
 					$db = null;
 					//todo ui: pass get variable to allow the new user to be highlighted for a time or something
@@ -115,12 +115,12 @@
 				$error = 'Network error please try again.';
 				require 'connect.php';
 				//DB check because name is PK can't have duplicate named site
-				$sql = 'UPDATE websites SET name = :name, description = :description WHERE name = :newName AND creator = :creator;';
+				$sql = 'UPDATE websites SET name = :name, description = :description WHERE name = :newName AND creatorID = :creator;';
 				$cmd = $db->prepare($sql);
 				$cmd->bindParam(':newName', $siteName, PDO::PARAM_STR, 35);
 				$cmd->bindParam(':name', $title, PDO::PARAM_STR, 35);
 				$cmd->bindParam(':description', $description, PDO::PARAM_STR, 600);
-				$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+				$cmd->bindParam(':creator', $creator, PDO::PARAM_INT, 11);
 				//db-side checking as well that description and title is not nul
 				$cmd->execute();
 				$db = null;
@@ -131,10 +131,10 @@
 			{
 				//check if the error is because they are using an already taken name
 				require 'connect.php';
-				$sql = 'SELECT * FROM websites WHERE name = :newName AND creator = :creator;';
+				$sql = 'SELECT * FROM websites WHERE name = :name AND creatorID = :creator;';
 				$cmd = $db->prepare($sql);
-				$cmd->bindParam(':newName', $siteName, PDO::PARAM_STR, 35);
-				$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 35);
+				$cmd->bindParam(':name', $siteName, PDO::PARAM_STR, 35);
+				$cmd->bindParam(':creator', $creator, PDO::PARAM_INT, 11);
 				$cmd->execute();
 				$exits = $cmd->fetch();
 				if(!empty($exits))

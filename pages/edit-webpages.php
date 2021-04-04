@@ -18,9 +18,9 @@
 	try
 	{
 		//get the details of current page if it already exits in db else this will do nothing
-		$sql = 'SELECT name, content FROM pages WHERE creator = :creator AND pageNumber = :pageNum AND siteName = :siteName;';
+		$sql = 'SELECT name, content FROM pages WHERE creatorID = :creator AND pageNumber = :pageNum AND siteName = :siteName;';
 		$cmd = $db->prepare($sql);
-		$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+		$cmd->bindParam(':creator', $creator, PDO::PARAM_INT, 11);
 		$cmd->bindParam(':pageNum', $pageNumber, PDO::PARAM_INT, 11);
 		$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 		$cmd->execute();
@@ -51,9 +51,9 @@
 	{
 		//display other pages on site on top in a list (not including current page)
 		require 'connect.php';
-		$sql = 'SELECT pageNumber, name FROM pages WHERE creator = :creator AND pageNumber != :pageNum AND siteName=:siteName ORDER BY pageNumber;';
+		$sql = 'SELECT pageNumber, name FROM pages WHERE creatorID = :creator AND pageNumber != :pageNum AND siteName=:siteName ORDER BY pageNumber;';
 		$cmd = $db->prepare($sql);
-		$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+		$cmd->bindParam(':creator', $creator, PDO::PARAM_INT, 11);
 		$cmd->bindParam(':pageNum', $pageNumber, PDO::PARAM_INT, 11);
 		$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 		$cmd->execute();

@@ -17,9 +17,9 @@
 	<?php
 		require_once 'connect.php';
 		//get description opf website and total number of pages
-		$sql = 'SELECT description, COUNT(pageNumber) AS `pages` FROM websites INNER JOIN pages p on p.siteName = :siteName WHERE p.creator = :creator GROUP BY description;';
+		$sql = 'SELECT description, COUNT(pageNumber) AS `pages` FROM websites INNER JOIN pages p on p.siteName = :siteName WHERE p.creatorID = :creator GROUP BY description;';
 		$cmd = $db->prepare($sql);
-		$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+		$cmd->bindParam(':creator', $creator, PDO::PARAM_INT, 11);
 		$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 		$cmd->execute();
 		$pageInfo = $cmd->fetch();

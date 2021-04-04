@@ -10,11 +10,11 @@
 		{
 			require_once 'connect.php';
 			//delete website belonging to the user,
-			$sql = 'DELETE FROM websites WHERE name = :siteName AND creator = :creator;';
+			$sql = 'DELETE FROM websites WHERE name = :siteName AND creatorID = :creator;';
 			$cmd = $db->prepare($sql);
 			//binds the :creator placeholder as the session's email instead of $_GET's creator as only the original creator AKA the signed in user can
 			//delete the site not just any admin
-			$cmd->bindParam(':creator', $_SESSION['email'], PDO::PARAM_STR, 128);
+			$cmd->bindParam(':creator', $_SESSION['id'], PDO::PARAM_STR, 128);
 			$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 			$cmd->execute();
 			$db = null;
@@ -32,18 +32,18 @@
 		try
 		{
 			require_once 'connect.php';
-			$sql = 'DELETE FROM pages WHERE siteName = :siteName AND creator = :creator AND pageNumber = :pgNum;';
+			$sql = 'DELETE FROM pages WHERE siteName = :siteName AND creatorID = :creator AND pageNumber = :pgNum;';
 			$cmd = $db->prepare($sql);
-			$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+			$cmd->bindParam(':creator', $creator, PDO::PARAM_INT, 11);
 			$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 			$cmd->bindParam(':pgNum', $pageNumber, PDO::PARAM_INT, 11);
 			$cmd->execute();
 			//reorder the pages accordingly
 			//I.e. if the 3rd page was taken out of 5 reorder page 4 and 5,
 			//to 3 and 4 respectively
-			$sql = 'UPDATE pages SET pageNumber = pageNumber-1 WHERE siteName = :siteName AND creator = :creator AND pageNumber > :pgNum;';
+			$sql = 'UPDATE pages SET pageNumber = pageNumber-1 WHERE siteName = :siteName AND creatorID = :creator AND pageNumber > :pgNum;';
 			$cmd = $db->prepare($sql);
-			$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+			$cmd->bindParam(':creator', $creator, PDO::PARAM_INT, 11);
 			$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 			$cmd->bindParam(':pgNum', $pageNumber, PDO::PARAM_INT, 11);
 			$cmd->execute();

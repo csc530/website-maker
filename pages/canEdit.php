@@ -4,7 +4,7 @@
 	//query db for to see if logged in user has permission to edit given site (of siteName and given creator)
 	$sql = 'SELECT admin FROM (SELECT * FROM websites_admin WHERE siteName = :siteName AND creator = :creator) AS `wa*` WHERE admin=:email;';
 	$cmd = $db->prepare($sql);
-	$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+	$cmd->bindParam(':creator', $creatorID, PDO::PARAM_INT, 11);
 	$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 	$cmd->bindParam(':email', $_SESSION['email'], PDO::PARAM_STR, 128);
 	$cmd->execute();
