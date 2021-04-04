@@ -1,5 +1,6 @@
 <h1>Assignment 2 - Web Dreamscapes</h1>
 <a href="https://lamp.computerstudi.es/~Christofer1157052/PHP-comp1006/CM-site/pages/index.php" target="_blank">Web Dreamscapes (Live site)</a>
+<p><small>Unfortunately there were some major database restructuring and your Test Co. website was lost you'll have to remake sorry :(</small></p>
 <h2>Purpose</h2>
 <p>This web app is made to allow registered users 'host' their websites. Allowing them to edit the website's name and individual page content. Also, allowing collaboration with other registered users.</p>
 <h2>Clarification</h2>
@@ -26,7 +27,7 @@
 </ul>
 <h2>Bonus</h2>
 <p>I added functionality to have multiple users build multiple websites. Which I believe is additional to the base project of multiple users editing one website. This can be seen most (I believe) in <a href="pages/edit-webpages.php">edit-webpages.php</a>. <small>I think this is bonus but a lot was MySQL so idk, </small></p>
-<h3>Databse stuff</h3>
+<h3>Database stuff</h3>
 <ul>
 <li>I changed how urls are made for accessing certain user sites and pages it uses a newly created creatorID which directly links to their email thus making urls not contain users email but integers relating to their emails. Making it more secure and private for them, that's also the reason why I did it.</li>
 </ul>
