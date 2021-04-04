@@ -3,8 +3,20 @@
 	$siteName = $_GET['siteTitle'];
 	$creator = $_GET['creator'];
 	$pageNumber = $_GET['pageNumber'];
+	//if there is no website name given they are deleting a user
+	if(empty($siteName))
+	{
+		require_once 'connect.php';
+		$sql = 'DELETE FROM creators WHERE email = :creator;';
+		$cmd=$db->prepare($sql);
+		$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+		$cmd->execute();
+		$db = null;
+		header("location:super-user.php?msg=Successfully deleted $creator and their websites from Web Dreamscapes.");
+		exit();
+	}
 	//if there is no pageNumber given that means they are deleting a website not a webpage
-	if(empty($pageNumber))
+	else if(empty($pageNumber))
 	{
 		try
 		{

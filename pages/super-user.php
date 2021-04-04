@@ -61,7 +61,7 @@
 			$users = $cmd->fetchAll();
 			foreach($users as $user)
 				if(!empty($user['email']))
-					echo '<li><a href="delete.php?user='.$user['email'].'"  onclick="return confirmDelete()" >'.$user['email'].'<button type="button" class="btn-danger">-</button></a></li>';
+					echo '<li><a href="delete.php?creator='.$user['email'].'"  onclick="return confirmDelete()" >'.$user['email'].'<button type="button" class="btn-danger">-</button></a></li>';
 		?>
 	</ul>
 	<a href="menu.php"><button class="btn btn-primary">Return</button></a>
