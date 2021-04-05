@@ -3,6 +3,10 @@
 /*Allows for container to take up whole page displaying all content*/
 .container{
     max-height: 100%;
+    max-width: 100%;
+    /*some padding to sort of center content accordingly vw(Viewport width)*/
+    padding-left: 7vw;
+    padding-right: 7vw;
 }
 
 /*Image sizing for websites logo*/
@@ -32,15 +36,14 @@ fieldset{
 /*places footer on bottom of page, and centers content (make~80%of screen space)*/
 header{
     min-height: 10vh;
-    background-color: skyblue;
 }
 main{
     min-height: 80vh;
 }
-footer{
+footer {
     min-height: 10vh;
     display: block;
-    justify-content: center;background-image: linear-gradient(floralwhite, whitesmoke);
+    justify-content: center;
 }
 
 /*Add nice delay transition animation (if any)*/

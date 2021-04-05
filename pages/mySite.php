@@ -51,7 +51,7 @@
 	$title = $site;
 	?>
 	<!DOCTYPE html>
-	<html>
+	<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo "$title"; ?></title>
@@ -59,9 +59,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 	<script src="../js/bootstrap.min.js" type="text/javascript" defer></script>
+<!--User's sites style sheet-->
+	<link href="../css/userStyles.css" type="text/css" rel="stylesheet" />
+	<script src="../js/userScripts.js" type="text/javascript" defer></script>
 </head>
 	<body class="bg-light">
 	<header>
+		<?php
+			echo '<h1>' . $pageDetails['name'] . '</h1>';
+		?>
 		<nav class='navbar navbar-expand-lg navbar-light'>
 			<div class="container-fluid">
 <?php
@@ -75,11 +81,10 @@
 			</div>
 		</nav>
 	</header>
-	<main>
+	<main class="container">
 	<?php
 	//write page appropriately if using page or main website table, depends if pgnum is empty (just changes the variables names)
 	//write page content as HTML
-	echo '<h1>' . $pageDetails['name'] . '</h1>';
 	echo $pageDetails['content'];
 	?>
 	</main>

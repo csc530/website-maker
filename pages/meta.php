@@ -32,5 +32,4 @@
 		</div>
 	</nav>
 </header>
-<main class="bg-light">
-	<div class="container">
+<main class="bg-light container">
