@@ -28,7 +28,7 @@
 		else
 			require_once 'main-header.php';
 	?>
-			<img src="" alt="Line drawing picture of the sun" height="25" id="theme"/>
+			<img src="../images/sun.svg" alt="Picture of the sun in front of a cloud" height="50" width="50" id="theme"/>
 		</div>
 	</nav>
 </header>
