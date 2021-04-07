@@ -10,6 +10,7 @@
 	<script src="../js/bootstrap.min.js" type="text/javascript" defer></script>
 	<link href="../css/myStyles.css" type="text/css" rel="stylesheet" />
 	<script src="../js/scripts.js" type="text/javascript" defer></script>
+	<script src="../js/userScripts.js" type="text/javascript" defer></script>
 </head>
 <body class="bg-light">
 <header class="bg-light">
