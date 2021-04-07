@@ -16,6 +16,7 @@
 <h2>Code</h2>
 <h3>Explaining ubiquitous code throughout website</h3>
 <ul>
+<li>I chose to use <code>!empty(var)</code> opposed to <code>isset(var)</code> because it checks for more valid (in my case) data than just not null</li>
 <li>I have placed an exit after each header to ensure that no other code is executed after leaving the page</li>
 <li>For sites that need authentication or refer to the email in the session object no <code>session_start()</code> is needed as it's called in the authentication at the beginning (somewhere) on the page</li>
 <li>If there is an <code>$error</code> or <code>_GET['error']</code> I am checking for an error (that I 'threw') to display to the user</li>

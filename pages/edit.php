@@ -4,6 +4,7 @@
 	require_once 'meta.php';
 	$siteName = $_GET['siteTitle'];
 	$creatorID = $_GET['creator'];
+	$error = $_GET['error'];
 	//if no creator GET argument has been passed it means they are the creator of the website
 	if(empty($creatorID))
 		$creatorID = $_SESSION['id'];
@@ -23,28 +24,36 @@
 	required attributes on any input and needing additional checks server-side) and handling in validation page-->
 	<h1><?php
 			echo $websiteInfo['name']; ?></h1>
+<?php
+	if(!empty($error))
+		echo "<div class='alert alert-warning'><p>$error</p></div>"
+?>
+	<div class="side-by-side">
 	<form action="edit-validation.php?siteTitle=<?php
 		echo "$siteName&creator=$creatorID"; ?>" method="post">
 		<fieldset>
 			<legend>Basics</legend>
-			<label for="title">Website title</label>
+			<label for="title" class="form-label">Website title</label>
 			<!-- insert current name and description of website to form-->
-			<input type="text" name="title" maxlength="35" id="title" required
+			<input class="form-control-lg" type="text" name="title" maxlength="35" id="title" required
 			       value="<?php
 				       echo $websiteInfo['name']; ?>" />
-			<label for="description">Description</label>
-			<textarea name="description" id="description" required
+			<label for="description" class="form-label">Description</label>
+			<textarea class="form-control-lg" name="description" id="description" required
 			          placeholder="Give a brief welcome and overview to your clients/users/visitors about your website."><?php
 					echo $websiteInfo['description']; ?></textarea>
+		<button type="submit" name="update" value="true" class="btn btn-primary">Update</button>
 		</fieldset>
-		<button type="submit" name="update" value="true" class="btn-primary">Update</button>
 	</form>
 	<form action="edit-validation.php?siteTitle=<?php
 		echo "$siteName&creator=$creatorID"; ?>" method="post">
 		<fieldset>
 			<legend>Access</legend>
-			<label for="user">Add user</label>
-			<input type="text" name="user" maxlength="128" id="user" required>
+			<label for="user" class="form-label">Add user</label>
+			<div class="input-group input-group-lg">
+			<input class="form-control-lg" type="text" name="user" maxlength="128" id="user" required>
+			<button type="submit" name="add" value="true" class="btn btn-primary">Add</button>
+			</div>
 			<ul>
 				<?php
 					require 'connect.php';
@@ -63,12 +72,13 @@
 						type="button"> - </button></a>' . $user['admin'] . '</li>';
 				?>
 			</ul>
-			<button type="submit" name="add" value="true" class="btn-primary">Add</button>
 		</fieldset>
 	</form>
+	</div>
 	<form action="edit-webpages.php?pageNumber=1&siteTitle=<?php
 		echo "$siteName&creator=$creatorID"; ?>" method="post">
-		<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit content</button>
+		<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit pages</button>
+		<a href="menu.php"><button type="button" class="btn btn-success">Exit</button></a>
 	</form>
 <?php
 	require_once 'footer.php' ?>

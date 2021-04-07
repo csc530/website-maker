@@ -1,5 +1,37 @@
 @charset "UTF-8";
 /*Custom styles for bootstrap overrides*/
+/*Puts items wrapped horizontally, side by side*/
+.side-by-side{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: center;
+    align-items: flex-start;
+    margin-bottom: 2.5rem;
+}
+/*Gives spacing between side byside forms*/
+.side-by-side form{
+    margin-right: 2%;
+}
+/*makes input and button same height when grouped side by side*/
+.input-group input{
+    margin-bottom: 0;
+}
+
+/*Centers text in alert and warning boxes*/
+div.alert{
+    padding: 1rem;
+}
+div.alert p{
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+/*Makes textarea diagonally resizable*/
+textarea{
+    resize: both;
+}
 /*Allows for container to take up whole page displaying all content*/
 .container{
     max-height: 100%;
@@ -29,10 +61,7 @@ img.logo-lg{
 /*add spacing between form inputs and groups*/
 input, form,textarea{
     display: block;
-    padding-bottom: 8px;
-}
-fieldset{
-    padding: 25px;
+    margin-bottom: 8px;
 }
 
 /*places footer on bottom of page, and centers content (make~80%of screen space)*/
