@@ -31,8 +31,12 @@ button.display-6{
 ul.side-by-side{
     justify-content: space-between;
 }
-/*Gives spacing between side byside forms*/
+/*Gives spacing between side by side forms*/
 .side-by-side form{
+    margin-right: 2%;
+}
+/*Gives spacing between side by side inputs*/
+.side-by-side input{
     margin-right: 2%;
 }
 /*makes input and button same height when grouped side by side*/
@@ -84,6 +88,13 @@ img.logo-lg{
 input, form,textarea{
     display: block;
     margin-bottom: 8px;
+}
+/*gives colour input more space to show the colour within it*/
+input[type="color"]{
+    padding: .25rem;
+    margin-left: .25rem;
+    /*height from form-control-sm to make it smaller*/
+    min-height: calc(1.5em + .5rem + 2px);
 }
 
 /*places footer on bottom of page, and centers content (make~80%of screen space)*/
@@ -143,4 +154,15 @@ body.bg-dark{
 .btn-success{
     border-color: deepskyblue;
     background-color: deepskyblue;
+}
+
+/*puts less emphasis on h3 in forms*/
+form h3 {
+    font-weight: normal;
+    font-size: large;
+    text-decoration: underline currentColor;
+}
+/*gives spacing between fieldsets*/
+fieldset{
+    margin-bottom: 5%;
 }

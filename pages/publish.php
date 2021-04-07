@@ -16,13 +16,14 @@
 	if(empty($path))
 		$alt = "$siteName's logo.";
 ?>
+	<h1>Finalization</h1>
 <form action="website-validation.php?siteTitle=<?php
 	echo "$siteName"; ?>" method="post">
-	<h1>Review</h1>
-	<h2>Overview</h2>
+	<fieldset>
+	<legend class="display-6">Overview</legend>
 	<!--todo add mini view of pages with link to edit them and special link for splash back to website edit not page-->
 	<h3>Website name: <?php
-			echo $siteName; ?></h3>
+			echo "<strong>$siteName</strong>"; ?></h3>
 	<h3>Logo: <img class="logo-lg" src="<?php echo $path;?>" alt="<?php echo $alt;?>"></h3>
 	<h3>Description:</h3>
 	<?php
@@ -40,12 +41,20 @@
 		//display total number of pages
 		echo '<h3>Page count: ' . $pageInfo['pages'] . '</h3>';
 	?>
-	<!--
-<label>Colour theme
-	Add option to personalize website theme
-</label>
--->
-	<!--todo: add an onclick to button view published site or return home-->
+	</fieldset>
+	<fieldset>
+		<legend class="display-6">Personalization</legend>
+<label>Theme</label>
+		<div class="side-by-side">
+		<label for="main">Main: </label>
+		<input type="color" name="c-main" id="main" />
+		<label for="second">Secondary: </label>
+		<input type="color" name="c-sec" id="second"/>
+		<label for="tertiary">Tertiary: </label>
+		<input type="color" name="c-ter" id="tertiary"/>
+		</div>
+	</fieldset>
+		<!--todo: add an onclick to button view published site or return home-->
 	<button type="submit" name="step" value="4">Finalize</button>
 </form>
 <?php
