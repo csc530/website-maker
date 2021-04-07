@@ -62,3 +62,12 @@ theme.addEventListener("click", function() {
 //when the document is loaded check the theme and if (it's not the default) light 'click' the theme button to switch to dark, for continuity
 if(sessionStorage.getItem("theme") === "dark")
 	theme.click();
+
+/*****************************************************************************************************************************************/
+//Appends the form-label and form-control-lg class to appropriate elements opposed to hardcoding it everywhere everytime
+let labels = document.querySelectorAll("form label");
+let inputs = document.querySelectorAll("form input");
+for(let i =0; i<labels.length;i++)
+	labels[i].classList.add("form-label");
+for(let i =0; i<inputs.length;i++)
+	inputs[i].classList.add("form-control-lg");

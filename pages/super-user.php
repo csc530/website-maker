@@ -18,7 +18,7 @@
 	<?php require_once 'msgOrError.php';?>
 	<form action="register.php" method="post">
 		<h2>Add user: </h2>
-		<label for="email">Email: </label>
+		<label for="email" >Email: </label>
 		<input type="email" name="email" id="email" maxlength="128" required />
 		<label for="password">Password: </label>
 		<input type="password" name="password" maxlength="128" id="password" required />

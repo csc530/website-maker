@@ -31,13 +31,13 @@
 		echo "$siteName&creator=$creatorID"; ?>" method="post">
 		<fieldset>
 			<legend>Basics</legend>
-			<label for="title" class="form-label">Website title</label>
+			<label for="title">Website title</label>
 			<!-- insert current name and description of website to form-->
-			<input class="form-control-lg" type="text" name="title" maxlength="35" id="title" required
+			<input type="text" name="title" maxlength="35" id="title" required
 			       value="<?php
 				       echo $websiteInfo['name']; ?>" />
-			<label for="description" class="form-label">Description</label>
-			<textarea class="form-control-lg" name="description" id="description" required
+			<label for="description" >Description</label>
+			<textarea name="description" id="description" required
 			          placeholder="Give a brief welcome and overview to your clients/users/visitors about your website."><?php
 					echo $websiteInfo['description']; ?></textarea>
 		<button type="submit" name="update" value="true" class="btn btn-primary">Update</button>
@@ -47,9 +47,9 @@
 		echo "$siteName&creator=$creatorID"; ?>" method="post">
 		<fieldset>
 			<legend>Access</legend>
-			<label for="user" class="form-label">Add user</label>
+			<label for="user">Add user</label>
 			<div class="input-group input-group-lg">
-			<input class="form-control-lg" type="text" name="user" maxlength="128" id="user" required>
+			<input type="text" name="user" maxlength="128" id="user" required>
 			<button type="submit" name="add" value="true" class="btn btn-primary">Add</button>
 			</div>
 			<ul>
