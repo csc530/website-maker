@@ -92,9 +92,9 @@
 				if(!empty($pageDetails))
 					echo $pageDetails['content'];
 			?></textarea>
-		<button type="submit" name="step" value="2"><?php
+		<button class="btn-primary" type="submit" name="step" value="2"><?php
 				echo $buttonMsg; ?></button>
-		<button type="submit" name="step" value="3">Submit</button>
+		<button type="submit" name="step" value="3" class="btn-success">Submit</button>
 	</form>
 <?php
 	require_once 'footer.php';

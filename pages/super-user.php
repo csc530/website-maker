@@ -25,7 +25,7 @@
 		<input type="hidden" name="confirm-password" />
 		<!--empty hidden element for register page to redirect back here instead of login-->
 		<input type="hidden" name="superuser" value="true" />
-		<button type="submit" class="btn btn-outline-primary">Submit</button>
+		<button type="submit" class="btn-outline-primary">Submit</button>
 	</form>
 	<form action="super-user.php" method="post">
 		<h2>Edit user: </h2>
@@ -64,7 +64,7 @@
 		</div>
 		<label for="newEmail">New email: </label>
 		<input type="email" name="newEmail" id="newEmail"/>
-		<button type="submit" class="btn btn-outline-danger">Change</button>
+		<button type="submit" class="btn-outline-danger">Change</button>
 	</form>
 	<h2>Delete users: </h2>
 	<ul class="side-by-side">
@@ -81,7 +81,7 @@
 							.'<button type="button" class="btn mx-1 btn-outline-danger btn-sm">-</button></a></li>';
 		?>
 	</ul>
-	<a href="menu.php"><button class="btn btn-primary btn-lg">Return</button></a>
+	<a href="menu.php"><button class="btn-success btn-lg">Return</button></a>
 <?php
 	require_once 'footer.php';
 ?>

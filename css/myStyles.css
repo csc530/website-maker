@@ -13,7 +13,7 @@
     flex-direction: row;
     align-content: center;
     align-items: flex-start;
-    margin-bottom: 2.5rem;
+    margin-bottom: 1rem;
 }
 ul.side-by-side{
     justify-content: space-between;
@@ -79,6 +79,7 @@ header{
 }
 main{
     min-height: 80vh;
+    padding-bottom: 1vh;
 }
 footer {
     min-height: 10vh;
@@ -121,7 +122,8 @@ footer.bg-dark{
 body.bg-dark{
     color: white;
 }
-.btn-primary{
+/*Added custom theme for buttons*/
+.btn-primary:hover{
     background-color: darkblue;
     border-color: darkblue;
 }

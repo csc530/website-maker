@@ -40,7 +40,7 @@
 			<textarea name="description" id="description" required
 			          placeholder="Give a brief welcome and overview to your clients/users/visitors about your website."><?php
 					echo $websiteInfo['description']; ?></textarea>
-		<button type="submit" name="update" value="true" class="btn btn-primary">Update</button>
+		<button type="submit" name="update" value="true" class="btn-primary">Update</button>
 		</fieldset>
 	</form>
 	<form action="edit-validation.php?siteTitle=<?php
@@ -50,7 +50,7 @@
 			<label for="user">Add user</label>
 			<div class="input-group input-group-lg">
 			<input type="text" name="user" maxlength="128" id="user" required>
-			<button type="submit" name="add" value="true" class="btn btn-primary">Add</button>
+			<button type="submit" name="add" value="true" class="btn-primary">Add</button>
 			</div>
 			<ul>
 				<?php
@@ -75,8 +75,9 @@
 	</div>
 	<form action="edit-webpages.php?pageNumber=1&siteTitle=<?php
 		echo "$siteName&creator=$creatorID"; ?>" method="post">
-		<button type="submit" name="edit" value="true" class="btn btn-secondary">Edit pages</button>
-		<a href="menu.php"><button type="button" class="btn btn-success">Exit</button></a>
+		<button type="submit" name="edit" value="true" class="btn-warning">Edit pages</button>
+		<a href="menu.php" onclick="return confirm('Any changes made to website will not be saved. Do you wish to continue?')"><button type="button"
+		                                                                                            class="btn-danger">Exit</button></a>
 	</form>
 <?php
 	require_once 'footer.php' ?>

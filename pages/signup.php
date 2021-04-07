@@ -16,9 +16,9 @@
 		<?php
 		require_once 'msgOrError.php';
 		?>
-		<button type="submit" class="btn btn-primary">Register</button>
+		<button type="submit" class="btn-primary">Register</button>
 		<a href="login.php">
-			<button type="button" class="btn btn-secondary">Login</button>
+			<button type="button" class="btn-secondary">Login</button>
 		</a>
 	</form>
 <?php

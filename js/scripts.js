@@ -83,4 +83,4 @@ for(let i =0; i<ta.length;i++)
 //Makes all form buttons large and btn class
 let btns = document.querySelectorAll("form button");
 for(let i =0; i<btns.length;i++)
-	btns[i].classList.add("btn","btn-lg");
+	btns[i].classList.add("btn-lg");
