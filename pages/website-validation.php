@@ -22,6 +22,8 @@
 		//I choose for 'Hi' as a basic and simplest overview
 		else if(strlen($description) < 2)
 			$error = 'Website overview must at least be 2 characters';
+		else if(strlen($description) > 600)
+			$error = 'Description must be less than 600 characters.';
 		//I think anything under 5 is impractical
 		else if(strlen($siteName) < 3)
 			$error = 'Website name/title must at least be 3 characters';

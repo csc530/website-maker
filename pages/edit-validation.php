@@ -35,7 +35,7 @@
 			$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 			$cmd->execute();
 			$db = null;
-			header("location:edit.php?siteTitle=$siteName&creator=$creator");
+			header("location:edit.php?siteTitle=$siteName&creator=$creator&msg=$delete removed as an admin to $siteName.");
 			exit();
 		}
 		catch(Exception $exception)
@@ -108,6 +108,10 @@
 			$error = 'Description must be less than 600 characters.';
 		else if(strlen($title) > 35)
 			$error = 'Website title must be less than 35 characters';
+		else if(strlen($title)<3)
+			$error = 'Website name/title must at least be 3 characters';
+		else if(strlen($description) < 2)
+			$error = 'Website overview must at least be 2 characters';
 		else
 		{
 			try
