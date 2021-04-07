@@ -1,5 +1,10 @@
 @charset "UTF-8";
 /*Custom styles for bootstrap overrides*/
+/*Removes visual cues of an average hyperlink*/
+.no-link{
+    color: unset;
+    text-decoration: none;
+}
 /*Puts items wrapped horizontally, side by side*/
 .side-by-side{
     display: flex;
@@ -9,6 +14,9 @@
     align-content: center;
     align-items: flex-start;
     margin-bottom: 2.5rem;
+}
+ul.side-by-side{
+    justify-content: space-between;
 }
 /*Gives spacing between side byside forms*/
 .side-by-side form{
