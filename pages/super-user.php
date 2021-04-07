@@ -81,7 +81,7 @@
 							.'<button type="button" class="btn mx-1 btn-outline-danger btn-sm">-</button></a></li>';
 		?>
 	</ul>
-	<a href="menu.php"><button class="btn btn-primary">Return</button></a>
+	<a href="menu.php"><button class="btn btn-primary btn-lg">Return</button></a>
 <?php
 	require_once 'footer.php';
 ?>

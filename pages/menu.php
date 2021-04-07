@@ -5,7 +5,7 @@
 	require_once 'menu-options.php';
 ?>
 	<h2>Your websites</h2>
-	<ul>
+	<ul class="side-by-side">
 		<?php
 			$email = $_SESSION['email'];
 			$id = $_SESSION['id'];

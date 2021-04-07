@@ -20,7 +20,7 @@
 			<label for="logo">Image: </label>
 			<input id="logo" name="logo" type="file" accept=".png,.jpg,.jpeg,.svg,.gif" />
 		</fieldset>
-		<button type="submit" name="step" id="step" value="1" class="btn btn-primary">Next</button>
+		<button type="submit" name="step" id="step" value="1" class="btn-primary">Next</button>
 	</form>
 <?php
 	require_once 'footer.php' ?>

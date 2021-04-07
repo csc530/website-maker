@@ -39,6 +39,7 @@ div.alert p{
 /*Makes textarea diagonally resizable*/
 textarea{
     resize: both;
+    height: 8em;
 }
 /*Allows for container to take up whole page displaying all content*/
 .container{

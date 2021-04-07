@@ -67,7 +67,20 @@ if(sessionStorage.getItem("theme") === "dark")
 //Appends the form-label and form-control-lg class to appropriate elements opposed to hardcoding it everywhere everytime
 let labels = document.querySelectorAll("form label");
 let inputs = document.querySelectorAll("form input");
+let ta = document.querySelectorAll("form textarea");
 for(let i =0; i<labels.length;i++)
 	labels[i].classList.add("form-label");
 for(let i =0; i<inputs.length;i++)
 	inputs[i].classList.add("form-control-lg");
+for(let i =0; i<ta.length;i++)
+{
+	ta[i].classList.add("form-control-lg");
+	//makes textarea the same length/width of text type inputs
+	ta[i].style.width = inputs[0].clientWidth+"px";
+}
+
+/*****************************************************************************************************************************************/
+//Makes all form buttons large and btn class
+let btns = document.querySelectorAll("form button");
+for(let i =0; i<btns.length;i++)
+	btns[i].classList.add("btn","btn-lg");
