@@ -9,8 +9,7 @@
 		<label for="password">Password: </label>
 		<input type="password" name="password" id="password" required />
 		<?php
-			if(!empty($_GET['error']))
-				echo '<p class="p-0 alert-danger">' . $_GET['error'] . '</p>'
+			require_once 'msgOrError.php';
 		?>
 		<button type="submit" class="btn btn-primary" name="login" value="true">login</button>
 		<a href="signup.php">

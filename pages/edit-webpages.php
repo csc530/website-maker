@@ -80,8 +80,7 @@
 		<h1><?php
 				echo "$siteName: page $pageNumber" ?></h1>
 		<?php
-			if(!empty($error))
-				echo "<p class='alert alert-danger'>$error</p>";
+			require_once 'msgOrError.php';
 		?>
 		<label for="pageTitle">Page title</label>
 		<input id="pageTitle" name="pageTitle" type="text" required max="50" min="1"

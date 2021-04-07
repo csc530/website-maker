@@ -4,7 +4,6 @@
 	require_once 'meta.php';
 	$siteName = $_GET['siteTitle'];
 	$creatorID = $_GET['creator'];
-	$error = $_GET['error'];
 	//if no creator GET argument has been passed it means they are the creator of the website
 	if(empty($creatorID))
 		$creatorID = $_SESSION['id'];
@@ -25,8 +24,7 @@
 	<h1><?php
 			echo $websiteInfo['name']; ?></h1>
 <?php
-	if(!empty($error))
-		echo "<div class='alert alert-warning'><p>$error</p></div>"
+	require_once 'msgOrError.php';
 ?>
 	<div class="side-by-side">
 	<form action="edit-validation.php?siteTitle=<?php

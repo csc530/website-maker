@@ -14,7 +14,8 @@
 		$db=null;
 	}
 ?>
-	<h1>Registered users of Web Dreamscapes: </h1>
+	<h1 class="h1">Web Dreamscapes administrative panel</h1>
+	<?php require_once 'msgOrError.php';?>
 	<form action="register.php" method="post">
 		<h2>Add user: </h2>
 		<label for="email">Email: </label>

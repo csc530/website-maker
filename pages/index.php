@@ -1,6 +1,7 @@
 <?php
 	$title = 'Welcome';
 	require_once 'meta.php';
+	require_once 'msgOrError.php';
 ?>
 	<h1>Web Dreamscapes</h1>
 	<h2>Build your dreams on the web.</h2>

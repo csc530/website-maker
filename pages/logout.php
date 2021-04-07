@@ -6,6 +6,6 @@
 	// terminate the session
 	session_destroy();
 	// redirect to main page
-	header('location:index.php');
+	header('location:index.php?msg=Successfully logged out');
 	exit();
 ?>
