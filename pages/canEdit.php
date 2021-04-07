@@ -13,6 +13,6 @@
 	if(empty($success))
 	{
 		//redirect to menu with error
-		header("location:menu.php?error=You don't have permission to edit $siteName.");
+		header("location:menu.php?error=You don't have permission to edit.$creatorID + $siteName". $success['admin'].$_SESSION['email']);
 		exit();
 	}

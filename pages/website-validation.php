@@ -3,10 +3,10 @@
 	$step = $_POST['step'];
 	$error = 'Please try again';
 	if(empty($_GET['creator']))
-	$creatorID = $_SESSION['id'];
+		$creatorID = $_SESSION['id'];
 	else
 		$creatorID = $_GET['creator'];
-		$creator = $_SESSION['email'];
+	$creator = $_SESSION['email'];
 	//check what step of the website building process user is on
 	//if user is coming from create.php (creating website title and description)
 	if($step == 1)
@@ -37,7 +37,7 @@
 				{
 					//check if file name is too big db, (kind of arbitrary but shorter name = faster processes relating to logo so ¯\_(ツ)_/¯) if so
 					// redirect back to create.php
-					if(strlen($_FILES['logo']['name'])>100)
+					if(strlen($_FILES['logo']['name']) > 100)
 					{
 						header("location:create.php?error=Logo file name is too long, must be less than 100 characters.");
 						exit();
@@ -52,8 +52,8 @@
 				$cmd->bindParam(':desc', $description, PDO::PARAM_STR, 600);
 				$cmd->bindParam(':creatorID', $creatorID, PDO::PARAM_INT, 11);
 				$cmd->execute();
-				$db=null;
-				$error='funbsdu';
+				$db = null;
+				$error = 'funbsdu';
 				/*there is a trigger in db that will add this website and creator to website_admin table to indicate that the creator is also an
 				admin allowed to edit the site and content */
 				//actually add logo path to db if any
@@ -140,7 +140,7 @@
 				$cmd->bindParam(':pageNumber', $pageNumber, PDO::PARAM_INT, 11);
 				$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 				$cmd->execute();
-				$db=null;
+				$db = null;
 				//increment the page number as to 'add' a new page (or progress to new page if they updated)
 				$pageNumber = $pageNumber + 1;
 				header("location:edit-webpages.php?siteTitle=$siteName&pageNumber=$pageNumber&creator=$creatorID");
@@ -149,11 +149,11 @@
 			catch(Exception $exception)
 			{
 				//check if the error was thrown because they already have a webpage with that name
-				$sql='SELECT name FROM pages WHERE creatorID=:ID AND siteName=:siteName AND name=:pageTitle;';
-				$cmd=$db->prepare($sql);
+				$sql = 'SELECT name FROM pages WHERE creatorID=:ID AND siteName=:siteName AND name=:pageTitle;';
+				$cmd = $db->prepare($sql);
 				$cmd->bindParam(':ID', $creatorID, PDO::PARAM_INT, 11);
 				$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
-				$cmd->bindParam(':pageTitle', $pageTitle,PDO::PARAM_STR,50);
+				$cmd->bindParam(':pageTitle', $pageTitle, PDO::PARAM_STR, 50);
 				$cmd->execute();
 				$duplicate = $cmd->fetch();
 				if($duplicate['name'] == $pageTitle)
@@ -177,52 +177,53 @@
 	}
 	else
 	{
+		$siteName = $_GET['siteTitle'];
 		require_once 'canEdit.php';
 		//get the main colours, stored as hex codes checked in firefox and chrome
 		$main = $_POST['c-main'];
 		$header = $_POST['c-header'];
-		$footer=$_POST['c-footer'];
+		$footer = $_POST['c-footer'];
 		//check if they are all black, unedited if so set default website theme
-		if($main=='#000000' && $footer == '#000000' &&$header=='#000000')
+		if($main == "#000000" && $footer == "#000000" && $header == "#000000")
 		{
-			$main = 'white';
-			$footer='white';
-			$header='lightgray';
+			$main = '#FFFFFF';
+			$footer = '#FFFFFF';
+			$header = '#D3D3D3';
 		}
+		//validate the colours, as hex codes
+		if(strlen($main) != 7)
+			$error = 'Your main colour is invalid please adjust it and try again.';
+		else if(strlen($header) != 7)
+			$error = 'Your header colour is invalid please adjust it and try again.';
+		else if(strlen($footer) != 7)
+			$error = 'Your footer colour is invalid please adjust it and try again.';
 		else
 		{
-			//validate the colours, as hex codes
-			if(strlen($main) != 7 || !str_contains($main, '#'))
-				$error = 'Your main colour is invalid please adjust it and try again.';
-			else if(strlen($header) != 7 || !str_contains($header, '#'))
-				$error = 'Your header colour is invalid please adjust it and try again.';
-			else if(strlen($footer) != 7 || !str_contains($footer, '#'))
-				$error = 'Your footer colour is invalid please adjust it and try again.';
-			else
+			$theme = $header . $main . $footer;
+			try
 			{
-				$theme = $header . $main . $footer;
-				try
-				{
-					$error='<span class="display-6">Network error</span>Sorry, something has gone wrong with your website submission. Don\'t worry all your progress up to finalization has been <em>saved</em>. Please try finalizing your website later thank you for you cooperation.';
-					//send theme information to db to associated with website
-					require_once 'connect.php';
-					$sql = 'UPDATE websites SET theme = :colours WHERE creatorID AND name = :sitename';
-					$cmd = $db->prepare($sql);
-					$cmd->bindParam(':colours', $theme, PDO::PARAM_STR, 21);
-					$cmd->bindParam(':sitename', $siteName, PDO::PARAM_STR, 35);
-					$cmd->execute();
-					//if they messed with the form and edited the step redirect to home page
-					header("location:menu.php?msg=Your website has been successfully published! <a href='mySite.php?ID=$creatorID&site=$siteName&pg=0' target='_blank'>View now</a>");
-					exit();
-				}
-				catch(Exception)
-				{
-					header("location:error.php?error=$error");
-					exit();
-				}
+				$error = '<span class="display-6">Network error</span>Sorry, something has gone wrong with your website submission. Don\'t worry all your progress up to finalization has been <em>saved</em>. Please try finalizing your website later thank you for you cooperation.';
+				//send theme information to db to associated with website
+				require_once 'connect.php';
+				$sql = 'UPDATE websites SET theme = :colours WHERE creatorID AND name = :sitename';
+				$cmd = $db->prepare($sql);
+				$cmd->bindParam(':colours', $theme, PDO::PARAM_STR, 21);
+				$cmd->bindParam(':sitename', $siteName, PDO::PARAM_STR, 35);
+				$cmd->execute();
+				//if they messed with the form and edited the step redirect to home page
+				header("location:menu.php?msg=Your website has been successfully published!");
+				exit();
 			}
-			header("location:publish.php?error=$error&main=$main&footer=$footer&header=$header");
-			exit();
+			catch(Exception $ex)
+			{
+				header("location:error.php?error=$error");
+				exit();
+			}
 		}
+		$main = substr($main, 1);
+		$header = substr($header, 1);
+		$footer = substr($footer, 1);
+		header("location:publish.php?siteTitle=$siteName&creator=$creatorID&main=$main&footer=$footer&header=$header&error=$error");
+		exit();
 	}
 ?>

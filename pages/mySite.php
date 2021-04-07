@@ -8,11 +8,11 @@
 	if(empty($pg) || $pg == 0)
 	{
 		//used aliases to display content at bottom simpler, less ifs
-		$sql = "SELECT 'Welcome' AS name, description AS 'content' FROM websites WHERE name = :name";
+		$sql = "SELECT 'Welcome' AS name, description AS 'content', theme, logo FROM websites WHERE name = :name";
 		$pg = 0;
 	}
 	else
-		$sql = 'SELECT name, content FROM pages WHERE siteName = :name AND pageNumber = :pgNum';
+		$sql = 'SELECT pages.name, content, theme, logo FROM pages INNER JOIN websites ON pages.siteName = websites.name WHERE siteName = :name AND pageNumber = :pgNum';
 	//if no id is given look for specific pages with given id
 	if(!empty($ID))
 		$sql .= ' AND creatorID = :id';
@@ -62,6 +62,17 @@
 <!--User's sites style sheet-->
 	<link href="../css/userStyles.css" type="text/css" rel="stylesheet" />
 	<script src="../js/userScripts.js" type="text/javascript" defer></script>
+	<style>
+		:root {
+		<?php
+		//echo out user selected themes as css variables to overwrite defaults
+		$themes = $pageDetails['theme'];
+		echo '--header: '.substr($themes, 0,7).';';
+		echo '--main: '.substr($themes, 7,7).';';
+		echo '--footer: '.substr($themes, 14,7).';';
+		 ?>
+		}
+	</style>
 </head>
 	<body class="bg-light">
 	<header>

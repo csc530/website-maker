@@ -41,7 +41,7 @@ nav.sticky{
 
 /*Default colour palette from https://coolors.co/ffffff-856d6d-de5b5b-ff0303-de6d6d*/
 /* CSS HEX*/
-body {
+:root {
     /*used to declare and use 'global variables' of colour palette*/
     --main: white;
     --header: lightgray;

@@ -1,9 +1,10 @@
 <?php
-	
 	require_once 'authenticate.php';
 	$title = "Finalize";
 	$siteName = $_GET['siteTitle'];
 	$creator = $_GET['creator'];
+	$creatorID = $creator;
+	require 'canEdit.php';
 	require_once 'meta.php';
 	//get logo of website if any
 	require_once 'connect.php';
@@ -18,7 +19,7 @@
 ?>
 	<h1>Finalization</h1>
 	<form action="website-validation.php?siteTitle=<?php
-		echo "$siteName?creator=$creator"; ?>" method="post">
+		echo "$siteName&creator=$creator"; ?>" method="post">
 		<fieldset>
 			<legend class="display-6">Overview</legend>
 			<!--todo add mini view of pages with link to edit them and special link for splash back to website edit not page-->
@@ -31,7 +32,7 @@
 			<?php
 				require 'connect.php';
 				//get description opf website and total number of pages
-				$sql = 'SELECT description, COUNT(pageNumber) AS `pages` FROM websites INNER JOIN pages p on p.siteName = :siteName WHERE p.creatorID = :creator GROUP BY description;';
+				$sql = 'SELECT description, COUNT(pageNumber) AS `pages` FROM websites INNER JOIN pages p on p.siteName = :siteName WHERE p.creatorID = :creator GROUP BY description,theme;';
 				$cmd = $db->prepare($sql);
 				$cmd->bindParam(':creator', $creator, PDO::PARAM_INT, 11);
 				$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
@@ -46,14 +47,40 @@
 		</fieldset>
 		<fieldset>
 			<legend class="display-6">Personalization</legend>
+			<?php require 'msgOrError.php'; ?>
 			<label>Theme</label>
 			<div class="side-by-side">
+				<?php
+					//get theme from db
+					require 'connect.php';
+					$sql='SELECT theme FROM websites WHERE creatorID = :id AND name = :siteName;';
+					$cmd=$db->prepare($sql);
+					$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
+					$cmd->bindParam(':id', $creator, PDO::PARAM_INT, 11);
+					$cmd->execute();
+					$theme = $cmd->fetch()['theme'];
+					$db=null;
+					//gets previous entry of colour variable in case one was invalid
+					if(!empty($_GET['error']))
+					{
+						$main = '#'.$_GET['main'];
+						$footer = '#'.$_GET['footer'];
+						$header = '#'.$_GET['header'];
+					}
+					else{
+						if(!empty($theme)){
+						$header=$header=substr($theme, 0,7);
+						$main=$main=substr($theme, 7,7);
+						$footer=$footer=substr($theme, 14,7);}
+					}
+					//set previous variables to correct inputs
+				?>
 				<label for="header">Header: </label>
-				<input type="color" name="c-sec" id="header" />
+				<input type="color" name="c-header" id="header" value="<?php echo $header?>"/>
 				<label for="main">Main: </label>
-				<input type="color" name="c-main" id="main" />
+				<input type="color" name="c-main" id="main" value="<?php echo $main?>"/>
 				<label for="footer">Footer: </label>
-				<input type="color" name="c-ter" id="footer" />
+				<input type="color" name="c-footer" id="footer" value="<?php echo $footer?>"/>
 			</div>
 		</fieldset>
 		<!--todo: add an onclick to button view published site or return home-->
