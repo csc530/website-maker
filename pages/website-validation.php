@@ -177,8 +177,52 @@
 	}
 	else
 	{
-		//if they messed with the form and edited the step redirect to home page
-		header('location:menu.php');
-		exit();
+		require_once 'canEdit.php';
+		//get the main colours, stored as hex codes checked in firefox and chrome
+		$main = $_POST['c-main'];
+		$header = $_POST['c-header'];
+		$footer=$_POST['c-footer'];
+		//check if they are all black, unedited if so set default website theme
+		if($main=='#000000' && $footer == '#000000' &&$header=='#000000')
+		{
+			$main = 'white';
+			$footer='white';
+			$header='lightgray';
+		}
+		else
+		{
+			//validate the colours, as hex codes
+			if(strlen($main) != 7 || !str_contains($main, '#'))
+				$error = 'Your main colour is invalid please adjust it and try again.';
+			else if(strlen($header) != 7 || !str_contains($header, '#'))
+				$error = 'Your header colour is invalid please adjust it and try again.';
+			else if(strlen($footer) != 7 || !str_contains($footer, '#'))
+				$error = 'Your footer colour is invalid please adjust it and try again.';
+			else
+			{
+				$theme = $header . $main . $footer;
+				try
+				{
+					$error='<span class="display-6">Network error</span>Sorry, something has gone wrong with your website submission. Don\'t worry all your progress up to finalization has been <em>saved</em>. Please try finalizing your website later thank you for you cooperation.';
+					//send theme information to db to associated with website
+					require_once 'connect.php';
+					$sql = 'UPDATE websites SET theme = :colours WHERE creatorID AND name = :sitename';
+					$cmd = $db->prepare($sql);
+					$cmd->bindParam(':colours', $theme, PDO::PARAM_STR, 21);
+					$cmd->bindParam(':sitename', $siteName, PDO::PARAM_STR, 35);
+					$cmd->execute();
+					//if they messed with the form and edited the step redirect to home page
+					header("location:menu.php?msg=Your website has been successfully published! <a href='mySite.php?ID=$creatorID&site=$siteName&pg=0' target='_blank'>View now</a>");
+					exit();
+				}
+				catch(Exception)
+				{
+					header("location:error.php?error=$error");
+					exit();
+				}
+			}
+			header("location:publish.php?error=$error&main=$main&footer=$footer&header=$header");
+			exit();
+		}
 	}
 ?>

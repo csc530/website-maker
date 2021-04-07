@@ -41,20 +41,18 @@ nav.sticky{
 
 /*Default colour palette from https://coolors.co/ffffff-856d6d-de5b5b-ff0303-de6d6d*/
 /* CSS HEX*/
-:root {
+body {
     /*used to declare and use 'global variables' of colour palette*/
-    --white: #ffffffff;
-    --rocket-metallic: #857373ff;
-    --rose-taupe: #8f5b5bff;
-    --taupe-gray: #9c9292ff;
-    --rose-taupe-2: #8a5e5eff;
+    --main: white;
+    --header: lightgray;
+    --footer: white;
 }
 header{
-    background-image: linear-gradient(var(--rose-taupe), var(--rocket-metallic));
+    background-image: linear-gradient(var(--header), var(--main));
 }
 main{
-    background-image: linear-gradient(var(--rocket-metallic),var(--taupe-gray));
+    background-image: linear-gradient(var(--main),var(--footer));
 }
 footer{
-    background-color: var(--taupe-gray);
+    background-color: var(--footer);
 }
