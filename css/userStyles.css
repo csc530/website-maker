@@ -52,6 +52,10 @@ nav{
     padding-right: 7vw;
 }
 
+img{
+    float: left;
+}
+
 /*Default colour palette from https://coolors.co/ffffff-856d6d-de5b5b-ff0303-de6d6d*/
 /* CSS HEX*/
 :root {
@@ -64,6 +68,7 @@ header{
     background-image: linear-gradient(var(--header), var(--main));
 }
 main{
+    padding-top: 10px;
     background-image: linear-gradient(var(--main),var(--footer));
 }
 footer{
