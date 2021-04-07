@@ -1,4 +1,5 @@
 <h1>Welcome<!--todo Add name arg for l8r aswell as a bunch of profile stuffies too--></h1>
+<?php require_once 'msgOrError.php';?>
 <nav>
 	<ul class="navbar nav-justified">
 		<li><a href="create.php">New website</a></li>

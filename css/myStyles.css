@@ -1,5 +1,18 @@
 @charset "UTF-8";
 /*Custom styles for bootstrap overrides*/
+/*makes list display6 smaller*/
+.display-6{
+    font-size: x-large;
+    font-weight: bold;
+}
+button.display-6{
+    font-weight: unset;
+}
+/*Make list have no preceding disc image or padding*/
+.no-list{
+    list-style: none;
+    padding: unset;
+}
 /*Removes visual cues of an average hyperlink*/
 .no-link{
     color: unset;
