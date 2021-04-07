@@ -5,6 +5,7 @@
 	<title><?php echo "$title - Web Dreamscapes"; ?></title>
 	<!--todo paths: make absolute paths for below links-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" href="../images/cloud-computing.svg" type="image/svg+xml">
 	<link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 	<script src="../js/bootstrap.min.js" type="text/javascript" defer></script>
 	<link href="../css/myStyles.css" type="text/css" rel="stylesheet" />
@@ -16,7 +17,8 @@
 	<!--Main navbar header displaying login and register links-->
 	<nav class="navbar navbar-expand-lg navbar-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="index.php">Web Dreamscapes <!--add img of logo or just logo--></a>
+			<a class="navbar-brand" href="index.php">Web Dreamscapes<img src="../images/cloud-computing.svg" height="45" alt="Image
+			of cloud with circuits inside"></a>
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 	<?php
