@@ -91,3 +91,17 @@
 	<footer class="modal-footer"><small>Created with <a href="index.php" target="_blank" rel="">Web Dreamscapes</a>&copy;.</small></footer>
 	</body>
 </html>
+<?php
+	require 'connect.php';
+	//increase the number if visits of the website
+	//todo if possible add 1 visit per session
+	$sql='UPDATE websites SET visits = visits+1 WHERE name = :name';
+	if(!empty($ID))
+		$sql.=' AND creatorID = :id;';
+	$cmd=$db->prepare($sql);
+	$cmd->bindParam(':name', $site, PDO::PARAM_STR, 35);
+	if(!empty($ID))
+	$cmd->bindParam(':id', $ID, PDO::PARAM_INT, 11);
+	$cmd->execute();
+	$db = null;
+		?>

@@ -9,7 +9,7 @@
 	   content creation and multi-user collaboration. Allowing you to build your team or friends dream site fluidly, flawlessly, and easily.
 	</p>
 	<form action="hosted-sites.php" method="get">
-		<button type="button">View Sites</button>
+		<a href="hosted-sites.php"><button type="button" class="btn btn-success">View Sites</button></a>
 	</form>
 <?php
 	require_once 'footer.php' ?>

@@ -2,17 +2,18 @@
 	$title = 'Sites';
 	require_once 'meta.php';
 	?>
-	<h1>Websites created with Dreamscapes: </h1>
+	<h1>Websites created with Dreamscapes</h1>
 	<h2>Featured sites: </h2>
 	<ol>
 <?php
 	require_once 'connect.php';
-	$sql = 'SELECT preview, name FROM websites ORDER BY visits LIMIT 10;';
+	$sql = 'SELECT * FROM websites ORDER BY visits LIMIT 10;';
 	$cmd = $db->prepare($sql);
 	$cmd->execute();
 	$sites =$cmd->fetchAll();
 	foreach($sites as $site)
-		echo '<li title="'.$site['name'].'"><figure>'.$site['preview'].'<figcaption>'.$site['name'].'</figcaption></figure></li>';
+		echo '<li title="' . $site['name'] . '"><a href="mySite.php?ID' .$site['creatorID'].'&pg=0&site='.$site['name'].'" <figure>'.$site['preview'].'<figcaption>'
+				.$site['name'].'</figcaption></figure></a></li>';
 	?>
 	</ol>
 	<form action="hosted-sites.php" method="post">
