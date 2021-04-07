@@ -49,31 +49,32 @@
 	}
 	//use website tilte in tab
 	$title = $site;
-	?>
+?>
 	<!DOCTYPE html>
 	<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title><?php echo "$title"; ?></title>
-	<!--todo paths: make absolute paths for below links-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-	<script src="../js/bootstrap.min.js" type="text/javascript" defer></script>
-<!--User's sites style sheet-->
-	<link href="../css/userStyles.css" type="text/css" rel="stylesheet" />
-	<script src="../js/userScripts.js" type="text/javascript" defer></script>
-	<style>
-		:root {
-		<?php
-		//echo out user selected themes as css variables to overwrite defaults
-		$themes = $pageDetails['theme'];
-		echo '--header: '.substr($themes, 0,7).';';
-		echo '--main: '.substr($themes, 7,7).';';
-		echo '--footer: '.substr($themes, 14,7).';';
-		 ?>
-		}
-	</style>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title><?php
+				echo "$title"; ?></title>
+		<!--todo paths: make absolute paths for below links-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+		<script src="../js/bootstrap.min.js" type="text/javascript" defer></script>
+		<!--User's sites style sheet-->
+		<link href="../css/userStyles.css" type="text/css" rel="stylesheet" />
+		<script src="../js/userScripts.js" type="text/javascript" defer></script>
+		<style>
+			:root {
+			<?php
+			//echo out user selected themes as css variables to overwrite defaults
+			$themes = $pageDetails['theme'];
+			echo '--header: '.substr($themes, 0,7).';';
+			echo '--main: '.substr($themes, 7,7).';';
+			echo '--footer: '.substr($themes, 14,7).';';
+			 ?>
+			}
+		</style>
+	</head>
 	<body class="bg-light">
 	<header>
 		<?php
@@ -81,38 +82,38 @@
 		?>
 		<nav class='navbar navbar-expand-lg navbar-light'>
 			<div class="container-fluid">
-<?php
-	//todo add include for nice bootstrap navbar and meta header
-	echo "<span class='navbar-brand'>$site</span><div class='d-flex'><ul class='navbar-nav me-auto mb-2 mb-lg-0'><li><a class='nav-link' href='mySite.php?ID=$ID&site=$site&pg=0'>Home</a></li>";
-	//create links foreach page in website
-	foreach($links as $link)
-		echo "<li class='nav-item'><a class='nav-link' href='mySite.php?ID=$ID&site=$site&pg=" . $link['pageNumber'] . "'>" . $link['name'] . '</a></li>';
-	echo '</ul></div>';
-	?>
+				<?php
+					echo "<span class='navbar-brand'><img alt =\"$site's logo\" src='".$pageDetails['logo']."' class='logo shadow' />$site</span><div
+					class='d-flex'><ul class='navbar-nav me-auto mb-2 mb-lg-0'><li><a class='nav-link' href='mySite.php?ID=$ID&site=$site&pg=0'>Home</a></li>";
+					//create links foreach page in website
+					foreach($links as $link)
+						echo "<li class='nav-item'><a class='nav-link' href='mySite.php?ID=$ID&site=$site&pg=" . $link['pageNumber'] . "'>" . $link['name'] . '</a></li>';
+					echo '</ul></div>';
+				?>
 			</div>
 		</nav>
 	</header>
-	<main class="container">
-	<?php
-	//write page appropriately if using page or main website table, depends if pgnum is empty (just changes the variables names)
-	//write page content as HTML
-	echo $pageDetails['content'];
-	?>
+	<main class="container display-6">
+		<?php
+			//write page appropriately if using page or main website table, depends if pgnum is empty (just changes the variables names)
+			//write page content as HTML
+			echo $pageDetails['content'];
+		?>
 	</main>
 	<footer class="modal-footer"><small>Created with <a href="index.php" target="_blank" rel="">Web Dreamscapes</a>&copy;.</small></footer>
 	</body>
-</html>
+	</html>
 <?php
 	require 'connect.php';
 	//increase the number if visits of the website
 	//todo if possible add 1 visit per session
-	$sql='UPDATE websites SET visits = visits+1 WHERE name = :name';
+	$sql = 'UPDATE websites SET visits = visits+1 WHERE name = :name';
 	if(!empty($ID))
-		$sql.=' AND creatorID = :id;';
-	$cmd=$db->prepare($sql);
+		$sql .= ' AND creatorID = :id;';
+	$cmd = $db->prepare($sql);
 	$cmd->bindParam(':name', $site, PDO::PARAM_STR, 35);
 	if(!empty($ID))
-	$cmd->bindParam(':id', $ID, PDO::PARAM_INT, 11);
+		$cmd->bindParam(':id', $ID, PDO::PARAM_INT, 11);
 	$cmd->execute();
 	$db = null;
-		?>
+?>

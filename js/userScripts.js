@@ -1,6 +1,4 @@
-//Used to make the navbar sticky
-// regular position sticky won't work because it's wrapped in header with h1
-// (referring to user's site and I don't the title sticky as well)
+//create a back to top button when navbar is out of frame
 const nav = document.querySelector("header>h1+nav");
 const header = document.querySelector("header");
 let height = header.clientHeight - nav.clientHeight;

@@ -1,3 +1,23 @@
+/*Stylesheet for user created websites*/
+/*Style for site's logo*/
+img{
+    image-resolution: from-image;
+    margin: auto;
+}
+img.logo{
+    max-height: 150px;
+    height: 100px;
+    min-height: 15px;
+    max-width: 150px;
+    width: 100px;
+    min-width: 15px;
+    border: rgba(0,0,0,.25) outset thin;
+    border-radius: 1.2rem;
+}
+/*Slows down all transition on the page*/
+html{
+    transition: all 1s;
+}
 /*places footer on bottom of page, and centers content (make~80%of screen space)*/
 header{
     min-height: 10vh;
@@ -21,13 +41,6 @@ header>h1{
 /*Nav border*/
 nav{
     border-bottom: rgba(0,0,0,.75) 2px groove;
-}
-
-/*To be used in JS to make the navbar sticky*/
-nav.sticky{
-    position: fixed;
-    top: 0;
-    z-index: 0;
 }
 
 /*Allows for container to take up whole page displaying all content*/
@@ -55,4 +68,8 @@ main{
 }
 footer{
     background-color: var(--footer);
+}
+
+.display-6{
+    font-size: 150%;
 }
