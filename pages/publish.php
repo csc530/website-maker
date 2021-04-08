@@ -52,46 +52,8 @@
 			<label>Theme</label>
 			<div class="side-by-side">
 				<?php
-					//set defaults so no warnings are placed in console
-					$main = '000000';
-					$header = '000000';
-					$footer = '000000';
-					//get theme from db
-					require 'connect.php';
-					$sql = 'SELECT theme FROM websites WHERE creatorID = :id AND name = :siteName;';
-					$cmd = $db->prepare($sql);
-					$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
-					$cmd->bindParam(':id', $creator, PDO::PARAM_INT, 11);
-					$cmd->execute();
-					$theme = $cmd->fetch()['theme'];
-					$db = null;
-					//gets previous entry of colour variable in case one was invalid
-					if(!empty($_GET['error']))
-					{
-						$main = '#' . $_GET['main'];
-						$footer = '#' . $_GET['footer'];
-						$header = '#' . $_GET['header'];
-					}
-					else
-					{
-						if(!empty($theme))
-						{
-							$header = $header = substr($theme, 0, 7);
-							$main = $main = substr($theme, 7, 7);
-							$footer = $footer = substr($theme, 14, 7);
-						}
-					}
-					//set previous variables to correct inputs
+					require 'siteThemeForm.php';
 				?>
-				<label for="header">Header: </label>
-				<input type="color" name="c-header" id="header" value="<?php
-					echo $header ?>" />
-				<label for="main">Main: </label>
-				<input type="color" name="c-main" id="main" value="<?php
-					echo $main ?>" />
-				<label for="footer">Footer: </label>
-				<input type="color" name="c-footer" id="footer" value="<?php
-					echo $footer ?>" />
 			</div>
 		</fieldset>
 		<!--todo: add an onclick to button view published site or return home-->

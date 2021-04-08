@@ -72,6 +72,15 @@
 			</ul>
 		</fieldset>
 	</form>
+		<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creatorID"; ?>" method="post">
+			<fieldset>
+				<legend>Colour theme</legend>
+				<?php
+					$creator = $creatorID;
+					require 'siteThemeForm.php';
+				?>
+			</fieldset>
+		</form>
 	</div>
 	<form action="edit-webpages.php?pageNumber=1&siteTitle=<?php
 		echo "$siteName&creator=$creatorID"; ?>" method="post">
