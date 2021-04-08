@@ -210,8 +210,11 @@
 				$cmd->bindParam(':colours', $theme, PDO::PARAM_STR, 21);
 				$cmd->bindParam(':sitename', $siteName, PDO::PARAM_STR, 35);
 				$cmd->execute();
-				//if they messed with the form and edited the step redirect to home page
-				header("location:menu.php?msg=Your website has been successfully published!");
+				//redirect to page they came from, publish or edit
+				if(empty($_POST['fromEdit']))
+					header("location:menu.php?msg=Your website has been successfully published!");
+				else
+					$header("location:edit.php?siteTitle=$siteName&creator=$creatorID");
 				exit();
 			}
 			catch(Exception $ex)
@@ -223,7 +226,10 @@
 		$main = substr($main, 1);
 		$header = substr($header, 1);
 		$footer = substr($footer, 1);
-		header("location:publish.php?siteTitle=$siteName&creator=$creatorID&main=$main&footer=$footer&header=$header&error=$error");
+		if(empty($_POST['fromEdit']))
+			header("location:publish.php?siteTitle=$siteName&creator=$creatorID&main=$main&footer=$footer&header=$header&error=$error");
+		else
+			$header("location:edit.php?siteTitle=$siteName&creator=$creatorID&main=$main&footer=$footer&header=$header&error=$error");
 		exit();
 	}
 ?>
