@@ -47,8 +47,6 @@
 		$pageDetails = array('name' => $_GET['pageTitle'], 'content' => $_GET['content']);
 		$buttonMsg = 'Add page';
 	}
-	try
-	{
 		//display other pages on site on top in a list (not including current page)
 		require 'connect.php';
 		$sql = 'SELECT pageNumber, name FROM pages WHERE creatorID = :creator AND pageNumber != :pageNum AND siteName=:siteName ORDER BY pageNumber;';
@@ -69,10 +67,6 @@
 						'</a><a href="delete.php?pageNumber=' . $page['pageNumber'] . "&siteTitle=$siteName&creator=$creator" . '" onclick="return confirmDelete()"><button class="btn btn-danger">Delete</button></a></li>';
 			echo "</ul>";
 		}
-	}
-	catch(Exception $exception)
-	{
-	}
 ?>
 	<form action="website-validation.php?pageNumber=<?php
 		echo "$pageNumber&siteTitle=$siteName&creator=$creator"; ?>"

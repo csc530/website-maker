@@ -4,21 +4,21 @@
 	$creator = $_GET['creator'];
 	$pageNumber = $_GET['pageNumber'];
 	//if there is no website name given they are deleting a user
-	if(empty($siteName))
+	try
 	{
-		require_once 'connect.php';
-		$sql = 'DELETE FROM creators WHERE email = :creator;';
-		$cmd=$db->prepare($sql);
-		$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
-		$cmd->execute();
-		$db = null;
-		header("location:super-user.php?msg=Successfully deleted $creator and their websites from Web Dreamscapes.");
-		exit();
-	}
-	//if there is no pageNumber given that means they are deleting a website not a webpage
-	else if(empty($pageNumber))
-	{
-		try
+		if(empty($siteName))
+		{
+			require_once 'connect.php';
+			$sql = 'DELETE FROM creators WHERE email = :creator;';
+			$cmd = $db->prepare($sql);
+			$cmd->bindParam(':creator', $creator, PDO::PARAM_STR, 128);
+			$cmd->execute();
+			$db = null;
+			header("location:super-user.php?msg=Successfully deleted $creator and their websites from Web Dreamscapes.");
+			exit();
+		}
+		//if there is no pageNumber given that means they are deleting a website not a webpage
+		else if(empty($pageNumber))
 		{
 			require_once 'connect.php';
 			//delete website belonging to the user,
@@ -33,15 +33,7 @@
 			header("location:menu.php?msg=Successfully deleted $siteName website.");
 			exit();
 		}
-		catch(Exception $exception)
-		{
-			header("location:menu.php?error=Error, please try again.");
-			exit();
-		}
-	}
-	else
-	{
-		try
+		else
 		{
 			require_once 'connect.php';
 			$sql = 'DELETE FROM pages WHERE siteName = :siteName AND creatorID = :creator AND pageNumber = :pgNum;';
@@ -63,10 +55,6 @@
 			header("location:edit-webpages.php?msg=Successfully deleted page $pageNumber from website.&creator=$creator&siteTitle=$siteName&pageNumber=1");
 			exit();
 		}
-		catch(Exception $exception)
-		{
-			header("location:edit-webpages.php?error=Error, please try again.");
-			exit();
-		}
 	}
+	catch(Exception $exception){header("location:err.php?return=$return&error=Sorry, an error has occurred please try the delete at a later time. Thank you for your cooperation.");}
 ?>
