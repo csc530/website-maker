@@ -37,7 +37,7 @@ ul.side-by-side{
 }
 /*Gives spacing between side by side inputs*/
 .side-by-side input{
-    margin-right: 2%;
+    padding-right: 2%;
 }
 /*makes input and button same height when grouped side by side*/
 .input-group input{
