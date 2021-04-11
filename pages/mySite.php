@@ -1,5 +1,4 @@
 <?php
-	//todo: add updated comments on how email is now unique with ID being PK
 	//variable needed to find and display correct page content
 	$ID = $_GET['ID'];
 	$site = $_GET['site'];

@@ -88,9 +88,9 @@ for(let i = 0; i < btns.length; i++)
 /*****************************************************************************************************************************************/
 //Script to make live page when editing website's page
 const root = document.querySelector("div.side-by-side form+div#shadowRoot");
-let shadow = root.attachShadow({mode: "open"});
 if(root)
 {
+	let shadow = root.attachShadow({mode: "open"});
 	const pageTitle = document.querySelector("div.side-by-side form input#pageTitle");
 	const pageContent = document.querySelector("div.side-by-side form textarea#pageContent");
 	//add default page styles
