@@ -5,6 +5,7 @@
 	$header = '000000';
 	$footer = '000000';
 	//get theme from db
+	//no try catch as if there is an error it will fall back on to default colour theme
 	require 'connect.php';
 	$sql = 'SELECT theme FROM websites WHERE creatorID = :id AND name = :siteName;';
 	$cmd = $db->prepare($sql);
@@ -32,11 +33,8 @@
 	//set previous variables to correct inputs
 ?>
 <label for="header">Header: </label>
-<input type="color" name="c-header" id="header" value="<?php
-	echo $header ?>" />
+<input type="color" name="c-header" id="header" value="<?php echo $header ?>" />
 <label for="main">Main: </label>
-<input type="color" name="c-main" id="main" value="<?php
-	echo $main ?>" />
+<input type="color" name="c-main" id="main" value="<?php echo $main ?>" />
 <label for="footer">Footer: </label>
-<input type="color" name="c-footer" id="footer" value="<?php
-	echo $footer ?>" />
+<input type="color" name="c-footer" id="footer" value="<?php echo $footer ?>" />

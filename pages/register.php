@@ -46,7 +46,8 @@
 		catch(Exception $exception)
 		{
 			$db=null;
-			header("location:login.php?error=$error");
+			$return = "login.php?$email";
+			header("location:err.php?return=$email&error=$error");
 			exit();
 		}
 	}
@@ -99,6 +100,11 @@
 				$db = null;
 				if(!empty($success))
 					$error = "$email is already bound to an account please <a href='pages/login.php'>login</a>.";
+				else
+				{
+					header("location:err.php?return=signup.php");
+					exit();
+				}
 			}
 		}
 		if(empty($_POST['superuser']))
