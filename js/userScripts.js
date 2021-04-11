@@ -1,7 +1,9 @@
 //create a back to top button when navbar is out of frame
-const nav = document.querySelector("header>h1+nav");
+const nav = document.querySelector("header>nav");
 const header = document.querySelector("header");
 let height = header.clientHeight - nav.clientHeight;
+if(height === 0)
+	height=nav.clientHeight;
 let btn = document.createElement("button");
 btn.innerText = "^";
 btn.id = "btnFade";
@@ -21,11 +23,13 @@ window.addEventListener("scroll", function() {
 	{
 		//check if the button has already been added to DOM
 		if(!document.querySelector("#btnFade"))
-			document.appendChild(btn);
+			document.querySelector("body").appendChild(btn);
 		btn.style.opacity = "1";
 	}
 	else
 	{
-		document.removeChild(document.querySelector("#btnFade"));
+		//remove button if it's on the page, suppresses js errors in console
+		if(document.querySelector("#btnFade"))
+		document.querySelector("body").removeChild(btn);
 	}
 });
