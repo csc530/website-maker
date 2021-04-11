@@ -8,7 +8,7 @@
 	<ol>
 		<?php
 			require_once 'connect.php';
-			$sql = 'SELECT logo, name, creatorID FROM websites WHERE public = true ORDER BY visits LIMIT 10;';
+			$sql = 'SELECT logo, name, creatorID FROM websites ORDER BY visits LIMIT 10;';
 			$cmd = $db->prepare($sql);
 			$cmd->execute();
 			$sites = $cmd->fetchAll();
@@ -31,7 +31,7 @@
 		try
 		{
 			require 'connect.php';
-			$sql = 'SELECT logo, name, creatorID FROM websites WHERE public = true AND name LIKE :search ORDER BY visits LIMIT 10;';
+			$sql = 'SELECT logo, name, creatorID FROM websites WHERE name LIKE :search ORDER BY visits LIMIT 10;';
 			$search = '%' . $search . '%';
 			$cmd = $db->prepare($sql);
 			$cmd->bindParam(':search', $search, PDO::PARAM_STR, 35);
@@ -49,11 +49,7 @@
 				echo '<div class="alert alert-warning"><p class="p-0">No matching results were found.</p></div>';
 		}
 		catch(Exception $exception){
-			echo $exception;
-			echo $exception[0];
-			echo $exception[1];
-			echo $exception[2];
-			echo $exception[3];
+			echo '<div class="alert alert-danger"><p class="p-0">Error in search term, please only use alphanumeric characters.</p></div>';
 		}
 	}
 	require_once 'footer.php';
