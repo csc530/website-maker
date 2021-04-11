@@ -158,3 +158,19 @@ form h3 {
 fieldset{
     margin-bottom: 5%;
 }
+
+/*shadow root/DOM styles for showing a preview of a website page*/
+div#shadowRoot{
+    max-height: 65vh;
+    height: 100%;
+    min-height: 55vh;
+    display: block;
+    box-sizing: border-box;
+    margin: auto;
+    border: rgba(0,0,0,.5) solid medium;
+    border-radius: 25%;
+    max-width: 45vh;
+    width: auto;
+    min-width: 35vw;
+    overflow: auto;
+}

@@ -68,19 +68,72 @@ if(sessionStorage.getItem("theme") === "dark")
 let labels = document.querySelectorAll("form label");
 let inputs = document.querySelectorAll("form input");
 let ta = document.querySelectorAll("form textarea");
-for(let i =0; i<labels.length;i++)
+for(let i = 0; i < labels.length; i++)
 	labels[i].classList.add("form-label");
-for(let i =0; i<inputs.length;i++)
+for(let i = 0; i < inputs.length; i++)
 	inputs[i].classList.add("form-control-lg");
-for(let i =0; i<ta.length;i++)
+for(let i = 0; i < ta.length; i++)
 {
 	ta[i].classList.add("form-control-lg");
 	//makes textarea the same length/width of text type inputs
-	ta[i].style.width = inputs[0].clientWidth+"px";
+	ta[i].style.width = inputs[0].clientWidth + "px";
 }
 
 /*****************************************************************************************************************************************/
 //Makes all form buttons large and btn class
 let btns = document.querySelectorAll("form button");
-for(let i =0; i<btns.length;i++)
+for(let i = 0; i < btns.length; i++)
 	btns[i].classList.add("btn-lg");
+
+/*****************************************************************************************************************************************/
+//Script to make live page when editing website's page
+const root = document.querySelector("div.side-by-side form+div#shadowRoot");
+let shadow = root.attachShadow({mode: "open"});
+if(root)
+{
+	const pageTitle = document.querySelector("div.side-by-side form input#pageTitle");
+	const pageContent = document.querySelector("div.side-by-side form textarea#pageContent");
+	//add default page styles
+	let element = document.createElement("link");
+	element.rel = "stylesheet";
+	element.href = "../css/userStyles.css";
+	element.type = "text/css";
+	shadow.appendChild(element);
+	//add the rest of the basic elements to shadowDOM
+	element = document.createElement("body");
+	shadow.appendChild(element);
+
+	element.appendChild(document.createElement("header"));
+	element.querySelector("header").appendChild(document.createElement("h1"));
+
+	element.appendChild(document.createElement("main"));
+	element.querySelector("main").appendChild(document.createElement("p"));
+	//Add shadow class to prevent the user styles making the preview too big
+	shadow.querySelector("body").classList.add("shadow");
+	shadow.querySelector("header").classList.add("shadow");
+	shadow.querySelector("main").classList.add("shadow");
+	//add the style to prevent a too large preview
+	element = document.createElement("style");
+	element.innerHTML = ".shadow{min-height: 100%;}";
+	shadow.prepend(element);
+	const rootTitle = shadow.querySelector("h1");
+	const rootContent = shadow.querySelector("p");
+
+	//function to edit the preview port with the new content in the inputs/textarea
+	function update(event) {
+		console.log(event.target.value);
+		//check the name i.e. php post variable name/attr name
+		if(event.target.name === "pageContent")
+			rootContent.innerHTML = event.target.value;
+		else
+			rootTitle.innerHTML = event.target.value;
+	}
+
+	//places the update function on every keystroke in the textarea and input
+	pageTitle.addEventListener("keyup", update);
+	pageContent.addEventListener("keyup", update);
+	//places default values of inputs into preview
+	rootContent.innerHTML = pageContent.value;
+	rootTitle.innerHTML = pageTitle.value;
+
+}

@@ -68,6 +68,7 @@
 			echo "</ul>";
 		}
 ?>
+	<div class="side-by-side">
 	<form action="website-validation.php?pageNumber=<?php
 		echo "$pageNumber&siteTitle=$siteName&creator=$creator"; ?>"
 	      method="post">
@@ -90,6 +91,8 @@
 				echo $buttonMsg; ?></button>
 		<button type="submit" name="step" value="3" class="btn-success">Submit</button>
 	</form>
+		<div id="shadowRoot"></div>
+	</div>
 <?php
 	require_once 'footer.php';
 ?>
