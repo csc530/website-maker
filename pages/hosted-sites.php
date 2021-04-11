@@ -49,7 +49,9 @@
 				echo '<div class="alert alert-warning"><p class="p-0">No matching results were found.</p></div>';
 		}
 		catch(Exception $exception){
-			echo '<div class="alert alert-danger"><p class="p-0">Error in search term, please only use alphanumeric characters.</p></div>';
+			$return = 'hosted-sites.php';
+			header("location:err.php?return=$return");
+			exit();
 		}
 	}
 	require_once 'footer.php';

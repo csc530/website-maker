@@ -42,12 +42,19 @@
 	}
 	catch(Exception $e)
 	{
-		//send a 404 directive so htaccess will handle it
-		header('HTTP/poop', true, 404);
+		$return = "mySite.php?ID=$ID&site=$site&pg=$pg";
+				//send a 404 directive so htaccess will handle it
+		header("location:err.php?return=$return", true, 404);
 		exit();
 	}
 	//use website tilte in tab
 	$title = $site;
+	//if there is website with given credentials/get_params show error
+	if(empty($pageDetails))
+	{
+		echo "<div class='alert alert-danger'><p>Looks like no such page exits here in our dreamscape. You can be the first to make it <a href='signup.php'>sign up</a> now and get started!</p></div>";
+		exit();
+	}
 ?>
 	<!DOCTYPE html>
 	<html lang="en">
