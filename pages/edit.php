@@ -72,19 +72,21 @@
 				</ul>
 			</fieldset>
 		</form>
-		<form action="website-validation.php?siteTitle=<?php echo "$siteName&creator=$creatorID"; ?>" method="post">
+		<form action="website-validation.php?siteTitle=<?php
+			echo "$siteName&creator=$creatorID"; ?>" method="post">
 			<fieldset>
 				<legend>Colour theme</legend>
 				<?php
 					$creator = $creatorID;
 					require 'siteThemeForm.php';
 				?>
-				<input type="hidden" hidden name="step" value="10"/>
+				<input type="hidden" hidden name="step" value="10" />
 				<input type="hidden" hidden name="fromEdit" value="true" />
 				<button type="submit" class="btn-primary">Change</button>
 			</fieldset>
 		</form>
-		<form action="chg-logo.php?creator=<?php echo "$creatorID&site=$siteName"?>" method="post" enctype="multipart/form-data">
+		<form action="chg-logo.php?creator=<?php
+			echo "$creatorID&site=$siteName" ?>" method="post" enctype="multipart/form-data">
 			<fieldset>
 				<legend>Logo</legend>
 				<label for="logo">Image: </label>
@@ -92,8 +94,10 @@
 				<button name="change" value="true" type="submit" class="btn-primary">Upload</button>
 				<button id="clear" name="clear" type="submit" value="clear" class="btn-secondary">Clear</button>
 				<figure>
-					<figcaption>Current logo: </figcaption>
-					<img src="<?php echo $websiteInfo['logo']; ?>" class="logo-lg" alt="<?php echo $siteName."'s logo"; ?>"/>
+					<figcaption>Current logo:</figcaption>
+					<img src="<?php
+						echo $websiteInfo['logo']; ?>" class="logo-lg" alt="<?php
+						echo $siteName . "'s logo"; ?>" />
 				</figure>
 			</fieldset>
 		</form>

@@ -1,5 +1,7 @@
 <h1>Assignment 2 - Web Dreamscapes</h1>
 <a href="https://lamp.computerstudi.es/~Christofer1157052/PHP-comp1006/website-maker/pages/index.php" target="_blank">Web Dreamscapes (Live site)</a>
+<br>
+<a href="https://lamp.computerstudi.es/~Christofer1157052/PHP-comp1006/website-maker/pages/mySite.php?ID=2&site=Planet%20Disco&pg=0" target="_blank">Demo site</a>
 <p><small>Unfortunately there were some major database restructuring and your Test Co. website was lost you'll have to remake sorry :(</small></p>
 <h2>Purpose</h2>
 <p>This web app is made to allow registered users 'host' their websites. Allowing them to edit the website's name and individual page content. Also, allowing collaboration with other registered users.</p>
@@ -28,6 +30,7 @@
 <li>All the pages and php includes are all in the same directory just making navigation easier, unfortunately I didn't have time to change them to be absolute or refactor the pages to be in a more organized directory structure</li>
 </ul>
 <h2>Bonus</h2>
+<p>A small thingI also worked/made/manipulated a string indexed array using php arrays function. (I could have also just used square brackets - <code>[]</code> - for the same result). Can be found on line 40 of <a href="pages/edit-webpages.php">edit-webpages.php</a>.</p>
 <p>Added customizable styles for each site in the gradient of their background.</p>
 <p>I added functionality to have multiple users build multiple websites. Which I believe is additional to the base project of multiple users editing one website. This can be seen most (I believe) in <a href="pages/edit-webpages.php">edit-webpages.php</a>. <small>I think this is bonus but a lot was MySQL so idk, </small></p>
 <h3>Database stuff</h3>

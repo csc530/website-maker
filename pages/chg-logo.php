@@ -57,12 +57,13 @@
 			}
 		}
 	}
-	catch(Exception $exception){
-		$return="edit.php?siteTitle=$siteName&creator=$creatorID";
+	catch(Exception $exception)
+	{
+		$return = "edit.php?siteTitle=$siteName&creator=$creatorID";
 		header("location:err.php?return=$return");
 		exit();
 	}
 	//return to the edit page, upload was successful
 	header("location:edit.php?siteTitle=$siteName&creator=$creatorID");
 	exit();
-	?>
+?>

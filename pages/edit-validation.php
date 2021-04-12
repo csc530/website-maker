@@ -107,7 +107,7 @@
 			$error = 'Description must be less than 600 characters.';
 		else if(strlen($title) > 35)
 			$error = 'Website title must be less than 35 characters';
-		else if(strlen($title)<3)
+		else if(strlen($title) < 3)
 			$error = 'Website name/title must at least be 3 characters';
 		else if(strlen($description) < 2)
 			$error = 'Website overview must at least be 2 characters';

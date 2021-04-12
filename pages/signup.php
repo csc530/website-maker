@@ -14,7 +14,7 @@
 		<label for="confirm-password">Confirm password: </label>
 		<input type="password" name="confirm-password" id="confirm-password" required />
 		<?php
-		require_once 'msgOrError.php';
+			require_once 'msgOrError.php';
 		?>
 		<button type="submit" class="btn-primary">Register</button>
 		<a href="login.php">

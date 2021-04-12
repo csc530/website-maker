@@ -19,4 +19,7 @@
 			exit();
 		}
 	}
-	catch(Exception $ex){header("location:err.php");}
+	catch(Exception $ex)
+	{
+		header("location:err.php");
+	}

@@ -63,7 +63,10 @@
 				?>
 			</div>
 		</fieldset>
-		<a target="_blank" href="mySite.php?ID=<?php echo "$creatorID&site=$siteName&pg=0" ?>"><button type="button" class="btn-secondary">Preview</button></a>
+		<a target="_blank" href="mySite.php?ID=<?php
+			echo "$creatorID&site=$siteName&pg=0" ?>">
+			<button type="button" class="btn-secondary">Preview</button>
+		</a>
 		<button type="submit" name="step" value="4" class="btn-primary">Finalize</button>
 	</form>
 <?php

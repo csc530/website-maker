@@ -32,7 +32,7 @@
 					$db = null;
 					$cmd->execute();
 					session_start();
-					$_SESSION['id']=$cmd->fetch()['ID'];
+					$_SESSION['id'] = $cmd->fetch()['ID'];
 					$_SESSION['email'] = $email;
 					header("location:menu.php");
 					exit();
@@ -45,7 +45,7 @@
 		}
 		catch(Exception $exception)
 		{
-			$db=null;
+			$db = null;
 			$return = "login.php?$email";
 			header("location:err.php?return=$email&error=$error");
 			exit();
@@ -84,7 +84,7 @@
 				session_start();
 				$_SESSION['email'] = $email;
 				//add creator id to session
-				$_SESSION['id']=$cmd->fetch()['ID'];
+				$_SESSION['id'] = $cmd->fetch()['ID'];
 				header("location:menu.php");
 				exit();
 			}

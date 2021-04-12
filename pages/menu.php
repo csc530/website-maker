@@ -25,8 +25,8 @@
 				echo '<li><a class="no-link" target="_blank" href="mySite.php?pg=0&site=' . $site['name'] . '&ID=' . $id . '">' .
 						$site['name'] .
 						'</a>
-					  <a href="edit.php?siteTitle=' . $site['name'] . '&creator='.$id.'"><button class="btn-warning" type="button">Edit</button></a>
-					  <a href="delete.php?siteTitle=' . $site['name'] . '&creator='.$email.'"' . ' onclick="return confirmDelete()"><button
+					  <a href="edit.php?siteTitle=' . $site['name'] . '&creator=' . $id . '"><button class="btn-warning" type="button">Edit</button></a>
+					  <a href="delete.php?siteTitle=' . $site['name'] . '&creator=' . $email . '"' . ' onclick="return confirmDelete()"><button
 					  class="btn-danger" type="button">Delete</button></a></li>';
 		?>
 	</ul>
@@ -48,7 +48,7 @@
 			//they do not display a delete button as only the creator should delete the website
 			foreach($websites as $site)
 				echo '<li><a target="_blank" href="mySite.php?pg=0&site=' . $site['name'] . '&ID=' . $site['creatorID'] . '">' . $site['name'] . '</a>
-						<a href="edit.php?siteTitle=' . $site['name'] . '&creator='. $site['creatorID'] . '"><button class="btn-warning" type="button">Edit</button></a></li>';
+						<a href="edit.php?siteTitle=' . $site['name'] . '&creator=' . $site['creatorID'] . '"><button class="btn-warning" type="button">Edit</button></a></li>';
 		?>
 	</ul>
 <?php

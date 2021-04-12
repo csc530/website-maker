@@ -33,8 +33,11 @@
 	//set previous variables to correct inputs
 ?>
 <label for="header">Header: </label>
-<input type="color" name="c-header" id="header" value="<?php echo $header ?>" />
+<input type="color" name="c-header" id="header" value="<?php
+	echo $header ?>" />
 <label for="main">Main: </label>
-<input type="color" name="c-main" id="main" value="<?php echo $main ?>" />
+<input type="color" name="c-main" id="main" value="<?php
+	echo $main ?>" />
 <label for="footer">Footer: </label>
-<input type="color" name="c-footer" id="footer" value="<?php echo $footer ?>" />
+<input type="color" name="c-footer" id="footer" value="<?php
+	echo $footer ?>" />

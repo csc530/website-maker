@@ -56,5 +56,8 @@
 			exit();
 		}
 	}
-	catch(Exception $exception){header("location:err.php?return=$return&error=Sorry, an error has occurred please try the delete at a later time. Thank you for your cooperation.");}
+	catch(Exception $exception)
+	{
+		header("location:err.php?return=$return&error=Sorry, an error has occurred please try the delete at a later time. Thank you for your cooperation.");
+	}
 ?>
