@@ -47,51 +47,55 @@
 		$pageDetails = array('name' => $_GET['pageTitle'], 'content' => $_GET['content']);
 		$buttonMsg = 'Add page';
 	}
-		//display other pages on site on top in a list (not including current page)
-		require 'connect.php';
-		$sql = 'SELECT pageNumber, name FROM pages WHERE creatorID = :creator AND pageNumber != :pageNum AND siteName=:siteName ORDER BY pageNumber;';
-		$cmd = $db->prepare($sql);
-		$cmd->bindParam(':creator', $creator, PDO::PARAM_INT, 11);
-		$cmd->bindParam(':pageNum', $pageNumber, PDO::PARAM_INT, 11);
-		$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
-		$cmd->execute();
-		$db = null;
-		$pages = $cmd->fetchAll();
-		//print each page as a list item if any with a link to go and edit that page
-		if(!empty($pages))
-		{
-			echo "<h2>pages</h2>\n<ul>";
-			foreach($pages as $page)
-				echo '<li>' . $page['pageNumber'] . '. <a href="edit-webpages.php?siteTitle=' . $siteName . '&pageNumber=' . $page['pageNumber'] . '">' .
-						$page['name'] .
-						'</a><a href="delete.php?pageNumber=' . $page['pageNumber'] . "&siteTitle=$siteName&creator=$creator" . '" onclick="return confirmDelete()"><button class="btn btn-danger">Delete</button></a></li>';
-			echo "</ul>";
-		}
+	//display other pages on site on top in a list (not including current page)
+	require 'connect.php';
+	$sql = 'SELECT pageNumber, name FROM pages WHERE creatorID = :creator AND pageNumber != :pageNum AND siteName=:siteName ORDER BY pageNumber;';
+	$cmd = $db->prepare($sql);
+	$cmd->bindParam(':creator', $creator, PDO::PARAM_INT, 11);
+	$cmd->bindParam(':pageNum', $pageNumber, PDO::PARAM_INT, 11);
+	$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
+	$cmd->execute();
+	$db = null;
+	$pages = $cmd->fetchAll();
+	//print each page as a list item if any with a link to go and edit that page
+	if(!empty($pages))
+	{
+		echo "<h2>pages</h2>\n<ul>";
+		foreach($pages as $page)
+			echo '<li>' . $page['pageNumber'] . '. <a href="edit-webpages.php?siteTitle=' . $siteName . '&pageNumber=' . $page['pageNumber'] . '">' .
+					$page['name'] .
+					'</a><a href="delete.php?pageNumber=' . $page['pageNumber'] . "&siteTitle=$siteName&creator=$creator" . '" onclick="return confirmDelete()"><button class="btn btn-danger">Delete</button></a></li>';
+		echo "</ul>";
+	}
 ?>
 	<div class="side-by-side">
-	<form action="website-validation.php?pageNumber=<?php
-		echo "$pageNumber&siteTitle=$siteName&creator=$creator"; ?>"
-	      method="post">
-		<h1><?php
-				echo "$siteName: page $pageNumber" ?></h1>
-		<?php
-			require_once 'msgOrError.php';
-		?>
-		<label for="pageTitle">Page title</label>
-		<input id="pageTitle" name="pageTitle" type="text" required max="50" min="1"
-		       value="<?php
-			       if(!empty($pageDetails)) echo $pageDetails['name']; ?>" />
-		<label for="pageContent">Page content</label>
-		<textarea name="pageContent" id="pageContent" required
-		          placeholder="HTML content is allowed i.e. <h1>Hello</h1><p>Welcome to my page, I hope you enjoy</p>..."><?php
-				if(!empty($pageDetails))
-					echo $pageDetails['content'];
-			?></textarea>
-		<button class="btn-primary" type="submit" name="step" value="2"><?php
-				echo $buttonMsg; ?></button>
-		<button type="submit" name="step" value="3" class="btn-success">Submit</button>
-	</form>
-		<div id="shadowRoot"></div>
+		<form action="website-validation.php?pageNumber=<?php
+			echo "$pageNumber&siteTitle=$siteName&creator=$creator"; ?>"
+		      method="post">
+			<h1><?php
+					echo "$siteName: page $pageNumber" ?></h1>
+			<?php
+				require_once 'msgOrError.php';
+			?>
+			<label for="pageTitle">Page title</label>
+			<input id="pageTitle" name="pageTitle" type="text" required max="50" min="1"
+			       value="<?php
+				       if(!empty($pageDetails)) echo $pageDetails['name']; ?>" />
+			<label for="pageContent">Page content</label>
+			<textarea name="pageContent" id="pageContent" required
+			          placeholder="HTML content is allowed i.e. <h1>Hello</h1><p>Welcome to my page, I hope you enjoy</p>..."><?php
+					if(!empty($pageDetails))
+						echo $pageDetails['content'];
+				?></textarea>
+			<button class="btn-primary" type="submit" name="step" value="2"><?php
+					echo $buttonMsg; ?></button>
+			<button type="submit" name="step" value="3" class="btn-success">Submit</button>
+		</form>
+		<div class="m-auto">
+			<h2 class="text-center">Webpage preview</h2>
+			<div id="shadowRoot"></div>
+			<p><small>preview is bare bones and un-styled it does not reflect the finished or published product thereof</small></p>
+		</div>
 	</div>
 <?php
 	require_once 'footer.php';

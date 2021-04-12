@@ -87,7 +87,7 @@ for(let i = 0; i < btns.length; i++)
 
 /*****************************************************************************************************************************************/
 //Script to make live page when editing website's page
-const root = document.querySelector("div.side-by-side form+div#shadowRoot");
+const root = document.querySelector("div.side-by-side form+div div#shadowRoot");
 if(root)
 {
 	let shadow = root.attachShadow({mode: "open"});
@@ -110,6 +110,7 @@ if(root)
 	element.querySelector("main").appendChild(document.createElement("p"));
 	//Add shadow class to prevent the user styles making the preview too big
 	shadow.querySelector("body").classList.add("shadow");
+	shadow.querySelector("body").style.padding = "5%";
 	shadow.querySelector("header").classList.add("shadow");
 	shadow.querySelector("main").classList.add("shadow");
 	//add the style to prevent a too large preview
