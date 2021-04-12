@@ -60,14 +60,18 @@
 	<html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title><?php
-				echo "$title"; ?></title>
+		<title><?php echo "$title"; ?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 		<script src="../js/bootstrap.min.js" type="text/javascript" defer></script>
 		<!--User's sites style sheet-->
 		<link href="../css/userStyles.css" type="text/css" rel="stylesheet" />
 		<script src="../js/userScripts.js" type="text/javascript" defer></script>
+		<?php
+			//add logo to tab bar if present
+			if(!empty($pageDetails['logo']))
+				echo '<link rel="icon" href="'.$pageDetails['logo'].'" type="image/svg+xml" />';
+		?>
 		<style>
 			:root {
 			<?php
