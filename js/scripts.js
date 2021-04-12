@@ -135,5 +135,15 @@ if(root)
 	//places default values of inputs into preview
 	rootContent.innerHTML = pageContent.value;
 	rootTitle.innerHTML = pageTitle.value;
-
 }
+
+//personal collapsible navbar for mobile and small screens since the bootstrap is not working
+const navBarButton = document.querySelector("header.container-fluid>nav#navbarMain button#collapseBtn");
+console.log(navBarButton);
+navBarButton.addEventListener("click", function() {
+	const navBar = document.querySelector("header.container-fluid>nav#navbarMain div#navbarSupportedContent");
+	if(navBar.style.display === "none")
+		navBar.style.display = "inline-block";
+	else
+		navBar.style.display = "none";
+})

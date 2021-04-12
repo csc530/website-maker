@@ -19,9 +19,10 @@
 	<nav class="navbar navbar-expand-lg navbar-dark" id="navbarMain">
 		<a class="navbar-brand" href="index.php">Web Dreamscapes<img src="../images/cloud-computing.svg" height="45" alt="Image
 			of cloud with circuits inside"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+		        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation" id="collapseBtn">
+			<span class="navbar-toggler-icon"></span></button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span></button>
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				<?php
 					//display appropriate header for if the user is logged in or not

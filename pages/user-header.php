@@ -1,6 +1,5 @@
 				<li class="nav-item">
-					<a class="nav-link" href="profile.php"><?php
-							echo $_SESSION['email']; ?></a>
+					<a class="nav-link" href="#"><?php echo $_SESSION['email']; ?></a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="menu.php" role="button">My sites</a>
