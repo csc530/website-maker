@@ -4,17 +4,17 @@
 	$site = $_GET['site'];
 	$pg = $_GET['pg'];
 	//if there is no given page number display their splash/overview/welcome page
-	if(empty($pg) || $pg == 0)
+	if(empty($pg) || $pg == 0 || !is_numeric($pg))
 	{
 		//used aliases to display content at bottom simpler, less ifs
-		$sql = "SELECT 'Welcome' AS name, description AS 'content', theme, logo FROM websites WHERE name = :name";
+		$sql = "SELECT name, description AS 'content', theme, logo FROM websites WHERE name = :name";
 		$pg = 0;
 	}
 	else
 		$sql = 'SELECT pages.name, content, theme, logo FROM pages INNER JOIN websites ON pages.siteName = websites.name WHERE siteName = :name AND pageNumber = :pgNum';
 	//if no id is given look for specific pages with given id
 	if(!empty($ID))
-		$sql .= ' AND creatorID = :id';
+		$sql .= ' AND websites.creatorID = :id';
 	try
 	{
 		require_once 'connect.php';
@@ -44,10 +44,10 @@
 	{
 		$return = "mySite.php?ID=$ID&site=$site&pg=$pg";
 		//send a 404 directive so htaccess will handle it
-		header("location:err.php?return=$return", true, 404);
+		header("location:err.php?return=$return");
 		exit();
 	}
-	//use website tilte in tab
+	//use website title in tab
 	$title = $site;
 	//if there is website with given credentials/get_params show error
 	if(empty($pageDetails))
