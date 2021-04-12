@@ -3,7 +3,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo "$title - Web Dreamscapes"; ?></title>
-	<!--todo paths: make absolute paths for below links-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<link rel="icon" href="../images/cloud-computing.svg" type="image/svg+xml">
 	<link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet" />

@@ -77,7 +77,6 @@
 					$cmd->bindParam(':creator', $creator, PDO::PARAM_INT, 11);
 					$cmd->execute();
 					$db = null;
-					//todo ui: pass get variable to allow the new user to be highlighted for a time or something
 					header("location:edit.php?creator=$creator&siteTitle=$siteName");
 					exit();
 				}

@@ -113,7 +113,6 @@
 <?php
 	require 'connect.php';
 	//increase the number if visits of the website
-	//todo if possible add 1 visit per session
 	$sql = 'UPDATE websites SET visits = visits+1 WHERE name = :name';
 	if(!empty($ID))
 		$sql .= ' AND creatorID = :id;';
