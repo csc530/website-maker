@@ -43,7 +43,7 @@
 	catch(Exception $e)
 	{
 		$return = "mySite.php?ID=$ID&site=$site&pg=$pg";
-				//send a 404 directive so htaccess will handle it
+		//send a 404 directive so htaccess will handle it
 		header("location:err.php?return=$return", true, 404);
 		exit();
 	}
@@ -62,7 +62,6 @@
 		<meta charset="UTF-8">
 		<title><?php
 				echo "$title"; ?></title>
-		<!--todo paths: make absolute paths for below links-->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link href="../css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 		<script src="../js/bootstrap.min.js" type="text/javascript" defer></script>
@@ -89,8 +88,10 @@
 		<nav class='navbar navbar-expand-lg navbar-light'>
 			<div class="container-fluid">
 				<?php
-					echo "<span class='navbar-brand'><img alt =\"$site's logo\" src='".$pageDetails['logo']."' class='logo shadow' />$site</span><div
-					class='d-flex'><ul class='navbar-nav me-auto mb-2 mb-lg-0'><li><a class='nav-link' href='mySite.php?ID=$ID&site=$site&pg=0'>Home</a></li>";
+					echo "<span class='navbar-brand'>";
+					if($pageDetails['logo'] != '../images/Blank.svg')
+						echo "<img alt =\"$site's logo\" src='" . $pageDetails['logo'] . "' class='logo shadow' />";
+					echo "$site</span><div class='d-flex'><ul class='navbar-nav me-auto mb-2 mb-lg-0'><li><a class='nav-link' href='mySite.php?ID=$ID&site=$site&pg=0'>Home</a></li>";
 					//create links foreach page in website
 					foreach($links as $link)
 						echo "<li class='nav-item'><a class='nav-link' href='mySite.php?ID=$ID&site=$site&pg=" . $link['pageNumber'] . "'>" . $link['name'] . '</a></li>';
