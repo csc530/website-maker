@@ -87,14 +87,15 @@
 	<body class="bg-light">
 	<header>
 		<?php
-			echo '<h1>' . $pageDetails['name'] . '</h1>';
+			echo "<span>";
+			if($pageDetails['logo'] != '../images/Blank.svg')
+				echo "<img alt =\"$site's logo\" src='" . $pageDetails['logo'] . "' class='logo shadow' />";
+			echo '<h1>' . $pageDetails['name'] . '</h1></span>';
 		?>
 		<nav class='navbar navbar-expand-lg navbar-light'>
 			<div class="container-fluid">
 				<?php
 					echo "<span class='navbar-brand'>";
-					if($pageDetails['logo'] != '../images/Blank.svg')
-						echo "<img alt =\"$site's logo\" src='" . $pageDetails['logo'] . "' class='logo shadow' />";
 					echo "$site</span><div class='d-flex'><ul class='navbar-nav me-auto mb-2 mb-lg-0'><li><a class='nav-link' href='mySite.php?ID=$ID&site=$site&pg=0'>Home</a></li>";
 					//create links foreach page in website
 					foreach($links as $link)
