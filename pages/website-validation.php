@@ -213,7 +213,7 @@
 				if(empty($_POST['fromEdit']))
 					header("location:menu.php?msg=Your website has been successfully published!");
 				else
-					$header("location:edit.php?siteTitle=$siteName&creator=$creatorID");
+					header("location:edit.php?siteTitle=$siteName&creator=$creatorID");
 				exit();
 			}
 			catch(Exception $ex)
