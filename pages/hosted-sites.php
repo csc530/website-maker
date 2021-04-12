@@ -7,11 +7,6 @@
 	<h2>Featured sites: </h2>
 <!--Bootstrap carousel element from https://getbootstrap.com/docs/5.0/components/carousel/#with-captions-->
 	<div id="carouselExampleCaptions" class="carousel slide carousel-dark" data-bs-ride="carousel">
-		<div class="carousel-indicators">
-			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-			<button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-		</div>
 		<div class="carousel-inner">
 			<?php
 				require_once 'connect.php';

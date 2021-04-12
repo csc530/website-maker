@@ -25,6 +25,7 @@
 <li>I often switch between " " and ' ' quotes depending if I am/can add a variable directly with double quotes if not I try to use single quotes</li>
 <li>Some pages include meta.php and authenticate.php this will not cause an error as authenticate in both cases use <code>require_once</code> which it means it will run only once in the page = <code>session_start()</code> is run only once per page</li>
 <li>the <code>$title</code> variable on top of pages is the tab's title</li>
+<li>All the pages and php includes are all in the same directory just making navigation easier, unfortunately I didn't have time to change them to be absolute or refactor the pages to be in a more organized directory structure</li>
 </ul>
 <h2>Bonus</h2>
 <p>I added functionality to have multiple users build multiple websites. Which I believe is additional to the base project of multiple users editing one website. This can be seen most (I believe) in <a href="pages/edit-webpages.php">edit-webpages.php</a>. <small>I think this is bonus but a lot was MySQL so idk, </small></p>
