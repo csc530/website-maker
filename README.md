@@ -1,5 +1,5 @@
 <h1>Assignment 2 - Web Dreamscapes</h1>
-<a href="https://lamp.computerstudi.es/~Christofer1157052/PHP-comp1006/CM-site/pages/index.php" target="_blank">Web Dreamscapes (Live site)</a>
+<a href="https://lamp.computerstudi.es/~Christofer1157052/PHP-comp1006/website-maker/pages/index.php" target="_blank">Web Dreamscapes (Live site)</a>
 <p><small>Unfortunately there were some major database restructuring and your Test Co. website was lost you'll have to remake sorry :(</small></p>
 <h2>Purpose</h2>
 <p>This web app is made to allow registered users 'host' their websites. Allowing them to edit the website's name and individual page content. Also, allowing collaboration with other registered users.</p>

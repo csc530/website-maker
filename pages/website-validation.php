@@ -53,7 +53,6 @@
 				$cmd->bindParam(':creatorID', $creatorID, PDO::PARAM_INT, 11);
 				$cmd->execute();
 				$db = null;
-				$error = 'funbsdu';
 				/*there is a trigger in db that will add this website and creator to website_admin table to indicate that the creator is also an
 				admin allowed to edit the site and content */
 				//actually add logo path to db if any
