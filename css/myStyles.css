@@ -74,6 +74,7 @@ img{
 img.logo-lg{
     height: 150px;
     width: 150px;
+    margin: auto;
 }
 
 /*add spacing between form inputs and groups*/
