@@ -2,7 +2,7 @@
 <a href="https://lamp.computerstudi.es/~Christofer1157052/PHP-comp1006/website-maker/pages/index.php" target="_blank">Web Dreamscapes (Live site)</a>
 <br>
 <a href="https://lamp.computerstudi.es/~Christofer1157052/PHP-comp1006/website-maker/pages/mySite.php?ID=2&site=Planet%20Disco&pg=0" target="_blank">Demo site</a>
-<p><small>Unfortunately there were some major database restructuring and your Test Co. website was lost you'll have to remake sorry :(</small></p>
+<p><small>Unfortunately there were some major database restructuring and your Test Co. website was lost you'll have to remake it sorry :(</small></p>
 <h2>Purpose</h2>
 <p>This web app is made to allow registered users 'host' their websites. Allowing them to edit the website's name and individual page content. Also, allowing collaboration with other registered users.</p>
 <h2>Bonus</h2>
