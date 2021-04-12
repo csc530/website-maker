@@ -72,13 +72,15 @@
 				</ul>
 			</fieldset>
 		</form>
-		<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creatorID"; ?>" method="post">
+		<form action="website-validation.php?siteTitle=<?php echo "$siteName&creator=$creatorID"; ?>" method="post">
 			<fieldset>
 				<legend>Colour theme</legend>
 				<?php
 					$creator = $creatorID;
 					require 'siteThemeForm.php';
 				?>
+				<input type="hidden" hidden name="step" value="10"/>
+				<input type="hidden" hidden name="fromEdit" value="true" />
 				<button type="submit" class="btn-primary">Change</button>
 			</fieldset>
 		</form>
