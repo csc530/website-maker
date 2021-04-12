@@ -109,7 +109,7 @@
 		<?php
 			//write page appropriately if using page or main website table, depends if pgnum is empty (just changes the variables names)
 			//write page content as HTML
-			echo $pageDetails['content'];
+			echo "<p class='text-center mx-auto pt-3'>".$pageDetails['content']."</p>";
 		?>
 	</main>
 	<footer class="modal-footer"><small>Created with <a href="index.php" target="_blank" rel="">Web Dreamscapes</a>&copy;.</small></footer>

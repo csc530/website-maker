@@ -174,4 +174,5 @@ div#shadowRoot{
     width: auto;
     min-width: 35vw;
     overflow: auto;
+    font-size: 50%;
 }

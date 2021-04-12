@@ -1,4 +1,8 @@
 /*Stylesheet for user created websites*/
+/*Makes text bigger as I find a lot of white space on the website*/
+body{
+    font-size: 200%;
+}
 /*Style for site's logo*/
 img{
     image-resolution: from-image;
