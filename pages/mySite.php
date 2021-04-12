@@ -92,7 +92,7 @@
 				echo "<img alt =\"$site's logo\" src='" . $pageDetails['logo'] . "' class='logo shadow' />";
 			echo '<h1>' . $pageDetails['name'] . '</h1></span>';
 		?>
-		<nav class='navbar navbar-expand-lg navbar-light'>
+		<nav class='navbar navbar-expand-lg navbar-light sticky-top'>
 			<div class="container-fluid">
 				<?php
 					echo "<span class='navbar-brand'>";

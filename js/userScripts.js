@@ -33,3 +33,9 @@ window.addEventListener("scroll", function() {
 		document.querySelector("body").removeChild(btn);
 	}
 });
+
+//add onclick to button to scroll to top of the page
+btn.addEventListener("click", function(){
+	while(window.scrollY>=0)
+	window.scrollY-=10
+})
