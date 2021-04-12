@@ -11,7 +11,7 @@
 	//validate user has access to edit this page, if they are an admin/creator (if they somehow got onto the wrong website's edit page somehow?)
 	require_once 'canEdit.php';
 	//get name and description of website from db (with creator and siteName PK)
-	$sql = 'SELECT name, description FROM websites WHERE creatorID = :creator AND name = :siteName;';
+	$sql = 'SELECT name, description, logo FROM websites WHERE creatorID = :creator AND name = :siteName;';
 	$cmd = $db->prepare($sql);
 	$cmd->bindParam(':creator', $creatorID, PDO::PARAM_INT, 11);
 	$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
@@ -72,8 +72,7 @@
 				</ul>
 			</fieldset>
 		</form>
-		<form action="edit-validation.php?siteTitle=<?php
-			echo "$siteName&creator=$creatorID"; ?>" method="post">
+		<form action="edit-validation.php?siteTitle=<?php echo "$siteName&creator=$creatorID"; ?>" method="post">
 			<fieldset>
 				<legend>Colour theme</legend>
 				<?php
@@ -83,14 +82,25 @@
 				<button type="submit" class="btn-primary">Change</button>
 			</fieldset>
 		</form>
+		<form action="chg-logo.php?creator=<?php echo "$creatorID&site=$siteName"?>" method="post" enctype="multipart/form-data">
+			<fieldset>
+				<legend>Logo</legend>
+				<label for="logo">Image: </label>
+				<input id="logo" name="logo" type="file" accept=".png,.jpg,.jpeg,.svg,.gif" />
+				<button name="change" value="true" type="submit" class="btn-primary">Upload</button>
+				<button id="clear" name="clear" type="submit" value="clear" class="btn-secondary">Clear</button>
+				<figure>
+					<figcaption>Current logo: </figcaption>
+					<img src="<?php echo $websiteInfo['logo']; ?>" class="logo-lg" alt="<?php echo $siteName."'s logo"; ?>"/>
+				</figure>
+			</fieldset>
+		</form>
 	</div>
 	<form action="edit-webpages.php?pageNumber=1&siteTitle=<?php
 		echo "$siteName&creator=$creatorID"; ?>" method="post">
 		<button type="submit" name="edit" value="true" class="btn-warning">Edit pages</button>
-		<a href="menu.php" onclick="return confirm('Any changes made to website will not be saved. Do you wish to continue?')">
-			<button type="button"
-			        class="btn-danger">Exit
-			</button>
+		<a href="menu.php" onclick="return confirm('Any changes made to website WILL be saved.')">
+			<button type="button" class="btn-info">Exit</button>
 		</a>
 	</form>
 <?php
