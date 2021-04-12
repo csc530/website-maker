@@ -39,7 +39,6 @@
 		echo "$siteName&creator=$creator"; ?>" method="post">
 		<fieldset>
 			<legend class="display-6">Overview</legend>
-			<!--todo add mini view of pages with link to edit them and special link for splash back to website edit not page-->
 			<h3>Website name: <?php
 					echo "<strong>$siteName</strong>"; ?></h3>
 			<h3>Logo: <img class="logo-lg" src="<?php
@@ -64,8 +63,8 @@
 				?>
 			</div>
 		</fieldset>
-		<!--todo: add an onclick to button view published site or return home-->
-		<button type="submit" name="step" value="4">Finalize</button>
+		<a target="_blank" href="mySite.php?ID=<?php echo "$creatorID&site=$siteName&pg=0" ?>"><button type="button" class="btn-secondary">Preview</button></a>
+		<button type="submit" name="step" value="4" class="btn-primary">Finalize</button>
 	</form>
 <?php
 	require_once 'footer.php';
