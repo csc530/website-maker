@@ -30,7 +30,7 @@
 			$cmd->bindParam(':siteName', $siteName, PDO::PARAM_STR, 35);
 			$cmd->execute();
 			$db = null;
-			header("location:menu.php?msg=Successfully deleted $siteName website.");
+			header("location:menu.php?msg=Successfully deleted '$siteName' website.");
 			exit();
 		}
 		else
