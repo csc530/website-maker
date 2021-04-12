@@ -3,11 +3,11 @@ const nav = document.querySelector("header>nav");
 const header = document.querySelector("header");
 let height = header.clientHeight - nav.clientHeight;
 if(height === 0)
-	height=nav.clientHeight;
+	height = nav.clientHeight;
 let btn = document.createElement("button");
 btn.innerText = "^";
 btn.id = "btnFade";
-btn.classList.add("btn", "btn-secondary", "btn-sm");
+btn.classList.add("btn", "btn-secondary", "btn-lg");
 //places button in bottom right corner
 btn.style.position = "fixed";
 btn.style.bottom = "5px";
@@ -23,19 +23,20 @@ window.addEventListener("scroll", function() {
 	{
 		//check if the button has already been added to DOM
 		if(!document.querySelector("#btnFade"))
+		{
 			document.querySelector("body").appendChild(btn);
+			//add onclick to button to scroll to top of the page
+			document.querySelector("body").querySelector("#btnFade").addEventListener("click", function() {
+					window.scroll(0,0);
+				console.log("afbusdvcis");
+			});
+		}
 		btn.style.opacity = "1";
 	}
 	else
 	{
 		//remove button if it's on the page, suppresses js errors in console
 		if(document.querySelector("#btnFade"))
-		document.querySelector("body").removeChild(btn);
+			document.querySelector("body").removeChild(btn);
 	}
 });
-
-//add onclick to button to scroll to top of the page
-btn.addEventListener("click", function(){
-	while(window.scrollY>=0)
-	window.scrollY-=10
-})

@@ -28,6 +28,7 @@
 <li>All the pages and php includes are all in the same directory just making navigation easier, unfortunately I didn't have time to change them to be absolute or refactor the pages to be in a more organized directory structure</li>
 </ul>
 <h2>Bonus</h2>
+<p>Added customizable styles for each site in the gradient of their background.</p>
 <p>I added functionality to have multiple users build multiple websites. Which I believe is additional to the base project of multiple users editing one website. This can be seen most (I believe) in <a href="pages/edit-webpages.php">edit-webpages.php</a>. <small>I think this is bonus but a lot was MySQL so idk, </small></p>
 <h3>Database stuff</h3>
 <ul>
